@@ -21,6 +21,7 @@ import FooterCta from './components/FooterCta'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import ProtectedRoute from './components/ProtectedRoute'
+import Profile from './pages/Profile'
 
 // Customer Pages
 import CustomerDashboard from './pages/customer/CustomerDashboard'
@@ -52,9 +53,6 @@ function Landing({ scrolled }) {
     <div className="app">
       {/* Background elements */}
       <div className="noise-overlay" />
-      <div className="bg-blob bg-blob-1" />
-      <div className="bg-blob bg-blob-2" />
-      <div className="bg-blob bg-blob-3" />
 
       <Navbar scrolled={scrolled} />
       <main>
@@ -63,11 +61,7 @@ function Landing({ scrolled }) {
         <Features />
         <HowItWorks />
         <OrderTimeline />
-        <Dashboards />
-        <KpiStrip />
-        <TechStack />
         <Testimonials />
-        <Roadmap />
         <FooterCta />
       </main>
     </div>
@@ -112,6 +106,9 @@ function AppContent({ scrolled }) {
         <Route path="/admin/tracking" element={<ProtectedRoute allowedRoles={['admin']}><AdminLiveTracking /></ProtectedRoute>} />
         <Route path="/admin/assign" element={<ProtectedRoute allowedRoles={['admin']}><AdminAssign /></ProtectedRoute>} />
         <Route path="/admin/analytics" element={<ProtectedRoute allowedRoles={['admin']}><AdminAnalytics /></ProtectedRoute>} />
+
+        {/* Common Shared Routes */}
+        <Route path="/profile" element={<ProtectedRoute allowedRoles={['admin', 'agent', 'customer']}><Profile /></ProtectedRoute>} />
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

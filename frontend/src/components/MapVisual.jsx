@@ -123,7 +123,7 @@ export default function MapVisual() {
             <feMerge><feMergeNode in="coloredBlur" /><feMergeNode in="SourceGraphic" /></feMerge>
           </filter>
           <linearGradient id="routeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#00d4ff" stopOpacity="0.8" />
+            <stop offset="0%" stopColor="#6366f1" stopOpacity="0.8" />
             <stop offset="100%" stopColor="#00ffaa" stopOpacity="0.8" />
           </linearGradient>
         </defs>
@@ -131,17 +131,17 @@ export default function MapVisual() {
         <ellipse cx="250" cy="210" rx="220" ry="180" fill="url(#mapGlow)" />
 
         {[60, 120, 180, 240, 300, 360].map(y => (
-          <line key={y} x1="20" y1={y} x2="480" y2={y} stroke="rgba(0,212,255,0.05)" strokeWidth="1" />
+          <line key={y} x1="20" y1={y} x2="480" y2={y} stroke="rgba(99,102,241,0.05)" strokeWidth="1" />
         ))}
         {[60, 120, 180, 240, 300, 360, 420].map(x => (
-          <line key={x} x1={x} y1="20" x2={x} y2="400" stroke="rgba(0,212,255,0.05)" strokeWidth="1" />
+          <line key={x} x1={x} y1="20" x2={x} y2="400" stroke="rgba(99,102,241,0.05)" strokeWidth="1" />
         ))}
 
         <path d="M 50 350 Q 180 300 250 220 Q 350 150 460 80" stroke="rgba(255,255,255,0.04)" strokeWidth="3" fill="none" strokeDasharray="8 4" />
 
         <polyline
           points={routePoints.map(p => `${p.x},${p.y}`).join(' ')}
-          stroke="rgba(0,212,255,0.15)"
+          stroke="rgba(99,102,241,0.15)"
           strokeWidth="2"
           strokeDasharray="6 4"
           fill="none"
@@ -151,7 +151,7 @@ export default function MapVisual() {
 
         {cities.map((city, i) => (
           <g key={i}>
-            <circle cx={city.x} cy={city.y} r="20" fill="rgba(0,119,255,0.05)" stroke="rgba(0,212,255,0.1)" strokeWidth="1" />
+            <circle cx={city.x} cy={city.y} r="20" fill="rgba(99,102,241,0.05)" stroke="rgba(99,102,241,0.1)" strokeWidth="1" />
             <circle cx={city.x} cy={city.y} r="6" fill={city.color} stroke="rgba(6,6,15,0.8)" strokeWidth="2" filter="url(#glow)" />
             <text x={city.x} y={city.y + 24} textAnchor="middle" fill="rgba(240,240,255,0.4)" fontSize="9" fontFamily="Inter, sans-serif">
               {city.label}
@@ -159,11 +159,11 @@ export default function MapVisual() {
           </g>
         ))}
 
-        <circle ref={markerRef} cx="80" cy="280" r="16" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.25)" strokeWidth="1">
+        <circle ref={markerRef} cx="80" cy="280" r="16" fill="rgba(99,102,241,0.08)" stroke="rgba(99,102,241,0.25)" strokeWidth="1">
           <animate attributeName="r" values="14;22;14" dur="2s" repeatCount="indefinite" />
           <animate attributeName="opacity" values="0.6;0;0.6" dur="2s" repeatCount="indefinite" />
         </circle>
-        <circle ref={dotRef} cx="80" cy="280" r="8" fill="#00d4ff" stroke="rgba(6,6,15,0.9)" strokeWidth="2.5" filter="url(#markerGlow)" />
+        <circle ref={dotRef} cx="80" cy="280" r="8" fill="#6366f1" stroke="rgba(6,6,15,0.9)" strokeWidth="2.5" filter="url(#markerGlow)" />
       </svg>
 
       {/* Floating cards — with SVG icons, no emojis */}

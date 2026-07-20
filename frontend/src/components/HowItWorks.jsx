@@ -93,7 +93,7 @@ export default function HowItWorks() {
           <p>From order creation to doorstep delivery — every step tracked, automated, and verifiable.</p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'start' }}>
+        <div className="hiw-grid">
           <div className="hiw-steps reveal">
             {steps.map((step, i) => {
               const StepIcon = step.Icon
@@ -125,7 +125,7 @@ export default function HowItWorks() {
             })}
           </div>
 
-          <div className="reveal" style={{ transitionDelay: '0.2s', position: 'sticky', top: '120px' }}>
+          <div className="reveal hiw-preview" style={{ transitionDelay: '0.2s' }}>
             <div className="glass-card" style={{ padding: '48px', textAlign: 'center' }}>
               <div style={{
                 width: '80px',

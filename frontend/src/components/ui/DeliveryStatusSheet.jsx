@@ -38,7 +38,7 @@ export default function DeliveryStatusSheet({ status, agent, onCall, delayNote }
             <Package size={20} color="#e23744" />
           </div>
           <div>
-            <div style={{ fontSize: '0.65rem', fontWeight: 700, color: '#00d4ff', background: 'rgba(0,212,255,0.12)', display: 'inline-block', padding: '2px 8px', borderRadius: 4, marginBottom: 6 }}>
+            <div style={{ fontSize: '0.65rem', fontWeight: 700, color: '#6366f1', background: 'rgba(0,212,255,0.12)', display: 'inline-block', padding: '2px 8px', borderRadius: 4, marginBottom: 6 }}>
               NOW
             </div>
             <div style={{ fontWeight: 800, fontSize: '1.05rem', color: 'var(--text-primary)', marginBottom: 4 }}>
@@ -52,7 +52,7 @@ export default function DeliveryStatusSheet({ status, agent, onCall, delayNote }
 
         {agent && (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, flexShrink: 0 }}>
-            <div style={{ width: 46, height: 46, borderRadius: '50%', background: 'linear-gradient(135deg,#00d4ff,#0077ff)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: '#fff' }}>
+            <div style={{ width: 46, height: 46, borderRadius: '50%', background: 'var(--color-surface)' }}>
               {agent.name?.[0]?.toUpperCase()}
             </div>
             <button

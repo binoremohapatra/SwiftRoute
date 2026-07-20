@@ -34,7 +34,7 @@ function ScootyTopDown() {
   return (
     <svg width="100%" height="100%" viewBox="0 0 40 40" fill="none" style={{ filter: 'drop-shadow(0px 3px 5px rgba(0,0,0,0.4))' }}>
       {/* Front Panel/Headlight */}
-      <path d="M14 8 Q20 4 26 8 L27 12 L13 12 Z" fill="#00d4ff" />
+      <path d="M14 8 Q20 4 26 8 L27 12 L13 12 Z" fill="#6366f1" />
       
       {/* Handlebars */}
       <path d="M10 12 Q20 10 30 12" stroke="#2b2b2b" strokeWidth="3" strokeLinecap="round" />
@@ -63,7 +63,7 @@ function TruckTopDown() {
       {/* Cabin */}
       <rect x="11" y="4" width="18" height="12" rx="3" fill="#1e2a3a" />
       {/* Windshield */}
-      <rect x="12" y="6" width="16" height="5" rx="1.5" fill="#00d4ff" opacity="0.8" />
+      <rect x="12" y="6" width="16" height="5" rx="1.5" fill="#6366f1" opacity="0.8" />
       {/* Cargo Box */}
       <rect x="8" y="15" width="24" height="23" rx="2" fill="#0077ff" />
       {/* Cargo Roof Details */}

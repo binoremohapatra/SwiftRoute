@@ -7,7 +7,10 @@ import { useAuth } from '../../context/AuthContext'
 import { useToast } from '../../components/ui/Toast'
 import AnimatedCounter from '../../components/ui/AnimatedCounter'
 
-const COLORS = ['#00d4ff', '#34d399', '#fbbf24', '#f87171', '#8b5cf6']
+// Semantic muted palette for donut chart — maps to status tokens
+const STATUS_COLORS = {
+  default: ['#6366f1', '#10b981', '#f59e0b', '#ef4444', '#6b7280']
+}
 
 export default function AdminAnalytics() {
   const { token } = useAuth()
@@ -96,14 +99,14 @@ export default function AdminAnalytics() {
         ) : data ? (
           <>
             {/* KPI Cards */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-              <KPICard title="Total Orders" value={data.totalOrders} icon={Package} color="#00d4ff" delay={0.1} trend={data.trends?.orders} />
-              <KPICard title="Total Revenue" value={`₹${data.totalRevenue?.toLocaleString() || 0}`} icon={DollarSign} color="#34d399" delay={0.2} trend={data.trends?.revenue} />
-              <KPICard title="Avg Delivery" value={`${data.avgDeliveryDurationMins}m`} icon={Clock} color="#fbbf24" delay={0.3} trend={data.trends?.avgDelivery} reverseTrendColor />
-              <KPICard title="Failed / Cancelled" value={data.failedDeliveries} icon={TrendingUp} color="#f87171" delay={0.4} trend={data.trends?.failed} reverseTrendColor />
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '1.25rem', marginBottom: '2rem' }}>
+              <KPICard title="Total Orders" value={data.totalOrders} icon={Package} color="var(--accent-indigo)" delay={0.1} trend={data.trends?.orders} />
+              <KPICard title="Total Revenue" value={`₹${data.totalRevenue?.toLocaleString() || 0}`} icon={DollarSign} delay={0.2} trend={data.trends?.revenue} />
+              <KPICard title="Avg Delivery" value={`${data.avgDeliveryDurationMins}m`} icon={Clock} delay={0.3} trend={data.trends?.avgDelivery} reverseTrendColor />
+              <KPICard title="Failed / Cancelled" value={data.failedDeliveries} icon={TrendingUp} delay={0.4} trend={data.trends?.failed} reverseTrendColor />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
               {/* 1. Orders Over Time */}
               <ChartCard title="Orders Over Time" delay={0.5}>
                 <ResponsiveContainer width="100%" height={300}>
@@ -112,7 +115,7 @@ export default function AdminAnalytics() {
                     <XAxis dataKey="date" stroke="rgba(255,255,255,0.4)" fontSize={12} />
                     <YAxis stroke="rgba(255,255,255,0.4)" fontSize={12} />
                     <Tooltip contentStyle={{ background: 'rgba(20,20,30,0.9)', border: 'none', borderRadius: 8, color: '#fff' }} />
-                    <Line type="monotone" dataKey="orders" stroke="#00d4ff" strokeWidth={3} dot={{ r: 4, fill: '#00d4ff' }} />
+                    <Line type="monotone" dataKey="orders" stroke="#6366f1" strokeWidth={3} dot={{ r: 4, fill: '#6366f1' }} />
                   </LineChart>
                 </ResponsiveContainer>
               </ChartCard>
@@ -123,28 +126,28 @@ export default function AdminAnalytics() {
                   <AreaChart data={data.charts.ordersOverTime}>
                     <defs>
                       <linearGradient id="colorRev" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#34d399" stopOpacity={0.5}/>
-                        <stop offset="95%" stopColor="#34d399" stopOpacity={0}/>
+                        <stop offset="5%" stopColor="#10b981" stopOpacity={0.5}/>
+                        <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
                       </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
                     <XAxis dataKey="date" stroke="rgba(255,255,255,0.4)" fontSize={12} />
                     <YAxis stroke="rgba(255,255,255,0.4)" fontSize={12} />
                     <Tooltip contentStyle={{ background: 'rgba(20,20,30,0.9)', border: 'none', borderRadius: 8, color: '#fff' }} />
-                    <Area type="monotone" dataKey="revenue" stroke="#34d399" fillOpacity={1} fill="url(#colorRev)" />
+                    <Area type="monotone" dataKey="revenue" stroke="#10b981" fillOpacity={1} fill="url(#colorRev)" />
                   </AreaChart>
                 </ResponsiveContainer>
               </ChartCard>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 350px), 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
               {/* 3. Status Distribution */}
               <ChartCard title="Status Distribution" delay={0.7}>
                 <ResponsiveContainer width="100%" height={250}>
                   <PieChart>
                     <Pie data={data.charts.statusDistribution} innerRadius={60} outerRadius={80} paddingAngle={5} dataKey="value">
                       {data.charts.statusDistribution.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        <Cell key={`cell-${index}`} fill={STATUS_COLORS.default[index % STATUS_COLORS.default.length]} />
                       ))}
                     </Pie>
                     <Tooltip contentStyle={{ background: 'rgba(20,20,30,0.9)', border: 'none', borderRadius: 8, color: '#fff' }} />
@@ -161,13 +164,13 @@ export default function AdminAnalytics() {
                     <XAxis dataKey="hour" stroke="rgba(255,255,255,0.4)" fontSize={10} interval={3} />
                     <YAxis stroke="rgba(255,255,255,0.4)" fontSize={12} />
                     <Tooltip cursor={{ fill: 'rgba(255,255,255,0.05)' }} contentStyle={{ background: 'rgba(20,20,30,0.9)', border: 'none', borderRadius: 8, color: '#fff' }} />
-                    <Bar dataKey="orders" fill="#fbbf24" radius={[4,4,0,0]} />
+                    <Bar dataKey="orders" fill="rgba(245,158,11,0.65)" radius={[4,4,0,0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </ChartCard>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '1.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))', gap: '1.5rem' }}>
               {/* 4. Agent Performance (Top 10) */}
               <ChartCard title="Agent Performance (Top 5)" delay={0.9}>
                 <ResponsiveContainer width="100%" height={300}>
@@ -190,8 +193,8 @@ export default function AdminAnalytics() {
                     <YAxis stroke="rgba(255,255,255,0.4)" fontSize={12} />
                     <Tooltip cursor={{ fill: 'rgba(255,255,255,0.05)' }} contentStyle={{ background: 'rgba(20,20,30,0.9)', border: 'none', borderRadius: 8, color: '#fff' }} />
                     <Legend />
-                    <Bar dataKey="onTime" stackId="a" fill="#34d399" radius={[0,0,4,4]} name="On Time" />
-                    <Bar dataKey="delayed" stackId="a" fill="#f87171" radius={[4,4,0,0]} name="Delayed" />
+                    <Bar dataKey="onTime" stackId="a" fill="#10b981" radius={[0,0,4,4]} name="On Time" />
+                    <Bar dataKey="delayed" stackId="a" fill="#ef4444" radius={[4,4,0,0]} name="Delayed" />
                   </BarChart>
                 </ResponsiveContainer>
               </ChartCard>
@@ -219,15 +222,19 @@ function KPICard({ title, value, icon: Icon, color, delay, trend, reverseTrendCo
   const isZero = trend === 0;
   
   // For some metrics like delivery time and failures, less is better (reverse color logic)
-  const positiveColor = reverseTrendColor ? '#f87171' : '#34d399';
-  const negativeColor = reverseTrendColor ? '#34d399' : '#f87171';
+  const positiveColor = reverseTrendColor ? '#ef4444' : '#10b981';
+  const negativeColor = reverseTrendColor ? '#10b981' : '#ef4444';
   const trendColor = isZero ? 'rgba(255,255,255,0.4)' : isPositive ? positiveColor : negativeColor;
+  
+  // Neutral style when no color provided
+  const iconBg = color ? `${color}20` : 'var(--bg-elevated)'
+  const iconColor = color || 'var(--text-secondary)'
 
   return (
     <div className="glass-card" style={{ padding: '1.5rem', borderRadius: 16, animation: `staggerUp 0.5s ${delay}s both`, position: 'relative' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
-        <div style={{ width: 32, height: 32, borderRadius: 8, background: `${color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <Icon size={16} color={color} />
+        <div style={{ width: 32, height: 32, borderRadius: 8, background: iconBg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Icon size={16} color={iconColor} />
         </div>
         <div style={{ fontSize: '0.85rem', color: 'rgba(240,240,255,0.5)', fontWeight: 600 }}>{title}</div>
       </div>

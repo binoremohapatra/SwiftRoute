@@ -1,8 +1,9 @@
+// v2 — layout pass
 import AnimatedCounter from './AnimatedCounter'
 
 const trendColor = (val) => {
   if (!val && val !== 0) return 'rgba(240,240,255,0.35)'
-  return val >= 0 ? '#34d399' : '#f87171'
+  return val >= 0 ? '#10b981' : '#ef4444'
 }
 
 /**
@@ -12,7 +13,7 @@ export default function StatCard({
   label,
   value,
   icon: Icon,
-  color = '#00d4ff',
+  color,
   trend,        // e.g. +12.5 or -3
   suffix = '',
   prefix = '',
@@ -33,7 +34,10 @@ export default function StatCard({
         <>
           <div
             className="dash-stat-icon"
-            style={{ background: `${color}18`, color }}
+            style={{ 
+              background: color ? `${color}18` : 'var(--bg-elevated)', 
+              color: color || 'var(--text-secondary)' 
+            }}
           >
             {Icon && <Icon size={22} strokeWidth={2} />}
           </div>

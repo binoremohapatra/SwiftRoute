@@ -58,6 +58,30 @@ export default function AnimatedVehicleMarker({ position, vehicleType = 'bike', 
   return (
     <Marker longitude={display.lng} latitude={display.lat} anchor="center">
       <div style={{ position: 'relative', width: containerSize, height: containerSize, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        {/* Animated Trail (extends backwards from the vehicle) */}
+        <div style={{ 
+          position: 'absolute', 
+          width: 24, 
+          height: 60, 
+          bottom: '50%', 
+          left: '50%', 
+          marginLeft: -12, 
+          transformOrigin: 'bottom center',
+          transform: `rotate(${bearing + 180}deg)`, 
+          zIndex: 0,
+          pointerEvents: 'none'
+        }}>
+          <div style={{ 
+            width: '100%', 
+            height: '100%', 
+            background: 'var(--color-surface)', 
+            opacity: 0.6,
+            maskImage: 'linear-gradient(to bottom, black 20%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, black 20%, transparent 100%)',
+            animation: 'trailPulse 1.5s ease-out infinite'
+          }} />
+        </div>
+
         {/* Live signal ring */}
         <div
           style={{
@@ -67,6 +91,7 @@ export default function AnimatedVehicleMarker({ position, vehicleType = 'bike', 
             border: `2px solid ${ringCol}`,
             opacity: 0.3,
             animation: 'livePulse 2s infinite',
+            zIndex: 1
           }}
         />
         
@@ -78,3 +103,4 @@ export default function AnimatedVehicleMarker({ position, vehicleType = 'bike', 
     </Marker>
   )
 }
+

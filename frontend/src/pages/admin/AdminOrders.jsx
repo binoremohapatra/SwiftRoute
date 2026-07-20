@@ -150,7 +150,7 @@ export default function AdminOrders() {
               Search
             </button>
             {isFiltered && (
-              <button type="button" onClick={clearFilters} className="btn-ghost" style={{ padding: '0.65rem 1rem', borderRadius: 10, color: '#f87171' }}>
+              <button type="button" onClick={clearFilters} className="btn-ghost" style={{ padding: '0.65rem 1rem', borderRadius: 10, color: '#ef4444' }}>
                 Clear
               </button>
             )}
@@ -202,14 +202,14 @@ export default function AdminOrders() {
                 <tbody>
                   {orders.map((o, idx) => (
                     <tr key={o.id} style={{ animation: `staggerUp 0.3s ${idx * 0.05}s both` }}>
-                      <td>
+                      <td data-label="Order #">
                         <span className="dash-order-num">{o.orderNumber}</span>
                       </td>
-                      <td>
+                      <td data-label="Customer">
                         <div style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{o.customer?.name}</div>
                         <div style={{ fontSize: '0.75rem', color: 'rgba(240,240,255,0.4)', marginTop: 2 }}>{o.customer?.phone}</div>
                       </td>
-                      <td>
+                      <td data-label="Agent">
                         {o.fulfillmentType === '3PL' ? (
                           <>
                             <div style={{ color: '#f59e0b', fontWeight: 600 }}>{o.thirdPartyCourier || '3PL'}</div>
@@ -224,29 +224,29 @@ export default function AdminOrders() {
                           <span style={{ padding: '4px 8px', background: 'rgba(255,255,255,0.05)', borderRadius: 6, fontSize: '0.75rem', color: 'rgba(240,240,255,0.4)' }}>Unassigned</span>
                         )}
                       </td>
-                      <td>
+                      <td data-label="Status">
                         <StatusBadge status={o.status} />
                       </td>
-                      <td>
+                      <td data-label="Payment">
                         <span style={{
                           padding: '4px 8px', borderRadius: 6, fontSize: '0.75rem', fontWeight: 600,
                           background: o.paymentStatus === 'PAID' ? 'rgba(52,211,153,0.1)' : o.paymentStatus === 'FAILED' ? 'rgba(248,113,113,0.1)' : 'rgba(251,191,36,0.1)',
-                          color: o.paymentStatus === 'PAID' ? '#34d399' : o.paymentStatus === 'FAILED' ? '#f87171' : '#fbbf24'
+                          color: o.paymentStatus === 'PAID' ? '#10b981' : o.paymentStatus === 'FAILED' ? '#ef4444' : '#fbbf24'
                         }}>
                           {o.paymentStatus} {o.paymentMethod === 'COD' ? '💵' : '💳'}
                         </span>
                       </td>
-                      <td style={{ maxWidth: 220 }}>
+                      <td data-label="Route" style={{ maxWidth: 220 }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                           <div className="dash-address" style={{ display: 'flex', alignItems: 'center', gap: 4 }} title={o.pickupAddress}>
-                            <MapPin size={10} color="#a78bfa" style={{ flexShrink: 0 }} /> {o.pickupAddress}
+                            <MapPin size={10} color="#8b5cf6" style={{ flexShrink: 0 }} /> {o.pickupAddress}
                           </div>
                           <div className="dash-address" style={{ display: 'flex', alignItems: 'center', gap: 4 }} title={o.dropAddress}>
-                            <MapPin size={10} color="#34d399" style={{ flexShrink: 0 }} /> {o.dropAddress}
+                            <MapPin size={10} color="#10b981" style={{ flexShrink: 0 }} /> {o.dropAddress}
                           </div>
                         </div>
                       </td>
-                      <td>
+                      <td data-label="Date">
                         <div style={{ fontSize: '0.8rem', color: 'rgba(240,240,255,0.6)' }}>
                           {new Date(o.createdAt).toLocaleDateString()}
                         </div>

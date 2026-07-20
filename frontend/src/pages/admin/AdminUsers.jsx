@@ -60,10 +60,10 @@ export default function AdminUsers() {
             <p className="dash-page-sub">Manage all platform participants</p>
           </div>
           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.25rem', background: 'rgba(0,212,255,0.08)', border: '1px solid rgba(0,212,255,0.15)', borderRadius: 12, fontSize: '0.85rem', fontWeight: 600, color: '#00d4ff' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.25rem', background: 'rgba(99,102,241,0.08)', border: '1px solid rgba(99,102,241,0.15)', borderRadius: 12, fontSize: '0.85rem', fontWeight: 600, color: 'var(--accent-indigo)' }}>
               <User size={14} /> {data.customers.length} Customers
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.25rem', background: 'rgba(167,139,250,0.08)', border: '1px solid rgba(167,139,250,0.15)', borderRadius: 12, fontSize: '0.85rem', fontWeight: 600, color: '#a78bfa' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.25rem', background: 'var(--bg-elevated)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 12, fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
               <Truck size={14} /> {data.agents.length} Agents
             </div>
           </div>
@@ -108,7 +108,7 @@ export default function AdminUsers() {
         </div>
 
         {loading ? (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.25rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))', gap: '1.25rem' }}>
             <SkeletonCard lines={3} />
             <SkeletonCard lines={3} />
             <SkeletonCard lines={3} />
@@ -124,10 +124,10 @@ export default function AdminUsers() {
             />
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.25rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))', gap: '1.25rem' }}>
             {filteredList.map((u, idx) => {
               const isAgent = tab === 'agents'
-              const color = isAgent ? '#a78bfa' : '#00d4ff'
+              const color = isAgent ? '#8b5cf6' : '#6366f1'
               
               return (
                 <div key={u.id} className="glass-card stagger-list" style={{ padding: '1.5rem', borderRadius: 24, animation: `staggerUp 0.3s ${idx * 0.05}s both`, borderTop: `4px solid ${color}` }}>
@@ -156,8 +156,8 @@ export default function AdminUsers() {
                         <Row 
                           label="Status" 
                           value={
-                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: u.isAvailable ? '#34d399' : '#f87171' }}>
-                              <div style={{ width: 6, height: 6, borderRadius: '50%', background: u.isAvailable ? '#34d399' : '#f87171', boxShadow: `0 0 8px ${u.isAvailable ? '#34d399' : '#f87171'}` }} />
+                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: u.isAvailable ? '#10b981' : '#ef4444' }}>
+                              <div style={{ width: 6, height: 6, borderRadius: '50%', background: u.isAvailable ? '#10b981' : '#ef4444', boxShadow: `0 0 8px ${u.isAvailable ? '#10b981' : '#ef4444'}` }} />
                               {u.isAvailable ? 'Available' : 'Offline'}
                             </span>
                           }

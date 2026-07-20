@@ -5,7 +5,8 @@ import { authAPI } from '../services/api'
 import {
   LayoutDashboard, Package, MapPin, Bell, Users, LogOut,
   Menu, X, Zap, Shield, Truck, TrendingUp, ChevronLeft,
-  ChevronRight, Sun, Moon, Search, Settings, User, Map
+  ChevronRight, Sun, Moon, Search, Settings, User, Map,
+  MoreHorizontal
 } from 'lucide-react'
 
 /* ──────────── Nav Config ──────────── */
@@ -23,17 +24,20 @@ const navConfig = {
   ],
   admin: [
     { label: 'Dashboard',    href: '/admin',                    icon: LayoutDashboard },
+    { section: 'OPERATIONS' },
     { label: 'Orders',       href: '/admin/orders',             icon: Package },
     { label: 'Live Tracking',href: '/admin/tracking',           icon: Map },
     { label: 'Assign Orders',href: '/admin/assign',             icon: MapPin },
-    { label: 'Users & Agents',href: '/admin/users',            icon: Users },
+    { section: 'INSIGHTS' },
     { label: 'Analytics',    href: '/admin/analytics',          icon: TrendingUp },
+    { label: 'Users & Agents',href: '/admin/users',            icon: Users },
   ],
 }
 
+
 const roleIcons   = { customer: User, agent: Truck, admin: Shield }
 const roleLabel   = { customer: 'Customer', agent: 'Delivery Agent', admin: 'Administrator' }
-const roleAccent  = { customer: '#00d4ff', agent: '#a78bfa', admin: '#f59e0b' }
+const roleAccent  = { customer: '#6366f1', agent: '#8b5cf6', admin: '#f59e0b' }
 
 /* ──────────── DashboardLayout ──────────── */
 export default function DashboardLayout({ children }) {
@@ -46,11 +50,16 @@ export default function DashboardLayout({ children }) {
   const [profileOpen,    setProfileOpen]    = useState(false)
   const [theme,          setTheme]          = useState('dark')
   const [notifCount]                        = useState(3)
+  
+  // Mobile specific state
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false)
+  const [moreSheetOpen,    setMoreSheetOpen]    = useState(false)
+  const [sidebarExpanded,  setSidebarExpanded]  = useState(false) // for tablet hover/tap
 
   const profileRef = useRef(null)
   const navLinks   = navConfig[user?.role] || []
   const RoleIcon   = roleIcons[user?.role] || User
-  const accent     = roleAccent[user?.role] || '#00d4ff'
+  const accent     = roleAccent[user?.role] || '#6366f1'
 
   /* Theme toggle */
   useEffect(() => {
@@ -81,13 +90,24 @@ export default function DashboardLayout({ children }) {
 
   const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark')
 
-  /* ─── Mobile bottom nav ─── */
-  const mobileNavLinks = navLinks.slice(0, 5)
+  /* ─── Mobile bottom nav logic ─── */
+  const flatLinks = navLinks.filter(l => !l.section)
+  // Max 4 primary icons if total > 5. If <=5, show all. But wait, "Sign Out" needs a place. 
+  // Delivery apps always have 4 tabs + More. Let's do 4 + More if > 4, or just 3 + More.
+  const primaryNavCount = 4
+  const hasMore = flatLinks.length > primaryNavCount
+  const mobileNavLinks = hasMore ? flatLinks.slice(0, primaryNavCount) : flatLinks
+  const moreNavLinks = hasMore ? flatLinks.slice(primaryNavCount) : []
 
   return (
     <div className="dash-layout">
       {/* ═══ SIDEBAR ═══ */}
-      <aside className={`dash-sidebar${collapsed ? ' collapsed' : ''}${sidebarOpen ? ' open' : ''}`}>
+      <aside 
+        className={`dash-sidebar${collapsed ? ' collapsed' : ''}${sidebarExpanded ? ' expanded' : ''}`}
+        onMouseEnter={() => setSidebarExpanded(true)}
+        onMouseLeave={() => setSidebarExpanded(false)}
+        onClick={() => setSidebarExpanded(true)}
+      >
         {/* Header */}
         <div className="dash-sidebar-header">
           <Link to="/" className="dash-logo">
@@ -99,7 +119,10 @@ export default function DashboardLayout({ children }) {
           {/* Desktop collapse button */}
           <button
             className="dash-collapse-btn"
-            onClick={() => setCollapsed(c => !c)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setCollapsed(c => !c);
+            }}
             title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           >
             {collapsed
@@ -107,17 +130,13 @@ export default function DashboardLayout({ children }) {
               : <ChevronLeft  size={16} />
             }
           </button>
-          {/* Mobile close button */}
-          <button className="dash-close-btn" onClick={() => setSidebarOpen(false)}>
-            <X size={18} />
-          </button>
         </div>
 
         {/* User card */}
         <div className="dash-user-card">
           <div
             className="dash-avatar"
-            style={{ background: `linear-gradient(135deg, ${accent}, ${accent}99)` }}
+            style={{ background: 'var(--color-surface)' }}
           >
             {user?.name?.[0]?.toUpperCase() || 'U'}
           </div>
@@ -132,7 +151,15 @@ export default function DashboardLayout({ children }) {
 
         {/* Navigation */}
         <nav className="dash-nav">
-          {navLinks.map((link) => {
+          {navLinks.map((link, idx) => {
+            // Section label divider
+            if (link.section) {
+              return (
+                <div key={`section-${idx}`} className="dash-nav-section-label">
+                  {link.section}
+                </div>
+              )
+            }
             const Icon     = link.icon
             const isActive = location.pathname === link.href ||
                              (link.href !== '/' && location.pathname.startsWith(link.href + '/') && link.href.length > 4)
@@ -142,6 +169,7 @@ export default function DashboardLayout({ children }) {
                 to={link.href}
                 className={`dash-nav-link${isActive ? ' active' : ''}`}
                 title={collapsed ? link.label : undefined}
+                style={{ opacity: isActive ? 1 : undefined }}
               >
                 <span className="dash-nav-link-icon">
                   <Icon size={18} strokeWidth={isActive ? 2.5 : 2} />
@@ -161,27 +189,37 @@ export default function DashboardLayout({ children }) {
         </div>
       </aside>
 
-      {/* Mobile overlay */}
-      {sidebarOpen && (
-        <div className="dash-overlay" onClick={() => setSidebarOpen(false)} />
-      )}
-
       {/* ═══ MAIN ═══ */}
       <div className="dash-main">
         {/* Top bar */}
         <header className="dash-topbar">
           <div className="dash-topbar-left">
-            <button
-              className="dash-menu-btn"
-              onClick={() => setSidebarOpen(true)}
-            >
-              <Menu size={20} />
-            </button>
             <div className="dash-topbar-search">
               <Search size={14} color="rgba(240,240,255,0.3)" />
               <input placeholder="Search orders, agents..." />
             </div>
+            {/* Mobile search toggle */}
+            <button 
+              className="dash-mobile-search-btn" 
+              onClick={() => setMobileSearchOpen(true)}
+              style={{ display: 'none', background: 'transparent', border: 'none', color: 'var(--text-secondary)' }}
+            >
+              <Search size={20} />
+            </button>
           </div>
+
+          {/* Mobile Full-Width Search Overlay */}
+          {mobileSearchOpen && (
+            <div className="dash-mobile-search-overlay">
+              <div className="search-overlay-header">
+                <Search size={18} color="rgba(240,240,255,0.4)" />
+                <input placeholder="Search orders, agents..." autoFocus />
+                <button onClick={() => setMobileSearchOpen(false)} className="close-search-btn">
+                  <X size={20} />
+                </button>
+              </div>
+            </div>
+          )}
 
           <div className="dash-topbar-right">
             {/* Live indicator */}
@@ -214,7 +252,7 @@ export default function DashboardLayout({ children }) {
               >
                 <div
                   className="dash-profile-avatar"
-                  style={{ background: `linear-gradient(135deg, ${accent}, ${accent}99)` }}
+                  style={{ background: 'var(--color-surface)' }}
                 >
                   {user?.name?.[0]?.toUpperCase() || 'U'}
                 </div>
@@ -234,12 +272,8 @@ export default function DashboardLayout({ children }) {
                     </div>
                     <div style={{ fontSize: '0.75rem', color: 'rgba(240,240,255,0.35)' }}>{user?.email}</div>
                   </div>
-                  <button className="dash-dropdown-item">
+                  <button className="dash-dropdown-item" onClick={() => navigate('/profile')}>
                     <User size={15} /> My Profile
-                  </button>
-                  <button className="dash-dropdown-item" onClick={toggleTheme}>
-                    {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
-                    {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
                   </button>
                   <div className="dash-dropdown-divider" />
                   <button className="dash-dropdown-item danger" onClick={handleLogout}>
@@ -267,12 +301,46 @@ export default function DashboardLayout({ children }) {
                 to={link.href}
                 className={`mobile-nav-item${isActive ? ' active' : ''}`}
               >
-                <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
+                <Icon size={22} strokeWidth={isActive ? 2.5 : 2} />
                 <span>{link.label.split(' ')[0]}</span>
               </Link>
             )
           })}
+          <button 
+            className={`mobile-nav-item${moreSheetOpen ? ' active' : ''}`}
+            onClick={() => setMoreSheetOpen(true)}
+          >
+            <MoreHorizontal size={22} strokeWidth={moreSheetOpen ? 2.5 : 2} />
+            <span>More</span>
+          </button>
         </nav>
+
+        {/* More Bottom Sheet */}
+        {moreSheetOpen && (
+          <>
+            <div className="mobile-sheet-backdrop" onClick={() => setMoreSheetOpen(false)} />
+            <div className="mobile-more-sheet">
+              <div className="sheet-handle" />
+              <div className="sheet-content">
+                <h3 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)', padding: '0 0.5rem' }}>Menu</h3>
+                <div className="sheet-links">
+                  {moreNavLinks.map(link => {
+                    const Icon = link.icon
+                    const isActive = location.pathname === link.href
+                    return (
+                      <Link key={link.href} to={link.href} className={`sheet-link-item${isActive ? ' active' : ''}`} onClick={() => setMoreSheetOpen(false)}>
+                        <Icon size={20} /> {link.label}
+                      </Link>
+                    )
+                  })}
+                  <button className="sheet-link-item danger" onClick={handleLogout}>
+                    <LogOut size={20} /> Sign out
+                  </button>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   )

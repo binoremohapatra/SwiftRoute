@@ -2,10 +2,10 @@ import { CheckCircle, Package, Truck, MapPin, User } from 'lucide-react'
 
 const STATUS_STEPS = [
   { key: 'Placed',       label: 'Order Placed',    color: '#60a5fa', rgb: '96,165,250',   Icon: Package },
-  { key: 'Assigned',     label: 'Agent Assigned',  color: '#a78bfa', rgb: '167,139,250',  Icon: User },
+  { key: 'Assigned',     label: 'Agent Assigned',  color: '#8b5cf6', rgb: '167,139,250',  Icon: User },
   { key: 'Picked-up',    label: 'Picked Up',       color: '#f59e0b', rgb: '245,158,11',   Icon: MapPin },
-  { key: 'In-Transit',   label: 'In Transit',      color: '#00d4ff', rgb: '0,212,255',    Icon: Truck },
-  { key: 'Delivered',    label: 'Delivered',       color: '#34d399', rgb: '52,211,153',   Icon: CheckCircle },
+  { key: 'In-Transit',   label: 'In Transit',      color: '#6366f1', rgb: '0,212,255',    Icon: Truck },
+  { key: 'Delivered',    label: 'Delivered',       color: '#10b981', rgb: '52,211,153',   Icon: CheckCircle },
 ]
 
 /**
@@ -21,8 +21,8 @@ export default function OrderTimeline({ status, timestamps = {} }) {
         borderRadius: 16,
         border: '1px solid rgba(248,113,113,0.15)',
       }}>
-        <Package size={36} color="#f87171" style={{ opacity: 0.6, marginBottom: '0.75rem' }} />
-        <p style={{ color: '#f87171', fontWeight: 700 }}>Order Cancelled</p>
+        <Package size={36} color="#ef4444" style={{ opacity: 0.6, marginBottom: '0.75rem' }} />
+        <p style={{ color: '#ef4444', fontWeight: 700 }}>Order Cancelled</p>
       </div>
     )
   }

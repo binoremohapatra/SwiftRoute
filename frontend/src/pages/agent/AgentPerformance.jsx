@@ -24,9 +24,9 @@ export default function AgentPerformance() {
   }, [token, toast])
 
   const metrics = performance ? [
-    { label: 'Deliveries Today', value: performance.deliveriesToday || 0, icon: Package, color: '#00d4ff', suffix: '' },
+    { label: 'Deliveries Today', value: performance.deliveriesToday || 0, icon: Package, color: '#6366f1', suffix: '' },
     { label: 'Average Rating', value: performance.avgRating || 0, icon: Star, color: '#fbbf24', suffix: ' / 5' },
-    { label: 'On-Time Rate', value: performance.onTimeRate || 0, icon: TrendingUp, color: '#34d399', suffix: '%' },
+    { label: 'On-Time Rate', value: performance.onTimeRate || 0, icon: TrendingUp, color: '#10b981', suffix: '%' },
   ] : []
 
   const onTimeRate = performance?.onTimeRate || 0
@@ -50,16 +50,16 @@ export default function AgentPerformance() {
           </div>
         ) : (
           <>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '1rem' }}>
               {metrics.map((m, idx) => {
                 const Icon = m.icon
                 return (
-                  <div key={m.label} className="glass-card stagger-list" style={{ padding: '2rem', borderRadius: 24, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', animation: `staggerUp 0.35s ${idx * 0.1}s both`, position: 'relative', overflow: 'hidden' }}>
+                  <div key={m.label} className="glass-card stagger-list perf-metric-card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', animation: `staggerUp 0.35s ${idx * 0.1}s both`, position: 'relative', overflow: 'hidden' }}>
                     <div style={{ position: 'absolute', top: -30, right: -30, width: 100, height: 100, background: `radial-gradient(circle, ${m.color}20 0%, transparent 70%)`, borderRadius: '50%' }} />
-                    <div style={{ width: 64, height: 64, background: `${m.color}15`, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem', boxShadow: `0 8px 24px ${m.color}15` }}>
+                    <div className="perf-metric-icon-wrap" style={{ background: `${m.color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem', boxShadow: `0 8px 24px ${m.color}15` }}>
                       <Icon size={28} color={m.color} />
                     </div>
-                    <div style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'var(--font-display)', marginBottom: '0.25rem', lineHeight: 1, letterSpacing: '-0.03em' }}>
+                    <div className="perf-metric-val" style={{ fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'var(--font-display)', marginBottom: '0.25rem', lineHeight: 1, letterSpacing: '-0.03em' }}>
                       <AnimatedCounter value={m.value} duration={1500} suffix={m.suffix} />
                     </div>
                     <div style={{ color: 'rgba(240,240,255,0.5)', fontSize: '0.9rem', fontWeight: 600 }}>{m.label}</div>
@@ -68,13 +68,13 @@ export default function AgentPerformance() {
               })}
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '1.5rem', marginTop: '1.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))', gap: '1rem', marginTop: '1.5rem' }}>
               
               {/* On-Time Progress */}
-              <div className="glass-card stagger-list" style={{ padding: '2rem', borderRadius: 24, animation: 'staggerUp 0.4s 0.3s both' }}>
+              <div className="glass-card stagger-list perf-detail-card" style={{ animation: 'staggerUp 0.4s 0.3s both' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
                   <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(52,211,153,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Clock size={18} color="#34d399" />
+                    <Clock size={18} color="#10b981" />
                   </div>
                   <h3 style={{ fontSize: '1.1rem', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>On-Time Delivery Rate</h3>
                 </div>
@@ -83,7 +83,7 @@ export default function AgentPerformance() {
                   <div style={{ 
                     position: 'absolute', left: 0, top: 0, bottom: 0, 
                     width: `${onTimeRate}%`, 
-                    background: 'linear-gradient(90deg, #00d4ff, #34d399)', 
+                    background: 'var(--color-surface)', 
                     borderRadius: 999, 
                     transition: 'width 1.5s cubic-bezier(0.25,0.46,0.45,0.94) 0.5s',
                     boxShadow: '0 0 12px rgba(52,211,153,0.5)'
@@ -92,13 +92,13 @@ export default function AgentPerformance() {
                 
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'rgba(240,240,255,0.4)', fontWeight: 600 }}>
                   <span>Needs Work</span>
-                  <span style={{ color: onTimeRate >= 90 ? '#34d399' : '#fbbf24', fontWeight: 700, fontSize: '1.25rem' }}><AnimatedCounter value={onTimeRate} suffix="%" /></span>
+                  <span style={{ color: onTimeRate >= 90 ? '#10b981' : '#fbbf24', fontWeight: 700, fontSize: '1.25rem' }}><AnimatedCounter value={onTimeRate} suffix="%" /></span>
                   <span>Excellent</span>
                 </div>
               </div>
 
               {/* Rating Detailed */}
-              <div className="glass-card stagger-list" style={{ padding: '2rem', borderRadius: 24, animation: 'staggerUp 0.4s 0.4s both' }}>
+              <div className="glass-card stagger-list perf-detail-card" style={{ animation: 'staggerUp 0.4s 0.4s both' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
                   <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(251,191,36,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <Award size={18} color="#fbbf24" />
@@ -106,9 +106,9 @@ export default function AgentPerformance() {
                   <h3 style={{ fontSize: '1.1rem', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>Customer Rating Breakdown</h3>
                 </div>
                 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+                <div className="perf-rating-container" style={{ alignItems: 'center' }}>
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '3.5rem', fontWeight: 900, color: '#fbbf24', fontFamily: 'var(--font-display)', lineHeight: 1 }}>
+                    <div className="perf-rating-val" style={{ fontWeight: 900, color: '#fbbf24', fontFamily: 'var(--font-display)', lineHeight: 1 }}>
                       <AnimatedCounter value={avgRating} />
                     </div>
                     <div style={{ display: 'flex', gap: 4, justifyContent: 'center', margin: '0.5rem 0' }}>

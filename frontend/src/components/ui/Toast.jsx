@@ -4,8 +4,8 @@ import { CheckCircle, AlertCircle, Info, AlertTriangle, X } from 'lucide-react'
 const ToastContext = createContext(null)
 
 const TOAST_ICONS = {
-  success: { Icon: CheckCircle, color: '#34d399', bg: 'rgba(52,211,153,0.12)' },
-  error:   { Icon: AlertCircle, color: '#f87171', bg: 'rgba(248,113,113,0.12)' },
+  success: { Icon: CheckCircle, color: '#10b981', bg: 'rgba(52,211,153,0.12)' },
+  error:   { Icon: AlertCircle, color: '#ef4444', bg: 'rgba(248,113,113,0.12)' },
   info:    { Icon: Info,        color: '#60a5fa', bg: 'rgba(96,165,250,0.12)' },
   warning: { Icon: AlertTriangle, color: '#f59e0b', bg: 'rgba(245,158,11,0.12)' },
 }

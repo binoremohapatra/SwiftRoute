@@ -28,11 +28,11 @@ export default function Navbar({ scrolled }) {
             ))}
           </ul>
           <div className="navbar-cta">
-            <Link to="/login" className="btn-ghost" style={{ fontSize: '13px', padding: '10px 20px' }}>
+            <Link to="/login" className="btn-ghost nav-btn-login">
               <LogIn size={14} />
               Login
             </Link>
-            <Link to="/signup" className="btn-primary" style={{ fontSize: '13px', padding: '10px 20px' }}>
+            <Link to="/signup" className="btn-primary nav-btn-signup">
               Get Started
               <ArrowRight size={14} />
             </Link>

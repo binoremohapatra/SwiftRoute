@@ -38,6 +38,8 @@ const createOrderSchema = z.object({
       lat: z.number({ required_error: 'Drop latitude is required' }),
       lng: z.number({ required_error: 'Drop longitude is required' }),
     }),
+    amount: z.number().optional(),
+    paymentMethod: z.string().optional(),
   }),
   query: z.any().optional(),
   params: z.any().optional(),

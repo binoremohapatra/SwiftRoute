@@ -72,7 +72,7 @@ export default function Roadmap() {
                 <div
                   className="roadmap-dot"
                   style={item.done ? {
-                    background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+                    background: 'var(--color-surface)',
                     borderColor: 'var(--accent-primary)',
                     boxShadow: '0 0 20px rgba(0,212,255,0.3)',
                   } : {}}

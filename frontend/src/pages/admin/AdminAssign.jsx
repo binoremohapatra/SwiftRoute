@@ -123,7 +123,7 @@ export default function AdminAssign() {
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
                     <div style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(0,212,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <Package size={14} color="#00d4ff" /> 
+                      <Package size={14} color="#6366f1" /> 
                     </div>
                     <h3 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>
                       1. Select Pending or Active Order
@@ -177,7 +177,7 @@ export default function AdminAssign() {
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
                     <div style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(167,139,250,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <Bike size={14} color="#a78bfa" /> 
+                      <Bike size={14} color="#8b5cf6" /> 
                     </div>
                     <h3 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>
                       2. Select Available Agent
@@ -207,7 +207,7 @@ export default function AdminAssign() {
                   {/* Agent Preview */}
                   {selectedAgentObj && (
                     <div style={{ marginTop: '1rem', padding: '1rem 1.25rem', background: 'rgba(167,139,250,0.05)', borderRadius: 16, border: '1px solid rgba(167,139,250,0.15)', display: 'flex', alignItems: 'center', gap: '1rem', animation: 'fadeIn 0.3s' }}>
-                      <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'linear-gradient(135deg, #a78bfa, #8b5cf6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem', fontWeight: 700, color: '#fff' }}>
+                      <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--color-surface)' }}>
                         {selectedAgentObj.name?.[0]?.toUpperCase()}
                       </div>
                       <div>
@@ -242,24 +242,6 @@ export default function AdminAssign() {
 
                   <button 
                     className="btn-primary"
-                    onClick={handleSmartAssign} 
-                    disabled={!selectedOrder || assigning}
-                    style={{ 
-                      flex: 1, 
-                      padding: '1rem', 
-                      fontSize: '1rem', 
-                      borderRadius: 14,
-                      justifyContent: 'center',
-                      background: 'linear-gradient(135deg, #a78bfa, #8b5cf6)',
-                      boxShadow: '0 4px 15px rgba(167, 139, 250, 0.3)',
-                      opacity: (!selectedOrder || assigning) ? 0.4 : 1 
-                    }}
-                  >
-                    <Zap size={18} /> Smart AI Assign
-                  </button>
-
-                  <button 
-                    className="btn-primary"
                     onClick={handleAssign3PL} 
                     disabled={!selectedOrder || assigning}
                     style={{ 
@@ -268,7 +250,7 @@ export default function AdminAssign() {
                       fontSize: '1rem', 
                       borderRadius: 14,
                       justifyContent: 'center',
-                      background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+                      background: 'var(--color-surface)',
                       boxShadow: '0 4px 15px rgba(245, 158, 11, 0.3)',
                       opacity: (!selectedOrder || assigning) ? 0.4 : 1 
                     }}

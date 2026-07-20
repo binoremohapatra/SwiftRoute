@@ -73,6 +73,25 @@ const updateLocation = asyncHandler(async (req, res) => {
         lng,
         timestamp: new Date(),
       });
+      // Broadcast to admin dashboard for Fleet Tracking
+      io.to('admin').emit('agent:locationBroadcast', {
+        agentId: req.user.id,
+        orderId,
+        lat,
+        lng,
+        timestamp: new Date(),
+      });
+    }
+  } else {
+    // Even if no active order, broadcast to admin for idle fleet tracking
+    const io = req.app.get('io');
+    if (io) {
+      io.to('admin').emit('agent:locationBroadcast', {
+        agentId: req.user.id,
+        lat,
+        lng,
+        timestamp: new Date(),
+      });
     }
   }
 

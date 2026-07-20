@@ -1,14 +1,14 @@
 import { Atom, Server, Cpu, Database, Zap, Map, Bell, Smartphone, Network } from 'lucide-react'
 
 const techItems = [
-  { logo: <Atom size={32} color="#00d4ff" />, name: 'React', desc: 'UI Framework' },
-  { logo: <Server size={32} color="#00ff88" />, name: 'Node.js', desc: 'Runtime' },
-  { logo: <Cpu size={32} color="#aaaaaa" />, name: 'Express', desc: 'API Layer' },
-  { logo: <Database size={32} color="#00ed64" />, name: 'MongoDB', desc: 'Primary DB' },
-  { logo: <Database size={32} color="#336791" />, name: 'PostgreSQL', desc: 'Analytics DB' },
-  { logo: <Zap size={32} color="#f7df1e" />, name: 'WebSockets', desc: 'Real-time IO' },
-  { logo: <Map size={32} color="#34a853" />, name: 'Maps API', desc: 'Navigation' },
-  { logo: <Bell size={32} color="#ff9800" />, name: 'Firebase', desc: 'Push Notifications' },
+  { logo: <Atom size={32} color="var(--text-secondary)" />, name: 'React', desc: 'UI Framework' },
+  { logo: <Server size={32} color="var(--text-secondary)" />, name: 'Node.js', desc: 'Runtime' },
+  { logo: <Cpu size={32} color="var(--text-secondary)" />, name: 'Express', desc: 'API Layer' },
+  { logo: <Database size={32} color="var(--text-secondary)" />, name: 'MongoDB', desc: 'Primary DB' },
+  { logo: <Database size={32} color="var(--text-secondary)" />, name: 'PostgreSQL', desc: 'Analytics DB' },
+  { logo: <Zap size={32} color="var(--text-secondary)" />, name: 'WebSockets', desc: 'Real-time IO' },
+  { logo: <Map size={32} color="var(--text-secondary)" />, name: 'Maps API', desc: 'Navigation' },
+  { logo: <Bell size={32} color="var(--text-secondary)" />, name: 'Firebase', desc: 'Push Notifications' },
 ]
 
 const archFlow = [
@@ -39,7 +39,7 @@ export default function TechStack() {
                 left: '60px',
                 right: '60px',
                 height: '2px',
-                background: 'linear-gradient(to right, var(--accent-primary), var(--accent-tertiary))',
+                background: 'var(--color-surface)',
                 opacity: 0.15,
                 transform: 'translateY(-50%)',
               }} />

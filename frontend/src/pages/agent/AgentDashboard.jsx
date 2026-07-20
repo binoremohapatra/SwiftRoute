@@ -21,7 +21,7 @@ const mapStyle = {
 
 const nextStatus = { 'Assigned': 'Picked-up', 'Picked-up': 'In-Transit', 'In-Transit': 'Delivered' }
 const actionLabel = { 'Picked-up': 'Confirm Pickup ✅', 'In-Transit': 'Start Transit 🚗', 'Delivered': 'Mark Delivered 🎉' }
-const actionColor = { 'Picked-up': '', 'In-Transit': 'linear-gradient(135deg,#a78bfa,#8b5cf6)', 'Delivered': 'linear-gradient(135deg,#34d399,#10b981)' }
+const actionColor = { 'Picked-up': '', 'In-Transit': 'linear-gradient(135deg,#8b5cf6,#8b5cf6)', 'Delivered': 'linear-gradient(135deg,#10b981,#10b981)' }
 
 export default function AgentDashboard() {
   const { token, user } = useAuth()
@@ -316,7 +316,7 @@ export default function AgentDashboard() {
               <button
                 onClick={handleInstallClick}
                 className="btn-primary"
-                style={{ padding: '0.6rem 1rem', borderRadius: 999, background: 'linear-gradient(135deg, #a78bfa, #8b5cf6)', color: '#fff', fontSize: '0.8rem', gap: 6 }}
+                style={{ padding: '0.6rem 1rem', borderRadius: 999, background: 'var(--color-surface)', gap: 6 }}
               >
                 <Download size={14} /> Install App
               </button>
@@ -328,11 +328,11 @@ export default function AgentDashboard() {
               style={{
                 borderColor: available ? 'rgba(52,211,153,0.35)' : 'rgba(255,255,255,0.1)',
                 background: available ? 'rgba(52,211,153,0.08)' : 'rgba(255,255,255,0.04)',
-                color: available ? '#34d399' : 'rgba(240,240,255,0.45)'
+                color: available ? '#10b981' : 'rgba(240,240,255,0.45)'
               }}
             >
               {available ? 'Available for Orders' : 'Currently Offline'}
-              <div style={{ width: 44, height: 26, borderRadius: 999, position: 'relative', transition: 'background 0.3s', background: available ? '#34d399' : 'rgba(255,255,255,0.12)', boxShadow: available ? '0 0 12px rgba(52,211,153,0.4)' : 'none', flexShrink: 0, marginLeft: 8 }}>
+              <div style={{ width: 44, height: 26, borderRadius: 999, position: 'relative', transition: 'background 0.3s', background: available ? '#10b981' : 'rgba(255,255,255,0.12)', boxShadow: available ? '0 0 12px rgba(52,211,153,0.4)' : 'none', flexShrink: 0, marginLeft: 8 }}>
                 <div style={{ position: 'absolute', top: 3, left: 3, width: 20, height: 20, borderRadius: '50%', background: '#fff', transition: 'transform 0.3s cubic-bezier(0.34,1.56,0.64,1)', boxShadow: '0 2px 6px rgba(0,0,0,0.3)', transform: available ? 'translateX(18px)' : 'translateX(0)' }} />
               </div>
             </button>
@@ -341,10 +341,10 @@ export default function AgentDashboard() {
 
         {/* Stats */}
         <div className="dash-stats-grid stagger-list">
-          <StatCard label="Total Deliveries" value={performance?.totalDeliveries ?? 0} icon={Package} color="#00d4ff" loading={loading} />
-          <StatCard label="Active Orders"    value={active.length} icon={Clock} color="#a78bfa" loading={loading} />
-          <StatCard label="Success Rate"     value={performance?.successRate ?? 0} suffix="%" icon={TrendingUp} color="#34d399" loading={loading} />
-          <StatCard label="Avg Time (mins)"  value={performance?.avgDeliveryTimeMinutes ?? 0} icon={Star} color="#fbbf24" loading={loading} />
+          <StatCard label="Total Deliveries" value={performance?.totalDeliveries ?? 0} icon={Package} loading={loading} />
+          <StatCard label="Active Orders"    value={active.length} icon={Clock} color="var(--accent-indigo)" loading={loading} />
+          <StatCard label="Success Rate"     value={performance?.successRate ?? 0} suffix="%" icon={TrendingUp} loading={loading} />
+          <StatCard label="Avg Time (mins)"  value={performance?.avgDeliveryTimeMinutes ?? 0} icon={Star} loading={loading} />
         </div>
 
         {active.length > 1 && (
@@ -352,7 +352,7 @@ export default function AgentDashboard() {
             <button 
               onClick={handleOptimizeRoute}
               className="btn-primary btn-glow"
-              style={{ background: 'linear-gradient(135deg, #a78bfa, #8b5cf6)', padding: '0.6rem 1.25rem', borderRadius: 999, fontSize: '0.85rem' }}
+              style={{ background: 'var(--color-surface)' }}
             >
               <Zap size={14} /> Optimize My Route
             </button>
@@ -378,19 +378,19 @@ export default function AgentDashboard() {
                   style={{
                     borderRadius: 20,
                     overflow: 'hidden',
-                    borderTop: `3px solid ${order.status === 'In-Transit' ? '#00d4ff' : order.status === 'Picked-up' ? '#a78bfa' : '#f59e0b'}`,
+                    borderTop: `3px solid ${order.status === 'In-Transit' ? '#6366f1' : order.status === 'Picked-up' ? '#8b5cf6' : '#f59e0b'}`,
                   }}
                 >
                   {/* Card Header */}
                   <div
-                    style={{ padding: '1rem 1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', background: isLive ? 'rgba(0,212,255,0.04)' : 'transparent' }}
+                    style={{ padding: '1rem 1.25rem', display: 'flex', flexWrap: 'wrap', gap: '0.75rem', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', background: isLive ? 'rgba(99,102,241,0.04)' : 'transparent' }}
                     onClick={() => {
                       setLiveOrder(order)
                       setExpandedOrders(prev => ({ ...prev, [order.id]: !isExpanded }))
                     }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                      {isLive && <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#00d4ff', boxShadow: '0 0 8px #00d4ff', animation: 'livePulse 2s infinite' }} />}
+                    <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.75rem' }}>
+                      {isLive && <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#6366f1', boxShadow: '0 0 8px #6366f1', animation: 'livePulse 2s infinite' }} />}
                       <span style={{ fontFamily: 'monospace', fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)' }}>{order.orderNumber}</span>
                       <StatusBadge status={order.status} />
                     </div>
@@ -400,7 +400,7 @@ export default function AgentDashboard() {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={e => e.stopPropagation()}
-                        style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', background: 'rgba(0,212,255,0.12)', border: '1px solid rgba(0,212,255,0.3)', color: '#00d4ff', padding: '0.35rem 0.75rem', borderRadius: 8, fontSize: '0.75rem', fontWeight: 700, textDecoration: 'none' }}
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', background: 'rgba(99,102,241,0.12)', border: '1px solid rgba(99,102,241,0.3)', color: '#6366f1', padding: '0.35rem 0.75rem', borderRadius: 8, fontSize: '0.75rem', fontWeight: 700, textDecoration: 'none' }}
                       >
                         <Navigation size={12} /> Navigate to {navTarget.label}
                       </a>
@@ -409,10 +409,78 @@ export default function AgentDashboard() {
                   </div>
 
                   {isExpanded && (
-                    <>
-                      {/* Map */}
-                      {order.pickupLat && (
-                        <div style={{ height: 260, position: 'relative', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+                    <div className="agent-order-grid">
+                      
+                      {/* Left Side: Order Details & Actions */}
+                      <div className="agent-order-col">
+                        {/* Address Details */}
+                        <div style={{ padding: '1.5rem 1.25rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', flex: 1 }}>
+                          <div>
+                            <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#8b5cf6', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: 6 }}>
+                              <MapPin size={12} /> Pickup Address
+                            </div>
+                            <div style={{ fontSize: '0.85rem', color: 'var(--text-primary)', lineHeight: 1.5, fontWeight: 500 }}>{order.pickupAddress}</div>
+                            <a href={`https://www.google.com/maps/dir/?api=1&destination=${order.pickupLat},${order.pickupLng}`} target="_blank" rel="noopener noreferrer"
+                              style={{ display: 'inline-flex', alignItems: 'center', gap: 4, marginTop: '0.5rem', fontSize: '0.75rem', color: '#8b5cf6', textDecoration: 'none', fontWeight: 600 }}>
+                              <Navigation size={12} /> Open in Maps
+                            </a>
+                          </div>
+                          
+                          <div style={{ height: 1, background: 'rgba(255,255,255,0.04)' }} />
+
+                          <div>
+                            <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#10b981', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: 6 }}>
+                              <MapPin size={12} /> Drop Address
+                            </div>
+                            <div style={{ fontSize: '0.85rem', color: 'var(--text-primary)', lineHeight: 1.5, fontWeight: 500 }}>{order.dropAddress}</div>
+                            <a href={`https://www.google.com/maps/dir/?api=1&destination=${order.dropLat},${order.dropLng}`} target="_blank" rel="noopener noreferrer"
+                              style={{ display: 'inline-flex', alignItems: 'center', gap: 4, marginTop: '0.5rem', fontSize: '0.75rem', color: '#10b981', textDecoration: 'none', fontWeight: 600 }}>
+                              <Navigation size={12} /> Open in Maps
+                            </a>
+                          </div>
+                        </div>
+
+                        {/* Customer + Action (Sticks to bottom of left col) */}
+                        <div style={{ padding: '1.25rem', background: 'rgba(255,255,255,0.02)', borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
+                            <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--color-surface)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: '1rem', color: 'var(--text-primary)' }}>
+                              {order.customer?.name?.[0]?.toUpperCase() || 'C'}
+                            </div>
+                            <div>
+                              <div style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)' }}>{order.customer?.name}</div>
+                              <a href={`tel:${order.customer?.phone}`} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: '0.75rem', color: 'var(--text-secondary)', textDecoration: 'none', marginTop: 2, fontWeight: 500 }}>
+                                <Phone size={10} /> {order.customer?.phone}
+                              </a>
+                            </div>
+                          </div>
+
+                          {ns && (
+                            ns === 'Delivered' && order.paymentMethod === 'COD' && order.paymentStatus !== 'PAID' ? (
+                              <button
+                                onClick={() => handleCollectCashAndDeliver(order)}
+                                disabled={updating === order.id}
+                                className="btn-primary"
+                                style={{ padding: '0.75rem 1.25rem', borderRadius: 12, fontSize: '0.85rem', fontWeight: 700, background: 'var(--color-surface)' }}
+                              >
+                                {updating === order.id ? '⏳ Updating...' : <><Banknote size={16} style={{display: 'inline', verticalAlign: 'middle', marginRight: 6}}/> Collect ₹{order.amount} & Deliver</>}
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => handleStatusUpdate(order, ns)}
+                                disabled={updating === order.id}
+                                className="btn-primary"
+                                style={{ padding: '0.75rem 1.5rem', borderRadius: 12, fontSize: '0.85rem', fontWeight: 700, background: actionColor[ns] || '', opacity: updating === order.id ? 0.7 : 1, color: ns === 'Delivered' ? '#0a0a12' : '#fff' }}
+                              >
+                                {updating === order.id ? '⏳ Updating...' : actionLabel[ns]}
+                              </button>
+                            )
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Right Side: Map */}
+                      <div className="agent-order-map-col">
+                        {order.pickupLat ? (
                           <Map
                             ref={isLive ? mapRef : undefined}
                             initialViewState={{
@@ -431,7 +499,7 @@ export default function AgentDashboard() {
                             {isLive && activeRouteGeoJSON && (
                               <Source id="agent-route" type="geojson" data={activeRouteGeoJSON}>
                                 <Layer id="route-shadow" type="line" layout={{ 'line-join': 'round', 'line-cap': 'round' }} paint={{ 'line-color': '#000', 'line-width': 7, 'line-opacity': 0.2 }} />
-                                <Layer id="route-line" type="line" layout={{ 'line-join': 'round', 'line-cap': 'round' }} paint={{ 'line-color': '#00d4ff', 'line-width': 4 }} />
+                                <Layer id="route-line" type="line" layout={{ 'line-join': 'round', 'line-cap': 'round' }} paint={{ 'line-color': '#6366f1', 'line-width': 4 }} />
                               </Source>
                             )}
 
@@ -446,87 +514,28 @@ export default function AgentDashboard() {
 
                             {/* Pickup pin */}
                             <Marker longitude={order.pickupLng} latitude={order.pickupLat} anchor="bottom">
-                              <div style={{ background: '#a78bfa', color: '#fff', padding: '5px 10px', borderRadius: 8, fontSize: '0.72rem', fontWeight: 700, boxShadow: '0 4px 16px rgba(167,139,250,0.6)', border: '1.5px solid white', whiteSpace: 'nowrap' }}>
+                              <div style={{ background: '#8b5cf6', color: '#fff', padding: '5px 10px', borderRadius: 8, fontSize: '0.72rem', fontWeight: 700, boxShadow: '0 4px 16px rgba(167,139,250,0.6)', border: '1.5px solid white', whiteSpace: 'nowrap' }}>
                                 📦 Pickup
                               </div>
                             </Marker>
 
                             {/* Drop pin */}
                             <Marker longitude={order.dropLng} latitude={order.dropLat} anchor="bottom">
-                              <div style={{ background: '#34d399', color: '#0a0a12', padding: '5px 10px', borderRadius: 8, fontSize: '0.72rem', fontWeight: 700, boxShadow: '0 4px 16px rgba(52,211,153,0.6)', border: '1.5px solid white', whiteSpace: 'nowrap' }}>
+                              <div style={{ background: '#10b981', color: '#0a0a12', padding: '5px 10px', borderRadius: 8, fontSize: '0.72rem', fontWeight: 700, boxShadow: '0 4px 16px rgba(52,211,153,0.6)', border: '1.5px solid white', whiteSpace: 'nowrap' }}>
                                 🏠 Drop
                               </div>
                             </Marker>
                           </Map>
-
-                          {/* Map hint */}
-                          <div style={{ position: 'absolute', top: 8, left: 8, background: 'rgba(10,10,18,0.75)', backdropFilter: 'blur(6px)', borderRadius: 8, padding: '4px 10px', fontSize: '0.68rem', color: 'rgba(240,240,255,0.7)', pointerEvents: 'none' }}>
-                            Click map to unlock scroll zoom
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Address Details */}
-                      <div style={{ padding: '1rem 1.25rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-                        <div>
-                          <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#a78bfa', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.4rem', display: 'flex', alignItems: 'center', gap: 4 }}>
-                            <MapPin size={10} /> Pickup Address
-                          </div>
-                          <div style={{ fontSize: '0.8rem', color: 'var(--text-primary)', lineHeight: 1.5 }}>{order.pickupAddress}</div>
-                          <a href={`https://www.google.com/maps/dir/?api=1&destination=${order.pickupLat},${order.pickupLng}`} target="_blank" rel="noopener noreferrer"
-                            style={{ display: 'inline-flex', alignItems: 'center', gap: 4, marginTop: '0.4rem', fontSize: '0.7rem', color: '#a78bfa', textDecoration: 'none' }}>
-                            <Navigation size={10} /> Open in Maps
-                          </a>
-                        </div>
-                        <div>
-                          <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#34d399', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.4rem', display: 'flex', alignItems: 'center', gap: 4 }}>
-                            <MapPin size={10} /> Drop Address
-                          </div>
-                          <div style={{ fontSize: '0.8rem', color: 'var(--text-primary)', lineHeight: 1.5 }}>{order.dropAddress}</div>
-                          <a href={`https://www.google.com/maps/dir/?api=1&destination=${order.dropLat},${order.dropLng}`} target="_blank" rel="noopener noreferrer"
-                            style={{ display: 'inline-flex', alignItems: 'center', gap: 4, marginTop: '0.4rem', fontSize: '0.7rem', color: '#34d399', textDecoration: 'none' }}>
-                            <Navigation size={10} /> Open in Maps
-                          </a>
-                        </div>
-                      </div>
-
-                      {/* Customer + Action */}
-                      <div style={{ padding: '0.875rem 1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                          <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(0,212,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: '0.9rem', color: '#00d4ff' }}>
-                            {order.customer?.name?.[0]?.toUpperCase() || 'C'}
-                          </div>
-                          <div>
-                            <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>{order.customer?.name}</div>
-                            <a href={`tel:${order.customer?.phone}`} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: '0.75rem', color: '#00d4ff', textDecoration: 'none', marginTop: 2 }}>
-                              <Phone size={10} /> {order.customer?.phone}
-                            </a>
-                          </div>
-                        </div>
-
-                        {ns && (
-                          ns === 'Delivered' && order.paymentMethod === 'COD' && order.paymentStatus !== 'PAID' ? (
-                            <button
-                              onClick={() => handleCollectCashAndDeliver(order)}
-                              disabled={updating === order.id}
-                              className="btn-primary"
-                              style={{ padding: '0.6rem 1.25rem', borderRadius: 10, fontSize: '0.82rem', fontWeight: 700, background: 'linear-gradient(135deg, #10b981, #059669)', opacity: updating === order.id ? 0.7 : 1, color: '#fff' }}
-                            >
-                              {updating === order.id ? '⏳ Updating...' : <><Banknote size={14} style={{display: 'inline', verticalAlign: 'middle', marginRight: 4}}/> Collect ₹{order.amount} & Deliver</>}
-                            </button>
-                          ) : (
-                            <button
-                              onClick={() => handleStatusUpdate(order, ns)}
-                              disabled={updating === order.id}
-                              className="btn-primary"
-                              style={{ padding: '0.6rem 1.25rem', borderRadius: 10, fontSize: '0.82rem', fontWeight: 700, background: actionColor[ns] || '', opacity: updating === order.id ? 0.7 : 1, color: ns === 'Delivered' ? '#0a0a12' : '#fff' }}
-                            >
-                              {updating === order.id ? '⏳ Updating...' : actionLabel[ns]}
-                            </button>
-                          )
+                        ) : (
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--text-muted)' }}>Location not available</div>
                         )}
+
+                        {/* Map hint */}
+                        <div style={{ position: 'absolute', top: 12, left: 12, background: 'rgba(10,10,18,0.75)', backdropFilter: 'blur(6px)', borderRadius: 8, padding: '6px 12px', fontSize: '0.7rem', color: 'rgba(240,240,255,0.7)', pointerEvents: 'none' }}>
+                          Click map to unlock scroll zoom
+                        </div>
                       </div>
-                    </>
+                    </div>
                   )}
                 </div>
               )
@@ -538,25 +547,25 @@ export default function AgentDashboard() {
       {/* New Order Request Modal */}
       {newRequest && (
         <div style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(10px)' }}>
-          <div style={{ background: '#12121a', border: '1px solid rgba(0,212,255,0.2)', padding: '2rem', borderRadius: 24, width: '90%', maxWidth: 400, textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-            <div style={{ position: 'absolute', top: 0, left: 0, height: 4, background: '#00d4ff', transition: 'width 1s linear', width: `${(newRequestTimer / 30) * 100}%` }} />
+          <div style={{ background: '#12121a', border: '1px solid rgba(99,102,241,0.2)', padding: '2rem', borderRadius: 24, width: '90%', maxWidth: 400, textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', top: 0, left: 0, height: 4, background: '#6366f1', transition: 'width 1s linear', width: `${(newRequestTimer / 30) * 100}%` }} />
             
-            <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(0,212,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
-              <Package size={32} color="#00d4ff" />
+            <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(99,102,241,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
+              <Package size={32} color="#6366f1" />
             </div>
             
             <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>New Delivery Request!</h3>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: '1.5rem' }}>
-              Pickup is <strong style={{ color: '#00d4ff' }}>{newRequest.etaMins} mins</strong> away ({newRequest.distance} km).
+              Pickup is <strong style={{ color: '#6366f1' }}>{newRequest.etaMins} mins</strong> away ({newRequest.distance} km).
             </p>
             
             <div style={{ background: 'rgba(255,255,255,0.03)', padding: '1rem', borderRadius: 12, marginBottom: '2rem', textAlign: 'left' }}>
               <div style={{ marginBottom: '0.75rem' }}>
-                <span style={{ fontSize: '0.75rem', color: '#a78bfa', textTransform: 'uppercase', fontWeight: 700 }}>Pickup</span>
+                <span style={{ fontSize: '0.75rem', color: '#8b5cf6', textTransform: 'uppercase', fontWeight: 700 }}>Pickup</span>
                 <div style={{ fontSize: '0.9rem', color: 'var(--text-primary)' }}>{newRequest.pickupAddress}</div>
               </div>
               <div>
-                <span style={{ fontSize: '0.75rem', color: '#34d399', textTransform: 'uppercase', fontWeight: 700 }}>Drop</span>
+                <span style={{ fontSize: '0.75rem', color: '#10b981', textTransform: 'uppercase', fontWeight: 700 }}>Drop</span>
                 <div style={{ fontSize: '0.9rem', color: 'var(--text-primary)' }}>{newRequest.dropAddress}</div>
               </div>
             </div>
@@ -569,7 +578,7 @@ export default function AgentDashboard() {
               </button>
               <button 
                 onClick={() => handleAcceptRequest(newRequest.orderId)}
-                style={{ padding: '0.875rem', borderRadius: 12, border: 'none', background: 'linear-gradient(135deg, #00d4ff, #0077ff)', color: '#fff', fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer' }}>
+                style={{ padding: '0.875rem', borderRadius: 12, border: 'none', background: 'var(--color-surface)' }}>
                 Accept ({newRequestTimer}s)
               </button>
             </div>

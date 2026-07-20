@@ -91,7 +91,7 @@ export default function FooterCta() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontFamily: 'var(--font-display)', fontWeight: '700', fontSize: '18px', marginBottom: '8px' }}>
                 <div style={{
                   width: '28px', height: '28px',
-                  background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+                  background: 'var(--color-surface)',
                   borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
                   <Zap size={14} color="#fff" strokeWidth={2.5} />

@@ -48,11 +48,11 @@ export default function Signup() {
       <div className="bg-blob bg-blob-1" />
       <div className="bg-blob bg-blob-3" />
 
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', padding: '2rem' }}>
+      <div className="auth-wrapper">
         <div style={{ width: '100%', maxWidth: 460, position: 'relative', zIndex: 10 }}>
           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
             <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#fff', textDecoration: 'none', marginBottom: '1.5rem', fontWeight: 700, fontSize: '1.25rem' }}>
-              <div style={{ background: 'linear-gradient(135deg,#00d4ff,#0077ff)', padding: '10px', borderRadius: '12px', display: 'flex' }}>
+              <div style={{ background: 'var(--color-surface)' }}>
                 <Zap size={20} strokeWidth={2.5} color="#fff" />
               </div>
               SwiftRoute
@@ -61,13 +61,13 @@ export default function Signup() {
             <p style={{ color: 'rgba(240,240,255,0.5)', fontSize: '0.9rem' }}>Join SwiftRoute and start delivering smarter</p>
           </div>
 
-          <div className="glass-card" style={{ padding: '2.5rem', borderRadius: '24px' }}>
+          <div className="glass-card auth-card">
             {/* Role Tabs */}
             <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.75rem', background: 'rgba(255,255,255,0.04)', padding: '4px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.08)' }}>
               {['customer', 'agent', 'admin'].map((r) => (
                 <button key={r} type="button" onClick={() => setForm({ ...form, role: r })}
                   style={{ flex: 1, padding: '0.5rem', borderRadius: '50px', border: 'none', fontSize: '0.8rem', fontWeight: 600, textTransform: 'capitalize', transition: '0.2s',
-                    background: form.role === r ? 'linear-gradient(135deg,#00d4ff,#0077ff)' : 'transparent',
+                    background: form.role === r ? 'linear-gradient(135deg,#6366f1,#0077ff)' : 'transparent',
                     color: form.role === r ? '#fff' : 'rgba(240,240,255,0.4)' }}>
                   {r}
                 </button>
@@ -81,7 +81,7 @@ export default function Signup() {
             )}
 
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div className="auth-grid-2">
                 <div>
                   <label className="form-label">Full Name</label>
                   <input type="text" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="John Doe" className="dash-input" />
@@ -110,11 +110,11 @@ export default function Signup() {
               {form.role === 'agent' && (
                 <div>
                   <label className="form-label">Vehicle Type</label>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.5rem' }}>
+                  <div className="auth-vehicle-grid">
                     {vehicleTypes.map((v) => (
                       <button key={v} type="button" onClick={() => setForm({ ...form, vehicleType: v })}
-                        style={{ padding: '0.5rem', borderRadius: '10px', border: `1px solid ${form.vehicleType === v ? '#00d4ff' : 'rgba(255,255,255,0.1)'}`,
-                          background: form.vehicleType === v ? 'rgba(0,212,255,0.1)' : 'transparent', color: form.vehicleType === v ? '#00d4ff' : 'rgba(240,240,255,0.5)', fontSize: '0.75rem', fontWeight: 600, textTransform: 'capitalize', transition: '0.2s' }}>
+                        style={{ padding: '0.5rem', borderRadius: '10px', border: `1px solid ${form.vehicleType === v ? '#6366f1' : 'rgba(255,255,255,0.1)'}`,
+                          background: form.vehicleType === v ? 'rgba(0,212,255,0.1)' : 'transparent', color: form.vehicleType === v ? '#6366f1' : 'rgba(240,240,255,0.5)', fontSize: '0.75rem', fontWeight: 600, textTransform: 'capitalize', transition: '0.2s' }}>
                         {v}
                       </button>
                     ))}
@@ -132,7 +132,7 @@ export default function Signup() {
 
             <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.875rem', color: 'rgba(240,240,255,0.4)' }}>
               Already have an account?{' '}
-              <Link to="/login" style={{ color: '#00d4ff', textDecoration: 'none', fontWeight: 600 }}>Sign in</Link>
+              <Link to="/login" style={{ color: '#6366f1', textDecoration: 'none', fontWeight: 600 }}>Sign in</Link>
             </p>
           </div>
         </div>

@@ -40,12 +40,12 @@ export default function Login() {
       <div className="bg-blob bg-blob-1" />
       <div className="bg-blob bg-blob-2" />
 
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', padding: '2rem' }}>
+      <div className="auth-wrapper">
         <div style={{ width: '100%', maxWidth: 420, position: 'relative', zIndex: 10 }}>
           {/* Logo */}
           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
             <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#fff', textDecoration: 'none', marginBottom: '1.5rem', fontWeight: 700, fontSize: '1.25rem' }}>
-              <div style={{ background: 'linear-gradient(135deg,#00d4ff,#0077ff)', padding: '10px', borderRadius: '12px', display: 'flex' }}>
+              <div style={{ background: 'var(--color-surface)' }}>
                 <Zap size={20} strokeWidth={2.5} color="#fff" />
               </div>
               SwiftRoute
@@ -54,7 +54,7 @@ export default function Login() {
             <p style={{ color: 'rgba(240,240,255,0.5)', fontSize: '0.9rem' }}>Sign in to access your dashboard</p>
           </div>
 
-          <div className="glass-card" style={{ padding: '2.5rem', borderRadius: '24px' }}>
+          <div className="glass-card auth-card">
             {/* Role Tabs */}
             <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.75rem', background: 'rgba(255,255,255,0.04)', padding: '4px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.08)' }}>
               {['customer', 'agent', 'admin'].map((r) => (
@@ -64,7 +64,7 @@ export default function Login() {
                   onClick={() => setForm({ ...form, role: r })}
                   style={{
                     flex: 1, padding: '0.5rem', borderRadius: '50px', border: 'none', fontSize: '0.8rem', fontWeight: 600, textTransform: 'capitalize', transition: '0.2s',
-                    background: form.role === r ? 'linear-gradient(135deg,#00d4ff,#0077ff)' : 'transparent',
+                    background: form.role === r ? 'linear-gradient(135deg,#6366f1,#0077ff)' : 'transparent',
                     color: form.role === r ? '#fff' : 'rgba(240,240,255,0.4)',
                   }}
                 >
@@ -120,7 +120,7 @@ export default function Login() {
 
             <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.875rem', color: 'rgba(240,240,255,0.4)' }}>
               Don't have an account?{' '}
-              <Link to="/signup" style={{ color: '#00d4ff', textDecoration: 'none', fontWeight: 600 }}>Sign up</Link>
+              <Link to="/signup" style={{ color: '#6366f1', textDecoration: 'none', fontWeight: 600 }}>Sign up</Link>
             </p>
           </div>
         </div>

@@ -26,7 +26,7 @@ export default function Notifications() {
   }, [token, toast])
 
   const typeIcon = { status_update: Package, assignment: Truck, info: Info }
-  const typeColor = { status_update: '#00d4ff', assignment: '#a78bfa', info: '#fbbf24' }
+  const typeColor = { status_update: '#6366f1', assignment: '#8b5cf6', info: '#fbbf24' }
 
   const markAllRead = () => {
     setNotifications(prev => prev.map(n => ({ ...n, isRead: true })))
@@ -69,7 +69,6 @@ export default function Notifications() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', maxWidth: 640 }}>
             {notifications.map((n, idx) => {
               const Icon = typeIcon[n.type] || Bell
-              const color = typeColor[n.type] || '#00d4ff'
               return (
                 <div 
                   key={n._id} 
@@ -83,11 +82,11 @@ export default function Notifications() {
                     opacity: n.isRead ? 0.6 : 1,
                     transition: 'all 0.2s',
                     animation: `staggerUp 0.3s ${idx * 0.05}s both`,
-                    borderLeft: !n.isRead ? `3px solid ${color}` : '1px solid rgba(255,255,255,0.08)'
+                    borderLeft: !n.isRead ? `3px solid var(--accent-indigo)` : '1px solid rgba(255,255,255,0.08)'
                   }}
                 >
-                  <div style={{ width: 44, height: 44, borderRadius: 14, background: `${color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <Icon size={20} color={color} />
+                  <div style={{ width: 44, height: 44, borderRadius: 14, background: 'var(--bg-elevated)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <Icon size={20} color="var(--text-secondary)" />
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <p style={{ fontSize: '0.95rem', fontWeight: n.isRead ? 500 : 700, marginBottom: '0.35rem', color: 'var(--text-primary)' }}>
@@ -98,7 +97,7 @@ export default function Notifications() {
                     </p>
                   </div>
                   {!n.isRead && (
-                    <div style={{ width: 8, height: 8, borderRadius: '50%', background: color, flexShrink: 0, marginTop: '0.4rem', boxShadow: `0 0 12px ${color}` }} />
+                    <div style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--accent-indigo)', flexShrink: 0, marginTop: '0.4rem', boxShadow: `0 0 12px var(--accent-indigo)` }} />
                   )}
                 </div>
               )

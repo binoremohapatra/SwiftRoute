@@ -31,7 +31,9 @@ export default function OrderTimeline() {
     timelineSteps.forEach((_, i) => {
       setTimeout(() => {
         if (progressRef.current) {
-          progressRef.current.style.width = `${(i / (totalSteps - 1)) * 100}%`
+          const pct = `${(i / (totalSteps - 1)) * 100}%`
+          progressRef.current.style.width = pct
+          progressRef.current.style.setProperty('--progress', pct)
         }
         if (dotsRef.current[i]) dotsRef.current[i].classList.add('filled')
         if (labelsRef.current[i]) labelsRef.current[i].classList.add('filled')
@@ -62,14 +64,16 @@ export default function OrderTimeline() {
                     <div className="timeline-dot" ref={el => dotsRef.current[i] = el}>
                       <StepIcon size={22} strokeWidth={1.75} />
                     </div>
-                    <div
-                      className="timeline-label"
-                      ref={el => labelsRef.current[i] = el}
-                      style={{ whiteSpace: 'pre-line' }}
-                    >
-                      {step.label}
+                    <div className="timeline-content">
+                      <div
+                        className="timeline-label"
+                        ref={el => labelsRef.current[i] = el}
+                        style={{ whiteSpace: 'pre-line' }}
+                      >
+                        {step.label}
+                      </div>
+                      <div className="timeline-time">{step.time}</div>
                     </div>
-                    <div className="timeline-time">{step.time}</div>
                   </div>
                 )
               })}

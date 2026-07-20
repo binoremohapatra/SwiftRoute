@@ -7,7 +7,7 @@ const testimonials = [
     name: 'Priya Nair',
     role: 'VP Operations, ZeptoMart',
     initials: 'PN',
-    color: '#00d4ff',
+    color: '#6366f1',
   },
   {
     rating: 5,
@@ -39,7 +39,7 @@ const testimonials = [
     name: 'Sanya Kapoor',
     role: 'COO, MedDeliveries',
     initials: 'SK',
-    color: '#00d4ff',
+    color: '#6366f1',
   },
   {
     rating: 5,
@@ -83,12 +83,12 @@ export default function Testimonials() {
       <div style={{ overflow: 'hidden', position: 'relative' }}>
         <div style={{
           position: 'absolute', left: 0, top: 0, bottom: 0, width: '120px',
-          background: 'linear-gradient(to right, var(--color-bg), transparent)',
+          background: 'var(--color-surface)',
           zIndex: 10, pointerEvents: 'none',
         }} />
         <div style={{
           position: 'absolute', right: 0, top: 0, bottom: 0, width: '120px',
-          background: 'linear-gradient(to left, var(--color-bg), transparent)',
+          background: 'var(--color-surface)',
           zIndex: 10, pointerEvents: 'none',
         }} />
 
@@ -98,7 +98,7 @@ export default function Testimonials() {
               <StarRating count={t.rating} />
               <p className="testimonial-text">"{t.text}"</p>
               <div className="testimonial-author">
-                <div className="author-avatar" style={{ background: `linear-gradient(135deg, ${t.color}, ${t.color}88)` }}>
+                <div className="author-avatar" style={{ background: 'var(--color-surface)' }}>
                   {t.initials}
                 </div>
                 <div>
