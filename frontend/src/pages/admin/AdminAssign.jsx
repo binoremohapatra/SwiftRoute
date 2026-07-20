@@ -122,8 +122,8 @@ export default function AdminAssign() {
                 {/* Order Selection */}
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
-                    <div style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(0,212,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <Package size={14} color="#00d4ff" /> 
+                    <div style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Package size={14} color="#6366f1" /> 
                     </div>
                     <h3 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>
                       1. Select Pending or Active Order
@@ -131,7 +131,7 @@ export default function AdminAssign() {
                   </div>
                   
                   {orders.length === 0 ? (
-                    <div style={{ padding: '1.25rem', background: 'rgba(255,255,255,0.03)', borderRadius: 16, fontSize: '0.875rem', color: 'rgba(240,240,255,0.5)', border: '1px dashed rgba(255,255,255,0.1)' }}>
+                    <div style={{ padding: '1.25rem', background: 'rgba(255,255,255,0.03)', borderRadius: 16, fontSize: '0.875rem', color: 'rgba(245,245,247,0.5)', border: '1px dashed rgba(255,255,255,0.1)' }}>
                       No active or unassigned orders available at the moment.
                     </div>
                   ) : (
@@ -156,16 +156,16 @@ export default function AdminAssign() {
                   {selectedOrderObj && (
                     <div style={{ marginTop: '1rem', padding: '1rem 1.25rem', background: 'rgba(255,255,255,0.03)', borderRadius: 16, border: '1px solid rgba(255,255,255,0.06)', display: 'flex', flexDirection: 'column', gap: '0.75rem', animation: 'fadeIn 0.3s' }}>
                       <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-                        <Navigation size={14} color="rgba(240,240,255,0.4)" style={{ marginTop: 2 }} />
+                        <Navigation size={14} color="rgba(245,245,247,0.4)" style={{ marginTop: 2 }} />
                         <div style={{ fontSize: '0.85rem' }}>
-                          <div style={{ color: 'rgba(240,240,255,0.4)', fontSize: '0.75rem', marginBottom: 2 }}>Pickup</div>
+                          <div style={{ color: 'rgba(245,245,247,0.4)', fontSize: '0.75rem', marginBottom: 2 }}>Pickup</div>
                           <div style={{ color: 'var(--text-primary)' }}>{selectedOrderObj.pickupAddress}</div>
                         </div>
                       </div>
                       <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-                        <Navigation size={14} color="rgba(240,240,255,0.4)" style={{ marginTop: 2 }} />
+                        <Navigation size={14} color="rgba(245,245,247,0.4)" style={{ marginTop: 2 }} />
                         <div style={{ fontSize: '0.85rem' }}>
-                          <div style={{ color: 'rgba(240,240,255,0.4)', fontSize: '0.75rem', marginBottom: 2 }}>Drop</div>
+                          <div style={{ color: 'rgba(245,245,247,0.4)', fontSize: '0.75rem', marginBottom: 2 }}>Drop</div>
                           <div style={{ color: 'var(--text-primary)' }}>{selectedOrderObj.dropAddress}</div>
                         </div>
                       </div>
@@ -176,8 +176,8 @@ export default function AdminAssign() {
                 {/* Agent Selection */}
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
-                    <div style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(167,139,250,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <Bike size={14} color="#a78bfa" /> 
+                    <div style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(129,140,248,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Bike size={14} color="#818cf8" /> 
                     </div>
                     <h3 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>
                       2. Select Available Agent
@@ -185,7 +185,7 @@ export default function AdminAssign() {
                   </div>
 
                   {agents.length === 0 ? (
-                    <div style={{ padding: '1.25rem', background: 'rgba(255,255,255,0.03)', borderRadius: 16, fontSize: '0.875rem', color: 'rgba(240,240,255,0.5)', border: '1px dashed rgba(255,255,255,0.1)' }}>
+                    <div style={{ padding: '1.25rem', background: 'rgba(255,255,255,0.03)', borderRadius: 16, fontSize: '0.875rem', color: 'rgba(245,245,247,0.5)', border: '1px dashed rgba(255,255,255,0.1)' }}>
                       No available agents online right now.
                     </div>
                   ) : (
@@ -206,13 +206,13 @@ export default function AdminAssign() {
 
                   {/* Agent Preview */}
                   {selectedAgentObj && (
-                    <div style={{ marginTop: '1rem', padding: '1rem 1.25rem', background: 'rgba(167,139,250,0.05)', borderRadius: 16, border: '1px solid rgba(167,139,250,0.15)', display: 'flex', alignItems: 'center', gap: '1rem', animation: 'fadeIn 0.3s' }}>
-                      <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'linear-gradient(135deg, #a78bfa, #8b5cf6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem', fontWeight: 700, color: '#fff' }}>
+                    <div style={{ marginTop: '1rem', padding: '1rem 1.25rem', background: 'rgba(129,140,248,0.05)', borderRadius: 16, border: '1px solid rgba(129,140,248,0.15)', display: 'flex', alignItems: 'center', gap: '1rem', animation: 'fadeIn 0.3s' }}>
+                      <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'linear-gradient(135deg, #818cf8, #6366f1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem', fontWeight: 700, color: '#fff' }}>
                         {selectedAgentObj.name?.[0]?.toUpperCase()}
                       </div>
                       <div>
                         <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)' }}>{selectedAgentObj.name}</div>
-                        <div style={{ fontSize: '0.75rem', color: 'rgba(240,240,255,0.5)' }}>{selectedAgentObj.phone} • {selectedAgentObj.vehicleType}</div>
+                        <div style={{ fontSize: '0.75rem', color: 'rgba(245,245,247,0.5)' }}>{selectedAgentObj.phone} • {selectedAgentObj.vehicleType}</div>
                       </div>
                     </div>
                   )}
@@ -250,8 +250,8 @@ export default function AdminAssign() {
                       fontSize: '1rem', 
                       borderRadius: 14,
                       justifyContent: 'center',
-                      background: 'linear-gradient(135deg, #a78bfa, #8b5cf6)',
-                      boxShadow: '0 4px 15px rgba(167, 139, 250, 0.3)',
+                      background: 'linear-gradient(135deg, #818cf8, #6366f1)',
+                      boxShadow: '0 4px 15px rgba(129,140,248, 0.3)',
                       opacity: (!selectedOrder || assigning) ? 0.4 : 1 
                     }}
                   >

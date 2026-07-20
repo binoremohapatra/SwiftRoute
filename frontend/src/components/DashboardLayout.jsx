@@ -33,7 +33,7 @@ const navConfig = {
 
 const roleIcons   = { customer: User, agent: Truck, admin: Shield }
 const roleLabel   = { customer: 'Customer', agent: 'Delivery Agent', admin: 'Administrator' }
-const roleAccent  = { customer: '#00d4ff', agent: '#a78bfa', admin: '#f59e0b' }
+const roleAccent  = { customer: '#6366f1', agent: '#818cf8', admin: '#f59e0b' }
 
 /* ──────────── DashboardLayout ──────────── */
 export default function DashboardLayout({ children }) {
@@ -50,7 +50,7 @@ export default function DashboardLayout({ children }) {
   const profileRef = useRef(null)
   const navLinks   = navConfig[user?.role] || []
   const RoleIcon   = roleIcons[user?.role] || User
-  const accent     = roleAccent[user?.role] || '#00d4ff'
+  const accent     = roleAccent[user?.role] || '#6366f1'
 
   /* Theme toggle */
   useEffect(() => {
@@ -178,7 +178,7 @@ export default function DashboardLayout({ children }) {
               <Menu size={20} />
             </button>
             <div className="dash-topbar-search">
-              <Search size={14} color="rgba(240,240,255,0.3)" />
+              <Search size={14} color="rgba(245,245,247,0.3)" />
               <input placeholder="Search orders, agents..." />
             </div>
           </div>
@@ -221,7 +221,7 @@ export default function DashboardLayout({ children }) {
                 <span className="dash-profile-name">{user?.name?.split(' ')[0]}</span>
                 <ChevronRight
                   size={14}
-                  color="rgba(240,240,255,0.4)"
+                  color="rgba(245,245,247,0.4)"
                   style={{ transform: profileOpen ? 'rotate(90deg)' : 'rotate(0)', transition: '0.2s' }}
                 />
               </button>
@@ -232,7 +232,7 @@ export default function DashboardLayout({ children }) {
                     <div style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 2 }}>
                       {user?.name}
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: 'rgba(240,240,255,0.35)' }}>{user?.email}</div>
+                    <div style={{ fontSize: '0.75rem', color: 'rgba(245,245,247,0.35)' }}>{user?.email}</div>
                   </div>
                   <button className="dash-dropdown-item">
                     <User size={15} /> My Profile

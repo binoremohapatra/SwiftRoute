@@ -131,11 +131,11 @@ export default function AdminDashboard() {
           <>
             {/* KPI Grid */}
             <div className="dash-stats-grid stagger-list" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', marginBottom: '1.5rem' }}>
-              <StatCard label="Active Orders"     value={stats?.activeOrders}          icon={Package}      color="#00d4ff" />
+              <StatCard label="Active Orders"     value={stats?.activeOrders}          icon={Package}      color="#6366f1" />
               <StatCard label="Delivered Today"   value={stats?.deliveredToday}        icon={CheckCircle}  color="#34d399" />
               <StatCard label="Pending Orders"    value={stats?.pendingOrders}         icon={Clock}        color="#fbbf24" />
               <StatCard label="Online Agents"     value={stats?.onlineAgents}          icon={Activity}     color="#34d399" />
-              <StatCard label="Total Agents"      value={stats?.totalAgents}           icon={Bike}         color="#a78bfa" />
+              <StatCard label="Total Agents"      value={stats?.totalAgents}           icon={Bike}         color="#818cf8" />
               <StatCard label="Total Users"       value={stats?.totalUsers}            icon={Users}        color="#60a5fa" />
               <StatCard label="Avg Delivery Time" value={stats?.avgDeliveryTimeMinutes} suffix="m" icon={Clock} color="#fbbf24" />
               <StatCard label="Success Rate"      value={stats?.deliverySuccessRate}    suffix="%" icon={Activity} color="#34d399" />
@@ -163,19 +163,19 @@ export default function AdminDashboard() {
                 <ResponsiveContainer width="100%" height={300}>
                   <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
-                    <XAxis dataKey="date" tick={{ fill: 'rgba(240,240,255,0.4)', fontSize: 11 }} axisLine={false} tickLine={false} dy={10} />
-                    <YAxis tick={{ fill: 'rgba(240,240,255,0.4)', fontSize: 11 }} axisLine={false} tickLine={false} />
+                    <XAxis dataKey="date" tick={{ fill: 'rgba(245,245,247,0.4)', fontSize: 11 }} axisLine={false} tickLine={false} dy={10} />
+                    <YAxis tick={{ fill: 'rgba(245,245,247,0.4)', fontSize: 11 }} axisLine={false} tickLine={false} />
                     <Tooltip 
-                      contentStyle={{ background: '#0a0a12', border: '1px solid rgba(0,212,255,0.2)', borderRadius: 12, boxShadow: '0 8px 32px rgba(0,0,0,0.5)' }} 
-                      itemStyle={{ color: '#00d4ff', fontWeight: 600 }}
-                      labelStyle={{ color: 'rgba(240,240,255,0.7)', marginBottom: 4 }} 
-                      cursor={{ fill: 'rgba(0,212,255,0.05)' }}
+                      contentStyle={{ background: '#0a0a12', border: '1px solid rgba(99,102,241,0.2)', borderRadius: 12, boxShadow: '0 8px 32px rgba(0,0,0,0.5)' }} 
+                      itemStyle={{ color: '#6366f1', fontWeight: 600 }}
+                      labelStyle={{ color: 'rgba(245,245,247,0.7)', marginBottom: 4 }} 
+                      cursor={{ fill: 'rgba(99,102,241,0.05)' }}
                     />
                     <Bar dataKey="orders" fill="url(#colorUv)" radius={[6, 6, 0, 0]} barSize={40} />
                     <defs>
                       <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#00d4ff" stopOpacity={0.8}/>
-                        <stop offset="95%" stopColor="#0077ff" stopOpacity={0.8}/>
+                        <stop offset="5%" stopColor="#6366f1" stopOpacity={0.8}/>
+                        <stop offset="95%" stopColor="#4f46e5" stopOpacity={0.8}/>
                       </linearGradient>
                     </defs>
                   </BarChart>
@@ -194,7 +194,7 @@ export default function AdminDashboard() {
                         </div>
                         <div style={{ flex: 1 }}>
                           <div style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--text-primary)' }}>{a.name}</div>
-                          <div style={{ fontSize: '0.75rem', color: 'rgba(240,240,255,0.4)' }}>{a.vehicleType} • {a.deliveriesInPeriod} deliveries</div>
+                          <div style={{ fontSize: '0.75rem', color: 'rgba(245,245,247,0.4)' }}>{a.vehicleType} • {a.deliveriesInPeriod} deliveries</div>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: '0.85rem', fontWeight: 600, color: '#fbbf24' }}>
                           {a.rating} ★
@@ -213,19 +213,19 @@ export default function AdminDashboard() {
           <div style={{ position: 'fixed', inset: 0, zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(8px)', animation: 'fadeIn 0.2s' }}>
             <div className="glass-card" style={{ padding: '2.5rem', width: '100%', maxWidth: 450, borderRadius: 24, animation: 'modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
-                <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(0,212,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Bell size={20} color="#00d4ff" />
+                <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Bell size={20} color="#6366f1" />
                 </div>
                 <h2 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 700 }}>Broadcast Alert</h2>
               </div>
               
               <form onSubmit={handleSendPush} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(240,240,255,0.5)', marginBottom: '0.5rem' }}>Notification Title</label>
+                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(245,245,247,0.5)', marginBottom: '0.5rem' }}>Notification Title</label>
                   <input required className="dash-input" placeholder="e.g. System Maintenance" value={pushData.title} onChange={e => setPushData({...pushData, title: e.target.value})} />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(240,240,255,0.5)', marginBottom: '0.5rem' }}>Message Content</label>
+                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(245,245,247,0.5)', marginBottom: '0.5rem' }}>Message Content</label>
                   <textarea required className="dash-input" placeholder="Type your message here..." value={pushData.body} onChange={e => setPushData({...pushData, body: e.target.value})} style={{ minHeight: 120, resize: 'vertical' }} />
                 </div>
                 

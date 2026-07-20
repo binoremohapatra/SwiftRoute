@@ -41,8 +41,8 @@ function KpiItem({ kpi, active }) {
       <div style={{
         width: '44px', height: '44px', margin: '0 auto 16px',
         borderRadius: '12px',
-        background: 'rgba(0,212,255,0.1)',
-        border: '1px solid rgba(0,212,255,0.15)',
+        background: 'rgba(99,102,241,0.1)',
+        border: '1px solid rgba(99,102,241,0.15)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}>
         <KpiIcon size={20} color="var(--accent-primary)" strokeWidth={1.75} />

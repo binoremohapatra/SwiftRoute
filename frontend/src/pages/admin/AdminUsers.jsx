@@ -60,10 +60,10 @@ export default function AdminUsers() {
             <p className="dash-page-sub">Manage all platform participants</p>
           </div>
           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.25rem', background: 'rgba(0,212,255,0.08)', border: '1px solid rgba(0,212,255,0.15)', borderRadius: 12, fontSize: '0.85rem', fontWeight: 600, color: '#00d4ff' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.25rem', background: 'rgba(99,102,241,0.08)', border: '1px solid rgba(99,102,241,0.15)', borderRadius: 12, fontSize: '0.85rem', fontWeight: 600, color: '#6366f1' }}>
               <User size={14} /> {data.customers.length} Customers
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.25rem', background: 'rgba(167,139,250,0.08)', border: '1px solid rgba(167,139,250,0.15)', borderRadius: 12, fontSize: '0.85rem', fontWeight: 600, color: '#a78bfa' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.25rem', background: 'rgba(129,140,248,0.08)', border: '1px solid rgba(129,140,248,0.15)', borderRadius: 12, fontSize: '0.85rem', fontWeight: 600, color: '#818cf8' }}>
               <Truck size={14} /> {data.agents.length} Agents
             </div>
           </div>
@@ -91,7 +91,7 @@ export default function AdminUsers() {
 
           <div style={{ display: 'flex', gap: '0.75rem', width: '100%', maxWidth: 400 }}>
             <div style={{ position: 'relative', flex: 1 }}>
-              <Search size={16} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'rgba(240,240,255,0.3)' }} />
+              <Search size={16} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'rgba(245,245,247,0.3)' }} />
               <input
                 className="dash-input"
                 placeholder={`Search ${tab}...`}
@@ -127,7 +127,7 @@ export default function AdminUsers() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.25rem' }}>
             {filteredList.map((u, idx) => {
               const isAgent = tab === 'agents'
-              const color = isAgent ? '#a78bfa' : '#00d4ff'
+              const color = isAgent ? '#818cf8' : '#6366f1'
               
               return (
                 <div key={u.id} className="glass-card stagger-list" style={{ padding: '1.5rem', borderRadius: 24, animation: `staggerUp 0.3s ${idx * 0.05}s both`, borderTop: `4px solid ${color}` }}>
@@ -143,7 +143,7 @@ export default function AdminUsers() {
                     </div>
                     <div>
                       <div style={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--text-primary)', marginBottom: 2 }}>{u.name}</div>
-                      <div style={{ fontSize: '0.8rem', color: 'rgba(240,240,255,0.5)' }}>{u.email}</div>
+                      <div style={{ fontSize: '0.8rem', color: 'rgba(245,245,247,0.5)' }}>{u.email}</div>
                     </div>
                   </div>
 
@@ -183,7 +183,7 @@ export default function AdminUsers() {
 function Row({ label, value }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <span style={{ fontSize: '0.8rem', color: 'rgba(240,240,255,0.4)', fontWeight: 500 }}>{label}</span>
+      <span style={{ fontSize: '0.8rem', color: 'rgba(245,245,247,0.4)', fontWeight: 500 }}>{label}</span>
       <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', textTransform: 'capitalize' }}>
         {value || '—'}
       </span>

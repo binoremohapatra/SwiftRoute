@@ -208,7 +208,7 @@ export default function PlaceOrder() {
               }
             },
             prefill: { name: form.pickupName, contact: form.pickupPhone },
-            theme: { color: "#00d4ff" }
+            theme: { color: "#6366f1" }
           };
           const rzp = new window.Razorpay(options);
           rzp.on('payment.failed', function (response){
@@ -295,11 +295,11 @@ export default function PlaceOrder() {
             <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '0.5rem', fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
               Order Placed!
             </h2>
-            <p style={{ color: 'rgba(240,240,255,0.5)', marginBottom: '1.25rem', fontSize: '0.95rem' }}>
-              Your order <strong style={{ color: '#00d4ff', fontFamily: 'monospace' }}>{success.orderNumber}</strong> has been successfully registered.
+            <p style={{ color: 'rgba(245,245,247,0.5)', marginBottom: '1.25rem', fontSize: '0.95rem' }}>
+              Your order <strong style={{ color: '#6366f1', fontFamily: 'monospace' }}>{success.orderNumber}</strong> has been successfully registered.
             </p>
             <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 16, padding: '1rem', marginBottom: '1.75rem' }}>
-              <p style={{ color: 'rgba(240,240,255,0.7)', fontSize: '0.85rem', fontWeight: 500 }}>
+              <p style={{ color: 'rgba(245,245,247,0.7)', fontSize: '0.85rem', fontWeight: 500 }}>
                 {success.assignedAgentId ? 'An agent has been assigned to your order!' : 'We are currently assigning the best agent for your route.'}
               </p>
             </div>
@@ -337,7 +337,7 @@ export default function PlaceOrder() {
             </div>
             <div>
               <h3 style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--text-primary)', margin: 0 }}>{title}</h3>
-              <p style={{ fontSize: '0.75rem', color: 'rgba(240,240,255,0.4)', margin: '2px 0 0 0' }}>Enter text or tap on the map to set location</p>
+              <p style={{ fontSize: '0.75rem', color: 'rgba(245,245,247,0.4)', margin: '2px 0 0 0' }}>Enter text or tap on the map to set location</p>
             </div>
           </div>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -376,11 +376,11 @@ export default function PlaceOrder() {
               )}
             </Map>
             {!activeMapZoom && (
-              <div style={{ position: 'absolute', top: 8, right: 8, background: 'rgba(10,10,18,0.8)', backdropFilter: 'blur(4px)', padding: '6px 10px', borderRadius: 6, fontSize: '0.7rem', color: 'rgba(240,240,255,0.8)', pointerEvents: 'none', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <div style={{ position: 'absolute', top: 8, right: 8, background: 'rgba(10,10,18,0.8)', backdropFilter: 'blur(4px)', padding: '6px 10px', borderRadius: 6, fontSize: '0.7rem', color: 'rgba(245,245,247,0.8)', pointerEvents: 'none', border: '1px solid rgba(255,255,255,0.1)' }}>
                 Click map to unlock scroll zoom
               </div>
             )}
-            <div style={{ position: 'absolute', bottom: 8, left: 8, background: 'rgba(10,10,18,0.7)', backdropFilter: 'blur(4px)', padding: '4px 8px', borderRadius: 6, fontSize: '0.7rem', color: 'rgba(240,240,255,0.6)', pointerEvents: 'none' }}>
+            <div style={{ position: 'absolute', bottom: 8, left: 8, background: 'rgba(10,10,18,0.7)', backdropFilter: 'blur(4px)', padding: '4px 8px', borderRadius: 6, fontSize: '0.7rem', color: 'rgba(245,245,247,0.6)', pointerEvents: 'none' }}>
               Click anywhere on the map to place the pin
             </div>
           </div>
@@ -388,22 +388,22 @@ export default function PlaceOrder() {
           {/* Contact Info Grid */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(240,240,255,0.4)', marginBottom: '0.4rem' }}>{isPickup ? 'Sender Name' : 'Receiver Name'}</label>
+              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(245,245,247,0.4)', marginBottom: '0.4rem' }}>{isPickup ? 'Sender Name' : 'Receiver Name'}</label>
               <input className="dash-input" placeholder="e.g. John Doe" value={form[`${type}Name`]} onChange={(e) => setForm({ ...form, [`${type}Name`]: e.target.value })} required />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(240,240,255,0.4)', marginBottom: '0.4rem' }}>Phone Number</label>
+              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(245,245,247,0.4)', marginBottom: '0.4rem' }}>Phone Number</label>
               <input className="dash-input" placeholder="e.g. 9876543210" type="tel" maxLength={10} value={form[`${type}Phone`]} onChange={(e) => setForm({ ...form, [`${type}Phone`]: e.target.value.replace(/\D/g, '') })} required />
             </div>
           </div>
 
           <div>
-            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(240,240,255,0.4)', marginBottom: '0.4rem' }}>Flat, House no., Building, Company, Apartment</label>
+            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(245,245,247,0.4)', marginBottom: '0.4rem' }}>Flat, House no., Building, Company, Apartment</label>
             <input className="dash-input" placeholder="e.g. Flat 402, A-Wing" value={form[`${type}Flat`]} onChange={(e) => setForm({ ...form, [`${type}Flat`]: e.target.value })} required />
           </div>
 
           <div>
-            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(240,240,255,0.4)', marginBottom: '0.4rem' }}>Area, Street, Sector, Village</label>
+            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(245,245,247,0.4)', marginBottom: '0.4rem' }}>Area, Street, Sector, Village</label>
             <input 
               className="dash-input" 
               placeholder="e.g. 123 Main St, New Delhi" 
@@ -416,11 +416,11 @@ export default function PlaceOrder() {
           
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(240,240,255,0.4)', marginBottom: '0.4rem' }}>Pincode</label>
+              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(245,245,247,0.4)', marginBottom: '0.4rem' }}>Pincode</label>
               <input className="dash-input" placeholder="e.g. 110001" type="number" maxLength={6} value={form[`${type}Pincode`]} onChange={(e) => setForm({ ...form, [`${type}Pincode`]: e.target.value })} onBlur={() => geocodeAddress(type)} required />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(240,240,255,0.4)', marginBottom: '0.4rem' }}>Nearby Landmark</label>
+              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(245,245,247,0.4)', marginBottom: '0.4rem' }}>Nearby Landmark</label>
               <input className="dash-input" placeholder="e.g. Near Metro Station" value={form[`${type}Landmark`]} onChange={(e) => setForm({ ...form, [`${type}Landmark`]: e.target.value })} onBlur={() => geocodeAddress(type)} />
             </div>
           </div>
@@ -442,8 +442,8 @@ export default function PlaceOrder() {
         <div style={{ maxWidth: 800 }}>
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             
-            {renderLocationBlock('pickup', 'Pickup Location', MapPin, '#00d4ff')}
-            {renderLocationBlock('drop', 'Drop Location', Package, '#00ffaa')}
+            {renderLocationBlock('pickup', 'Pickup Location', MapPin, '#6366f1')}
+            {renderLocationBlock('drop', 'Drop Location', Package, '#34d399')}
 
             {/* Payment Section */}
             <div className="glass-card stagger-list" style={{ padding: '1.75rem', borderRadius: 20 }}>
@@ -451,23 +451,23 @@ export default function PlaceOrder() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <div 
                   onClick={() => setPaymentMethod('ONLINE')}
-                  style={{ padding: '1.25rem', borderRadius: 16, border: paymentMethod === 'ONLINE' ? '2px solid #00d4ff' : '1px solid rgba(255,255,255,0.1)', background: paymentMethod === 'ONLINE' ? 'rgba(0,212,255,0.05)' : 'rgba(255,255,255,0.02)', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', transition: 'all 0.2s' }}
+                  style={{ padding: '1.25rem', borderRadius: 16, border: paymentMethod === 'ONLINE' ? '2px solid #6366f1' : '1px solid rgba(255,255,255,0.1)', background: paymentMethod === 'ONLINE' ? 'rgba(99,102,241,0.05)' : 'rgba(255,255,255,0.02)', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', transition: 'all 0.2s' }}
                 >
-                  <CreditCard size={24} color={paymentMethod === 'ONLINE' ? '#00d4ff' : 'rgba(240,240,255,0.5)'} />
-                  <span style={{ fontWeight: 600, color: paymentMethod === 'ONLINE' ? '#00d4ff' : 'rgba(240,240,255,0.7)' }}>Pay Online</span>
-                  <span style={{ fontSize: '0.75rem', color: 'rgba(240,240,255,0.4)' }}>Cards, UPI, Netbanking</span>
+                  <CreditCard size={24} color={paymentMethod === 'ONLINE' ? '#6366f1' : 'rgba(245,245,247,0.5)'} />
+                  <span style={{ fontWeight: 600, color: paymentMethod === 'ONLINE' ? '#6366f1' : 'rgba(245,245,247,0.7)' }}>Pay Online</span>
+                  <span style={{ fontSize: '0.75rem', color: 'rgba(245,245,247,0.4)' }}>Cards, UPI, Netbanking</span>
                 </div>
                 <div 
                   onClick={() => setPaymentMethod('COD')}
                   style={{ padding: '1.25rem', borderRadius: 16, border: paymentMethod === 'COD' ? '2px solid #34d399' : '1px solid rgba(255,255,255,0.1)', background: paymentMethod === 'COD' ? 'rgba(52,211,153,0.05)' : 'rgba(255,255,255,0.02)', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', transition: 'all 0.2s' }}
                 >
-                  <Banknote size={24} color={paymentMethod === 'COD' ? '#34d399' : 'rgba(240,240,255,0.5)'} />
-                  <span style={{ fontWeight: 600, color: paymentMethod === 'COD' ? '#34d399' : 'rgba(240,240,255,0.7)' }}>Cash on Delivery</span>
-                  <span style={{ fontSize: '0.75rem', color: 'rgba(240,240,255,0.4)' }}>Pay when delivered</span>
+                  <Banknote size={24} color={paymentMethod === 'COD' ? '#34d399' : 'rgba(245,245,247,0.5)'} />
+                  <span style={{ fontWeight: 600, color: paymentMethod === 'COD' ? '#34d399' : 'rgba(245,245,247,0.7)' }}>Cash on Delivery</span>
+                  <span style={{ fontSize: '0.75rem', color: 'rgba(245,245,247,0.4)' }}>Pay when delivered</span>
                 </div>
               </div>
               <div style={{ marginTop: '1.5rem', padding: '1rem', background: 'rgba(255,255,255,0.03)', borderRadius: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ color: 'rgba(240,240,255,0.7)', fontWeight: 500 }}>Total Amount to Pay</span>
+                <span style={{ color: 'rgba(245,245,247,0.7)', fontWeight: 500 }}>Total Amount to Pay</span>
                 <span style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)' }}>₹{orderAmount}</span>
               </div>
             </div>

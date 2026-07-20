@@ -74,7 +74,7 @@ export default function Roadmap() {
                   style={item.done ? {
                     background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
                     borderColor: 'var(--accent-primary)',
-                    boxShadow: '0 0 20px rgba(0,212,255,0.3)',
+                    boxShadow: '0 0 20px rgba(99,102,241,0.3)',
                   } : {}}
                 >
                   <ItemIcon
@@ -91,8 +91,8 @@ export default function Roadmap() {
                     <div style={{
                       marginTop: '8px', display: 'inline-flex', alignItems: 'center', gap: '4px',
                       padding: '3px 10px', borderRadius: '20px', fontSize: '10px', fontWeight: '700',
-                      background: 'rgba(0,255,170,0.12)', color: 'var(--accent-tertiary)',
-                      border: '1px solid rgba(0,255,170,0.2)',
+                      background: 'rgba(52,211,153,0.12)', color: 'var(--accent-tertiary)',
+                      border: '1px solid rgba(52,211,153,0.2)',
                     }}>
                       <CheckCircle2 size={10} strokeWidth={2.5} />
                       Launched

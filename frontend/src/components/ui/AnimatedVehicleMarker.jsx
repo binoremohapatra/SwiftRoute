@@ -15,7 +15,7 @@ function getBearing(start, end) {
 const lerp = (a, b, t) => a + (b - a) * t
 
 // Truck ka pulse ring color alag (blue) rakha, bike/scooty ka red
-const ringColor = { bike: '#e23744', scooty: '#e23744', scooter: '#e23744', truck: '#0077ff', van: '#0077ff' }
+const ringColor = { bike: '#e23744', scooty: '#e23744', scooter: '#e23744', truck: '#4f46e5', van: '#4f46e5' }
 
 export default function AnimatedVehicleMarker({ position, vehicleType = 'bike', glideDuration = 4000 }) {
   const [display, setDisplay] = useState(position)

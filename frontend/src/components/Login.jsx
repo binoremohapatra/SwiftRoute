@@ -45,13 +45,13 @@ export default function Login() {
           {/* Logo */}
           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
             <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#fff', textDecoration: 'none', marginBottom: '1.5rem', fontWeight: 700, fontSize: '1.25rem' }}>
-              <div style={{ background: 'linear-gradient(135deg,#00d4ff,#0077ff)', padding: '10px', borderRadius: '12px', display: 'flex' }}>
+              <div style={{ background: 'linear-gradient(135deg,#6366f1,#4f46e5)', padding: '10px', borderRadius: '12px', display: 'flex' }}>
                 <Zap size={20} strokeWidth={2.5} color="#fff" />
               </div>
               SwiftRoute
             </Link>
             <h1 style={{ fontSize: '2rem', fontWeight: 800, margin: '0.5rem 0 0.25rem', fontFamily: 'var(--font-display)' }}>Welcome back</h1>
-            <p style={{ color: 'rgba(240,240,255,0.5)', fontSize: '0.9rem' }}>Sign in to access your dashboard</p>
+            <p style={{ color: 'rgba(245,245,247,0.5)', fontSize: '0.9rem' }}>Sign in to access your dashboard</p>
           </div>
 
           <div className="glass-card" style={{ padding: '2.5rem', borderRadius: '24px' }}>
@@ -64,8 +64,8 @@ export default function Login() {
                   onClick={() => setForm({ ...form, role: r })}
                   style={{
                     flex: 1, padding: '0.5rem', borderRadius: '50px', border: 'none', fontSize: '0.8rem', fontWeight: 600, textTransform: 'capitalize', transition: '0.2s',
-                    background: form.role === r ? 'linear-gradient(135deg,#00d4ff,#0077ff)' : 'transparent',
-                    color: form.role === r ? '#fff' : 'rgba(240,240,255,0.4)',
+                    background: form.role === r ? 'linear-gradient(135deg,#6366f1,#4f46e5)' : 'transparent',
+                    color: form.role === r ? '#fff' : 'rgba(245,245,247,0.4)',
                   }}
                 >
                   {r}
@@ -81,7 +81,7 @@ export default function Login() {
 
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(240,240,255,0.6)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Email</label>
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(245,245,247,0.6)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Email</label>
                 <input
                   type="email"
                   required
@@ -93,7 +93,7 @@ export default function Login() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(240,240,255,0.6)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Password</label>
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'rgba(245,245,247,0.6)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Password</label>
                 <div style={{ position: 'relative' }}>
                   <input
                     type={showPass ? 'text' : 'password'}
@@ -104,7 +104,7 @@ export default function Login() {
                     className="dash-input"
                     style={{ paddingRight: '3rem' }}
                   />
-                  <button type="button" onClick={() => setShowPass(!showPass)} style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'rgba(240,240,255,0.4)' }}>
+                  <button type="button" onClick={() => setShowPass(!showPass)} style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'rgba(245,245,247,0.4)' }}>
                     {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
                 </div>
@@ -118,9 +118,9 @@ export default function Login() {
               <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
             </form>
 
-            <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.875rem', color: 'rgba(240,240,255,0.4)' }}>
+            <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.875rem', color: 'rgba(245,245,247,0.4)' }}>
               Don't have an account?{' '}
-              <Link to="/signup" style={{ color: '#00d4ff', textDecoration: 'none', fontWeight: 600 }}>Sign up</Link>
+              <Link to="/signup" style={{ color: '#6366f1', textDecoration: 'none', fontWeight: 600 }}>Sign up</Link>
             </p>
           </div>
         </div>

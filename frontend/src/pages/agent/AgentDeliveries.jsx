@@ -154,7 +154,7 @@ export default function AgentDeliveries() {
           
           {/* Search */}
           <div style={{ position: 'relative', width: '100%', maxWidth: 320 }}>
-            <Search size={16} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'rgba(240,240,255,0.3)' }} />
+            <Search size={16} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'rgba(245,245,247,0.3)' }} />
             <input
               className="dash-input"
               placeholder="Search by order number..."
@@ -173,10 +173,10 @@ export default function AgentDeliveries() {
                   key={f} 
                   className={`kanban-tab${filter === f ? ' active' : ''}`} 
                   onClick={() => setFilter(f)}
-                  style={{ padding: '0.4rem 1rem', textTransform: 'capitalize', borderBottom: 'none', background: filter === f ? 'rgba(0,212,255,0.1)' : 'transparent', borderRadius: 999, border: `1px solid ${filter === f ? 'rgba(0,212,255,0.3)' : 'transparent'}` }}
+                  style={{ padding: '0.4rem 1rem', textTransform: 'capitalize', borderBottom: 'none', background: filter === f ? 'rgba(99,102,241,0.1)' : 'transparent', borderRadius: 999, border: `1px solid ${filter === f ? 'rgba(99,102,241,0.3)' : 'transparent'}` }}
                 >
                   {f} Deliveries
-                  <span className="kanban-tab-count" style={{ background: filter === f ? 'rgba(0,212,255,0.2)' : 'rgba(255,255,255,0.1)', color: filter === f ? '#00d4ff' : 'rgba(240,240,255,0.5)' }}>
+                  <span className="kanban-tab-count" style={{ background: filter === f ? 'rgba(99,102,241,0.2)' : 'rgba(255,255,255,0.1)', color: filter === f ? '#6366f1' : 'rgba(245,245,247,0.5)' }}>
                     {count}
                   </span>
                 </button>
@@ -213,13 +213,13 @@ export default function AgentDeliveries() {
                     display: 'flex',
                     flexDirection: 'column',
                     animation: `staggerUp 0.35s ${idx * 0.05}s both`,
-                    borderTop: `4px solid ${o.status === 'Delivered' ? '#34d399' : '#00d4ff'}`
+                    borderTop: `4px solid ${o.status === 'Delivered' ? '#34d399' : '#6366f1'}`
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
                     <div>
                       <div className="dash-order-num" style={{ marginBottom: 8, display: 'inline-block' }}>{o.orderNumber}</div>
-                      <div style={{ fontSize: '0.8rem', color: 'rgba(240,240,255,0.4)', marginTop: 4 }}>
+                      <div style={{ fontSize: '0.8rem', color: 'rgba(245,245,247,0.4)', marginTop: 4 }}>
                         {new Date(o.createdAt).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                       </div>
                     </div>
@@ -228,13 +228,13 @@ export default function AgentDeliveries() {
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1 }}>
                     <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                      <div style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(167,139,250,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                        <MapPin size={14} color="#a78bfa" />
+                      <div style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(129,140,248,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <MapPin size={14} color="#818cf8" />
                       </div>
                       <div style={{ flex: 1 }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#a78bfa', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 2 }}>Pickup</div>
-                          <a href={`https://www.google.com/maps/dir/?api=1&destination=${o.pickupLat},${o.pickupLng}`} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.7rem', color: '#a78bfa', background: 'rgba(167,139,250,0.1)', padding: '2px 8px', borderRadius: 4, textDecoration: 'none' }}>
+                          <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#818cf8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 2 }}>Pickup</div>
+                          <a href={`https://www.google.com/maps/dir/?api=1&destination=${o.pickupLat},${o.pickupLng}`} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.7rem', color: '#818cf8', background: 'rgba(129,140,248,0.1)', padding: '2px 8px', borderRadius: 4, textDecoration: 'none' }}>
                             <Navigation size={10} /> Navigate
                           </a>
                         </div>
@@ -265,7 +265,7 @@ export default function AgentDeliveries() {
                       </div>
                       <div>
                         <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)' }}>{o.customer?.name}</div>
-                        <div style={{ fontSize: '0.75rem', color: 'rgba(240,240,255,0.4)' }}>{o.customer?.phone}</div>
+                        <div style={{ fontSize: '0.75rem', color: 'rgba(245,245,247,0.4)' }}>{o.customer?.phone}</div>
                       </div>
                     </div>
                   </div>

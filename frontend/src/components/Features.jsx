@@ -8,7 +8,7 @@ const features = [
     title: 'Live GPS Tracking',
     desc: 'Sub-3-second location updates via WebSocket connections. Watch agents move on a live map in real time.',
     tags: ['WebSockets', 'Google Maps', 'Real-time'],
-    accent: '#00d4ff',
+    accent: '#6366f1',
   },
   {
     Icon: PackageCheck,
@@ -16,7 +16,7 @@ const features = [
     title: 'Order Lifecycle Manager',
     desc: 'Full-lifecycle tracking from placement to delivery with automated state transitions and audit trails.',
     tags: ['State Machine', 'REST API', 'Webhooks'],
-    accent: '#00ffaa',
+    accent: '#34d399',
   },
   {
     Icon: LayoutDashboard,
@@ -24,7 +24,7 @@ const features = [
     title: 'Admin Control Panel',
     desc: 'Manage agents, zones, and orders from a unified dashboard with role-based access controls.',
     tags: ['RBAC', 'Analytics', 'Dashboard'],
-    accent: '#ff6b35',
+    accent: '#f59e0b',
   },
   {
     Icon: BellRing,

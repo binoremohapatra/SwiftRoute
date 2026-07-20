@@ -2,9 +2,9 @@ import { CheckCircle, Package, Truck, MapPin, User } from 'lucide-react'
 
 const STATUS_STEPS = [
   { key: 'Placed',       label: 'Order Placed',    color: '#60a5fa', rgb: '96,165,250',   Icon: Package },
-  { key: 'Assigned',     label: 'Agent Assigned',  color: '#a78bfa', rgb: '167,139,250',  Icon: User },
+  { key: 'Assigned',     label: 'Agent Assigned',  color: '#818cf8', rgb: '129,140,248',  Icon: User },
   { key: 'Picked-up',    label: 'Picked Up',       color: '#f59e0b', rgb: '245,158,11',   Icon: MapPin },
-  { key: 'In-Transit',   label: 'In Transit',      color: '#00d4ff', rgb: '0,212,255',    Icon: Truck },
+  { key: 'In-Transit',   label: 'In Transit',      color: '#6366f1', rgb: '99,102,241',   Icon: Truck },
   { key: 'Delivered',    label: 'Delivered',       color: '#34d399', rgb: '52,211,153',   Icon: CheckCircle },
 ]
 
@@ -48,7 +48,7 @@ export default function OrderTimeline({ status, timestamps = {} }) {
               >
                 <Icon
                   size={14}
-                  color={done ? step.color : 'rgba(240,240,255,0.2)'}
+                  color={done ? step.color : 'rgba(245,245,247,0.2)'}
                 />
               </div>
               {i < STATUS_STEPS.length - 1 && (

@@ -38,13 +38,13 @@ export default function DeliveryStatusSheet({ status, agent, onCall, delayNote }
             <Package size={20} color="#e23744" />
           </div>
           <div>
-            <div style={{ fontSize: '0.65rem', fontWeight: 700, color: '#00d4ff', background: 'rgba(0,212,255,0.12)', display: 'inline-block', padding: '2px 8px', borderRadius: 4, marginBottom: 6 }}>
+            <div style={{ fontSize: '0.65rem', fontWeight: 700, color: '#6366f1', background: 'rgba(99,102,241,0.12)', display: 'inline-block', padding: '2px 8px', borderRadius: 4, marginBottom: 6 }}>
               NOW
             </div>
             <div style={{ fontWeight: 800, fontSize: '1.05rem', color: 'var(--text-primary)', marginBottom: 4 }}>
               {info.title}
             </div>
-            <div style={{ fontSize: '0.85rem', color: 'rgba(240,240,255,0.6)', lineHeight: 1.5 }}>
+            <div style={{ fontSize: '0.85rem', color: 'rgba(245,245,247,0.6)', lineHeight: 1.5 }}>
               {message}
             </div>
           </div>
@@ -52,7 +52,7 @@ export default function DeliveryStatusSheet({ status, agent, onCall, delayNote }
 
         {agent && (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, flexShrink: 0 }}>
-            <div style={{ width: 46, height: 46, borderRadius: '50%', background: 'linear-gradient(135deg,#00d4ff,#0077ff)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: '#fff' }}>
+            <div style={{ width: 46, height: 46, borderRadius: '50%', background: 'linear-gradient(135deg,#6366f1,#4f46e5)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: '#fff' }}>
               {agent.name?.[0]?.toUpperCase()}
             </div>
             <button
@@ -73,7 +73,7 @@ export default function DeliveryStatusSheet({ status, agent, onCall, delayNote }
       {delayNote && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
           <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#ef4444', flexShrink: 0 }} />
-          <span style={{ fontSize: '0.82rem', color: 'rgba(240,240,255,0.7)' }}>{delayNote}</span>
+          <span style={{ fontSize: '0.82rem', color: 'rgba(245,245,247,0.7)' }}>{delayNote}</span>
         </div>
       )}
     </div>

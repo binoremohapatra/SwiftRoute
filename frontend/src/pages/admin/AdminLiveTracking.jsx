@@ -26,8 +26,8 @@ const mapStyle = {
 
 const STATUS_COLOR = {
   'Assigned': '#f59e0b',
-  'Picked-up': '#a78bfa',
-  'In-Transit': '#00d4ff',
+  'Picked-up': '#818cf8',
+  'In-Transit': '#2563eb',
 }
 
 export default function AdminLiveTracking() {
@@ -196,23 +196,23 @@ export default function AdminLiveTracking() {
           
           {/* Header */}
           <div style={{ padding: '1.25rem 1.25rem 0.75rem', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-            <Link to="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: '#00d4ff', textDecoration: 'none', fontSize: '0.78rem', fontWeight: 600, marginBottom: '0.75rem' }}>
+            <Link to="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: '#6366f1', textDecoration: 'none', fontSize: '0.78rem', fontWeight: 600, marginBottom: '0.75rem' }}>
               <ArrowLeft size={13} /> Back to Dashboard
             </Link>
             <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: 4 }}>🛰 Fleet Tracking</h2>
-            <p style={{ fontSize: '0.75rem', color: 'rgba(240,240,255,0.4)', marginBottom: '0.75rem' }}>Monitor all active deliveries in real-time</p>
+            <p style={{ fontSize: '0.75rem', color: 'rgba(245,245,247,0.4)', marginBottom: '0.75rem' }}>Monitor all active deliveries in real-time</p>
             
             {/* Stats */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
-              <div style={{ background: 'rgba(0,212,255,0.08)', border: '1px solid rgba(0,212,255,0.2)', borderRadius: 10, padding: '0.6rem 0.75rem' }}>
-                <div style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'rgba(240,240,255,0.45)', marginBottom: 2 }}>Active Orders</div>
+              <div style={{ background: 'rgba(99,102,241,0.08)', border: '1px solid rgba(99,102,241,0.2)', borderRadius: 10, padding: '0.6rem 0.75rem' }}>
+                <div style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'rgba(245,245,247,0.45)', marginBottom: 2 }}>Active Orders</div>
                 <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff', lineHeight: 1 }}>{orders.length}</div>
               </div>
-              <div style={{ background: 'rgba(0,212,255,0.08)', border: '1px solid rgba(0,212,255,0.2)', borderRadius: 10, padding: '0.6rem 0.75rem' }}>
-                <div style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'rgba(240,240,255,0.45)', marginBottom: 2 }}>Live Agents</div>
+              <div style={{ background: 'rgba(99,102,241,0.08)', border: '1px solid rgba(99,102,241,0.2)', borderRadius: 10, padding: '0.6rem 0.75rem' }}>
+                <div style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'rgba(245,245,247,0.45)', marginBottom: 2 }}>Live Agents</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <Activity size={14} color="#00d4ff" />
-                  <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#00d4ff', lineHeight: 1 }}>{Object.keys(agents).length}</div>
+                  <Activity size={14} color="#6366f1" />
+                  <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#6366f1', lineHeight: 1 }}>{Object.keys(agents).length}</div>
                 </div>
               </div>
             </div>
@@ -221,7 +221,7 @@ export default function AdminLiveTracking() {
           {/* Search Bar */}
           <div style={{ padding: '0.6rem 0.75rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
             <div style={{ position: 'relative' }}>
-              <Search size={13} style={{ position: 'absolute', left: '0.7rem', top: '50%', transform: 'translateY(-50%)', color: 'rgba(240,240,255,0.35)', pointerEvents: 'none' }} />
+              <Search size={13} style={{ position: 'absolute', left: '0.7rem', top: '50%', transform: 'translateY(-50%)', color: 'rgba(245,245,247,0.35)', pointerEvents: 'none' }} />
               <input
                 value={search}
                 onChange={e => setSearch(e.target.value)}
@@ -241,7 +241,7 @@ export default function AdminLiveTracking() {
               {search && (
                 <button
                   onClick={() => setSearch('')}
-                  style={{ position: 'absolute', right: '0.6rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(240,240,255,0.4)', padding: 0, display: 'flex' }}
+                  style={{ position: 'absolute', right: '0.6rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(245,245,247,0.4)', padding: 0, display: 'flex' }}
                 >
                   <X size={12} />
                 </button>
@@ -254,7 +254,7 @@ export default function AdminLiveTracking() {
             <button
               onClick={fetchActiveOrders}
               disabled={loading}
-              style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, padding: '0.35rem 0.75rem', fontSize: '0.75rem', color: 'rgba(240,240,255,0.6)', cursor: 'pointer' }}
+              style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, padding: '0.35rem 0.75rem', fontSize: '0.75rem', color: 'rgba(245,245,247,0.6)', cursor: 'pointer' }}
             >
               <RefreshCw size={12} style={{ animation: loading ? 'spin 1s linear infinite' : 'none' }} />
               Refresh
@@ -270,7 +270,7 @@ export default function AdminLiveTracking() {
                 ))}
               </div>
             ) : orders.length === 0 ? (
-              <div style={{ textAlign: 'center', paddingTop: '3rem', color: 'rgba(240,240,255,0.3)' }}>
+              <div style={{ textAlign: 'center', paddingTop: '3rem', color: 'rgba(245,245,247,0.3)' }}>
                 <Package size={40} style={{ opacity: 0.3, marginBottom: '0.75rem' }} />
                 <div style={{ fontSize: '0.85rem', fontWeight: 600 }}>No active deliveries</div>
                 <div style={{ fontSize: '0.75rem', marginTop: 4 }}>All orders are delivered!</div>
@@ -292,7 +292,7 @@ export default function AdminLiveTracking() {
                     return (
                       <>
                         {text.slice(0, idx)}
-                        <mark style={{ background: 'rgba(0,212,255,0.3)', color: '#fff', borderRadius: 2, padding: '0 1px' }}>{text.slice(idx, idx + q.length)}</mark>
+                        <mark style={{ background: 'rgba(99,102,241,0.3)', color: '#fff', borderRadius: 2, padding: '0 1px' }}>{text.slice(idx, idx + q.length)}</mark>
                         {text.slice(idx + q.length)}
                       </>
                     )
@@ -302,7 +302,7 @@ export default function AdminLiveTracking() {
                       key={order.id}
                       onClick={() => flyToOrder(order)}
                       style={{
-                        background: isSelected ? `rgba(${color === '#00d4ff' ? '0,212,255' : color === '#a78bfa' ? '167,139,250' : '245,158,11'},0.12)` : 'rgba(255,255,255,0.04)',
+                        background: isSelected ? `${color}22` : 'rgba(255,255,255,0.04)',
                         border: `1px solid ${isSelected ? color : 'rgba(255,255,255,0.08)'}`,
                         borderRadius: 12,
                         padding: '0.875rem 1rem',
@@ -317,28 +317,28 @@ export default function AdminLiveTracking() {
                       </div>
                       
                       <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.4rem', marginBottom: '0.35rem' }}>
-                        <MapPin size={10} color="#a78bfa" style={{ marginTop: 3, flexShrink: 0 }} />
-                        <div style={{ fontSize: '0.72rem', color: 'rgba(240,240,255,0.55)', lineHeight: 1.3 }}>
+                        <MapPin size={10} color="#818cf8" style={{ marginTop: 3, flexShrink: 0 }} />
+                        <div style={{ fontSize: '0.72rem', color: 'rgba(245,245,247,0.55)', lineHeight: 1.3 }}>
                           {order.pickupAddress?.length > 50 ? order.pickupAddress.slice(0, 50) + '…' : order.pickupAddress}
                         </div>
                       </div>
                       
                       <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.4rem' }}>
                         <MapPin size={10} color="#34d399" style={{ marginTop: 3, flexShrink: 0 }} />
-                        <div style={{ fontSize: '0.72rem', color: 'rgba(240,240,255,0.55)', lineHeight: 1.3 }}>
+                        <div style={{ fontSize: '0.72rem', color: 'rgba(245,245,247,0.55)', lineHeight: 1.3 }}>
                           {order.dropAddress?.length > 50 ? order.dropAddress.slice(0, 50) + '…' : order.dropAddress}
                         </div>
                       </div>
 
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.5rem' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.7rem', color: 'rgba(240,240,255,0.4)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.7rem', color: 'rgba(245,245,247,0.4)' }}>
                           <User size={10} />
                           {highlightText(order.customer?.name || 'Customer')}
                         </div>
                         {order.status !== 'Delivered' && order.status !== 'Cancelled' && (
                           <button 
                             onClick={(e) => { e.stopPropagation(); openReassignModal(order.id); }}
-                            style={{ background: 'rgba(0,212,255,0.1)', color: '#00d4ff', border: '1px solid rgba(0,212,255,0.3)', borderRadius: 6, padding: '0.2rem 0.6rem', fontSize: '0.65rem', fontWeight: 600, cursor: 'pointer' }}
+                            style={{ background: 'rgba(99,102,241,0.1)', color: '#6366f1', border: '1px solid rgba(99,102,241,0.3)', borderRadius: 6, padding: '0.2rem 0.6rem', fontSize: '0.65rem', fontWeight: 600, cursor: 'pointer' }}
                           >
                             Reassign
                           </button>
@@ -355,11 +355,11 @@ export default function AdminLiveTracking() {
           <div style={{ padding: '0.75rem 1.25rem', borderTop: '1px solid rgba(255,255,255,0.07)', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
             {[
               { color: '#f59e0b', label: 'Assigned' },
-              { color: '#a78bfa', label: 'Picked Up' },
-              { color: '#00d4ff', label: 'In Transit' },
+              { color: '#818cf8', label: 'Picked Up' },
+              { color: '#2563eb', label: 'In Transit' },
               { color: '#34d399', label: 'Drop Point' },
             ].map(({ color, label }) => (
-              <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.7rem', color: 'rgba(240,240,255,0.6)' }}>
+              <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.7rem', color: 'rgba(245,245,247,0.6)' }}>
                 <div style={{ width: 10, height: 10, borderRadius: 3, background: color }} />
                 {label}
               </div>
@@ -382,7 +382,7 @@ export default function AdminLiveTracking() {
             {/* ── Route Lines ── */}
             {Object.entries(activeRoutes).map(([orderId, geoJSON]) => {
               const order = orders.find(o => o.id === orderId)
-              const color = order ? statusColor(order.status) : '#00d4ff'
+              const color = order ? statusColor(order.status) : '#6366f1'
               const isSelected = selectedOrder === orderId
               return (
                 <Source key={`route-src-${orderId}`} id={`route-src-${orderId}`} type="geojson" data={geoJSON}>
@@ -422,13 +422,13 @@ export default function AdminLiveTracking() {
                       <div
                         onClick={() => setPopup({ type: 'pickup', order })}
                         style={{
-                          background: '#a78bfa',
+                          background: '#818cf8',
                           color: '#fff',
                           padding: '5px 10px',
                           borderRadius: 8,
                           fontSize: '0.7rem',
                           fontWeight: 700,
-                          boxShadow: '0 4px 16px rgba(167,139,250,0.5)',
+                          boxShadow: '0 4px 16px rgba(129,140,248,0.5)',
                           border: selectedOrder === order.id ? '2px solid white' : '1px solid rgba(255,255,255,0.4)',
                           cursor: 'pointer',
                           whiteSpace: 'nowrap',
@@ -521,7 +521,7 @@ export default function AdminLiveTracking() {
                 style={{ zIndex: 20 }}
               >
                 <div style={{ minWidth: 200, padding: '0.5rem', fontFamily: 'inherit' }}>
-                  <div style={{ fontWeight: 700, fontSize: '0.8rem', marginBottom: '0.35rem', color: popup.type === 'pickup' ? '#a78bfa' : '#34d399' }}>
+                  <div style={{ fontWeight: 700, fontSize: '0.8rem', marginBottom: '0.35rem', color: popup.type === 'pickup' ? '#818cf8' : '#34d399' }}>
                     {popup.type === 'pickup' ? '📦 Pickup Point' : '🏠 Drop Point'}
                   </div>
                   <div style={{ fontSize: '0.8rem', fontWeight: 700, marginBottom: '0.3rem' }}>{popup.order.orderNumber}</div>
@@ -544,7 +544,7 @@ export default function AdminLiveTracking() {
               background: 'rgba(10,10,18,0.85)', backdropFilter: 'blur(12px)',
               border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12,
               padding: '0.6rem 1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem',
-              fontSize: '0.78rem', color: 'rgba(240,240,255,0.6)', whiteSpace: 'nowrap',
+              fontSize: '0.78rem', color: 'rgba(245,245,247,0.6)', whiteSpace: 'nowrap',
               pointerEvents: 'none'
             }}>
               <Activity size={13} color="#f59e0b" />

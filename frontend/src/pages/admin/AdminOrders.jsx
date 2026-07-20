@@ -98,7 +98,7 @@ export default function AdminOrders() {
           <form onSubmit={handleSearch} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
             
             <div style={{ position: 'relative', flex: '1 1 240px' }}>
-              <Search size={16} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'rgba(240,240,255,0.3)' }} />
+              <Search size={16} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'rgba(245,245,247,0.3)' }} />
               <input 
                 className="dash-input"
                 value={search} 
@@ -136,7 +136,7 @@ export default function AdminOrders() {
                 onChange={e => setStartDate(e.target.value)}
                 style={{ flex: 1 }} 
               />
-              <span style={{ color: 'rgba(240,240,255,0.3)' }}>to</span>
+              <span style={{ color: 'rgba(245,245,247,0.3)' }}>to</span>
               <input 
                 type="date" 
                 className="dash-input"
@@ -207,21 +207,21 @@ export default function AdminOrders() {
                       </td>
                       <td>
                         <div style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{o.customer?.name}</div>
-                        <div style={{ fontSize: '0.75rem', color: 'rgba(240,240,255,0.4)', marginTop: 2 }}>{o.customer?.phone}</div>
+                        <div style={{ fontSize: '0.75rem', color: 'rgba(245,245,247,0.4)', marginTop: 2 }}>{o.customer?.phone}</div>
                       </td>
                       <td>
                         {o.fulfillmentType === '3PL' ? (
                           <>
                             <div style={{ color: '#f59e0b', fontWeight: 600 }}>{o.thirdPartyCourier || '3PL'}</div>
-                            <div style={{ fontSize: '0.75rem', color: 'rgba(240,240,255,0.4)', marginTop: 2 }}>{o.thirdPartyTrackingId}</div>
+                            <div style={{ fontSize: '0.75rem', color: 'rgba(245,245,247,0.4)', marginTop: 2 }}>{o.thirdPartyTrackingId}</div>
                           </>
                         ) : o.assignedAgent ? (
                           <>
-                            <div style={{ color: 'rgba(240,240,255,0.8)', fontWeight: 500 }}>{o.assignedAgent.name}</div>
-                            <div style={{ fontSize: '0.75rem', color: 'rgba(240,240,255,0.4)', marginTop: 2 }}>{o.assignedAgent.vehicleType}</div>
+                            <div style={{ color: 'rgba(245,245,247,0.8)', fontWeight: 500 }}>{o.assignedAgent.name}</div>
+                            <div style={{ fontSize: '0.75rem', color: 'rgba(245,245,247,0.4)', marginTop: 2 }}>{o.assignedAgent.vehicleType}</div>
                           </>
                         ) : (
-                          <span style={{ padding: '4px 8px', background: 'rgba(255,255,255,0.05)', borderRadius: 6, fontSize: '0.75rem', color: 'rgba(240,240,255,0.4)' }}>Unassigned</span>
+                          <span style={{ padding: '4px 8px', background: 'rgba(255,255,255,0.05)', borderRadius: 6, fontSize: '0.75rem', color: 'rgba(245,245,247,0.4)' }}>Unassigned</span>
                         )}
                       </td>
                       <td>
@@ -239,7 +239,7 @@ export default function AdminOrders() {
                       <td style={{ maxWidth: 220 }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                           <div className="dash-address" style={{ display: 'flex', alignItems: 'center', gap: 4 }} title={o.pickupAddress}>
-                            <MapPin size={10} color="#a78bfa" style={{ flexShrink: 0 }} /> {o.pickupAddress}
+                            <MapPin size={10} color="#818cf8" style={{ flexShrink: 0 }} /> {o.pickupAddress}
                           </div>
                           <div className="dash-address" style={{ display: 'flex', alignItems: 'center', gap: 4 }} title={o.dropAddress}>
                             <MapPin size={10} color="#34d399" style={{ flexShrink: 0 }} /> {o.dropAddress}
@@ -247,10 +247,10 @@ export default function AdminOrders() {
                         </div>
                       </td>
                       <td>
-                        <div style={{ fontSize: '0.8rem', color: 'rgba(240,240,255,0.6)' }}>
+                        <div style={{ fontSize: '0.8rem', color: 'rgba(245,245,247,0.6)' }}>
                           {new Date(o.createdAt).toLocaleDateString()}
                         </div>
-                        <div style={{ fontSize: '0.7rem', color: 'rgba(240,240,255,0.3)', marginTop: 2 }}>
+                        <div style={{ fontSize: '0.7rem', color: 'rgba(245,245,247,0.3)', marginTop: 2 }}>
                           {new Date(o.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </div>
                       </td>
@@ -264,7 +264,7 @@ export default function AdminOrders() {
           {/* Pagination */}
           {pagination.totalPages > 1 && (
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', borderTop: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.01)' }}>
-              <span style={{ color: 'rgba(240,240,255,0.5)', fontSize: '0.85rem' }}>
+              <span style={{ color: 'rgba(245,245,247,0.5)', fontSize: '0.85rem' }}>
                 Showing <strong style={{ color: 'var(--text-primary)' }}>{orders.length}</strong> of <strong style={{ color: 'var(--text-primary)' }}>{pagination.total}</strong> orders
               </span>
               

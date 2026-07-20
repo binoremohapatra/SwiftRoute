@@ -26,7 +26,7 @@ export default function Notifications() {
   }, [token, toast])
 
   const typeIcon = { status_update: Package, assignment: Truck, info: Info }
-  const typeColor = { status_update: '#00d4ff', assignment: '#a78bfa', info: '#fbbf24' }
+  const typeColor = { status_update: '#6366f1', assignment: '#818cf8', info: '#fbbf24' }
 
   const markAllRead = () => {
     setNotifications(prev => prev.map(n => ({ ...n, isRead: true })))
@@ -62,14 +62,14 @@ export default function Notifications() {
             <div className="glass-card dash-empty" style={{ borderRadius: 24, padding: '4rem 2rem' }}>
               <Bell size={48} style={{ opacity: 0.2, marginBottom: '1rem' }} />
               <p style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)' }}>All caught up!</p>
-              <p style={{ color: 'rgba(240,240,255,0.4)', marginTop: '0.5rem' }}>You have no new notifications.</p>
+              <p style={{ color: 'rgba(245,245,247,0.4)', marginTop: '0.5rem' }}>You have no new notifications.</p>
             </div>
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', maxWidth: 640 }}>
             {notifications.map((n, idx) => {
               const Icon = typeIcon[n.type] || Bell
-              const color = typeColor[n.type] || '#00d4ff'
+              const color = typeColor[n.type] || '#6366f1'
               return (
                 <div 
                   key={n._id} 
@@ -93,7 +93,7 @@ export default function Notifications() {
                     <p style={{ fontSize: '0.95rem', fontWeight: n.isRead ? 500 : 700, marginBottom: '0.35rem', color: 'var(--text-primary)' }}>
                       {n.message}
                     </p>
-                    <p style={{ fontSize: '0.75rem', color: 'rgba(240,240,255,0.4)', fontWeight: 500 }}>
+                    <p style={{ fontSize: '0.75rem', color: 'rgba(245,245,247,0.4)', fontWeight: 500 }}>
                       {new Date(n.createdAt).toLocaleString(undefined, { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                     </p>
                   </div>

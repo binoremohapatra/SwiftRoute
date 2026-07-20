@@ -29,9 +29,9 @@ export default function EmptyState({ icon = 'default', title = 'Nothing here yet
       }}>
         <Icon size={36} style={{ opacity: 0.25 }} />
       </div>
-      <div style={{ fontWeight: 700, fontSize: '1rem', color: 'rgba(240,240,255,0.5)' }}>{title}</div>
+      <div style={{ fontWeight: 700, fontSize: '1rem', color: 'rgba(245,245,247,0.5)' }}>{title}</div>
       {subtitle && (
-        <p style={{ fontSize: '0.85rem', color: 'rgba(240,240,255,0.3)', maxWidth: 280, textAlign: 'center', lineHeight: 1.6 }}>
+        <p style={{ fontSize: '0.85rem', color: 'rgba(245,245,247,0.3)', maxWidth: 280, textAlign: 'center', lineHeight: 1.6 }}>
           {subtitle}
         </p>
       )}

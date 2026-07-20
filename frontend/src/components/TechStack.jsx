@@ -1,7 +1,7 @@
 import { Atom, Server, Cpu, Database, Zap, Map, Bell, Smartphone, Network } from 'lucide-react'
 
 const techItems = [
-  { logo: <Atom size={32} color="#00d4ff" />, name: 'React', desc: 'UI Framework' },
+  { logo: <Atom size={32} color="#6366f1" />, name: 'React', desc: 'UI Framework' },
   { logo: <Server size={32} color="#00ff88" />, name: 'Node.js', desc: 'Runtime' },
   { logo: <Cpu size={32} color="#aaaaaa" />, name: 'Express', desc: 'API Layer' },
   { logo: <Database size={32} color="#00ed64" />, name: 'MongoDB', desc: 'Primary DB' },
@@ -12,10 +12,10 @@ const techItems = [
 ]
 
 const archFlow = [
-  { label: 'Client Apps', desc: 'React · Mobile', icon: <Smartphone size={28} color="#f0f0ff" /> },
-  { label: 'API Gateway', desc: 'Express · REST', icon: <Network size={28} color="#f0f0ff" /> },
-  { label: 'WebSocket Hub', desc: 'Socket.io · Live', icon: <Zap size={28} color="#f0f0ff" /> },
-  { label: 'Data Layer', desc: 'MongoDB · PG', icon: <Database size={28} color="#f0f0ff" /> },
+  { label: 'Client Apps', desc: 'React · Mobile', icon: <Smartphone size={28} color="#f5f5f7" /> },
+  { label: 'API Gateway', desc: 'Express · REST', icon: <Network size={28} color="#f5f5f7" /> },
+  { label: 'WebSocket Hub', desc: 'Socket.io · Live', icon: <Zap size={28} color="#f5f5f7" /> },
+  { label: 'Data Layer', desc: 'MongoDB · PG', icon: <Database size={28} color="#f5f5f7" /> },
 ]
 
 export default function TechStack() {
@@ -60,8 +60,8 @@ export default function TechStack() {
                     cursor: 'default',
                   }}
                     onMouseEnter={e => {
-                      e.currentTarget.style.borderColor = 'rgba(0,212,255,0.3)'
-                      e.currentTarget.style.background = 'rgba(0,212,255,0.06)'
+                      e.currentTarget.style.borderColor = 'rgba(99,102,241,0.3)'
+                      e.currentTarget.style.background = 'rgba(99,102,241,0.06)'
                       e.currentTarget.style.transform = 'translateY(-4px)'
                     }}
                     onMouseLeave={e => {

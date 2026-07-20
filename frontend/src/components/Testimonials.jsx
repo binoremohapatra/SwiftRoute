@@ -7,7 +7,7 @@ const testimonials = [
     name: 'Priya Nair',
     role: 'VP Operations, ZeptoMart',
     initials: 'PN',
-    color: '#00d4ff',
+    color: '#6366f1',
   },
   {
     rating: 5,
@@ -15,7 +15,7 @@ const testimonials = [
     name: 'Rohan Sharma',
     role: 'CTO, QuickBasket',
     initials: 'RS',
-    color: '#00ffaa',
+    color: '#34d399',
   },
   {
     rating: 5,
@@ -23,7 +23,7 @@ const testimonials = [
     name: 'Anjali Desai',
     role: 'Fleet Manager, CityRunner',
     initials: 'AD',
-    color: '#ff6b35',
+    color: '#f59e0b',
   },
   {
     rating: 4,
@@ -39,7 +39,7 @@ const testimonials = [
     name: 'Sanya Kapoor',
     role: 'COO, MedDeliveries',
     initials: 'SK',
-    color: '#00d4ff',
+    color: '#6366f1',
   },
   {
     rating: 5,
@@ -47,7 +47,7 @@ const testimonials = [
     name: 'Arjun Reddy',
     role: 'Founder, SpeedBox',
     initials: 'AR',
-    color: '#00ffaa',
+    color: '#34d399',
   },
 ]
 

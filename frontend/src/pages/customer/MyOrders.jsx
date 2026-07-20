@@ -97,7 +97,7 @@ export default function MyOrders() {
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
           <div style={{ position: 'relative', width: '100%', maxWidth: 320 }}>
-            <Search size={16} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'rgba(240,240,255,0.3)' }} />
+            <Search size={16} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'rgba(245,245,247,0.3)' }} />
             <input
               className="dash-input"
               placeholder="Search by order number..."
@@ -108,7 +108,7 @@ export default function MyOrders() {
           </div>
 
           <div className="filter-chips">
-            <Filter size={14} style={{ color: 'rgba(240,240,255,0.3)', marginRight: 4 }} />
+            <Filter size={14} style={{ color: 'rgba(245,245,247,0.3)', marginRight: 4 }} />
             {['All', 'Active', 'Completed', 'Cancelled'].map(f => (
               <button
                 key={f}
@@ -200,10 +200,10 @@ export default function MyOrders() {
                       <td className="dash-address" title={o.dropAddress}>
                         {o.dropAddress || 'N/A'}
                       </td>
-                      <td style={{ color: 'rgba(240,240,255,0.5)', fontSize: '0.8rem' }}>
-                        {o.assignedAgentId?.name || <span style={{ color: 'rgba(240,240,255,0.2)' }}>Pending</span>}
+                      <td style={{ color: 'rgba(245,245,247,0.5)', fontSize: '0.8rem' }}>
+                        {o.assignedAgentId?.name || <span style={{ color: 'rgba(245,245,247,0.2)' }}>Pending</span>}
                       </td>
-                      <td style={{ color: 'rgba(240,240,255,0.4)', fontSize: '0.8rem' }}>
+                      <td style={{ color: 'rgba(245,245,247,0.4)', fontSize: '0.8rem' }}>
                         {new Date(o.createdAt).toLocaleDateString()}
                       </td>
                       <td>

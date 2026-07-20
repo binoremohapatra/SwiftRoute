@@ -8,7 +8,7 @@ const steps = [
     title: 'Order Placed',
     desc: 'Customer places an order via the app or web. Order details are instantly captured, validated, and assigned a unique tracking ID. Real-time confirmation sent immediately.',
     badge: 'Customer',
-    badgeColor: '#00d4ff',
+    badgeColor: '#6366f1',
     time: '0:00',
   },
   {
@@ -26,7 +26,7 @@ const steps = [
     title: 'Picked Up',
     desc: 'Agent scans the package at the warehouse. Pickup timestamp locked. Customer and admin get a push notification. Agent route calculated and optimized on-the-fly.',
     badge: 'Agent',
-    badgeColor: '#ff6b35',
+    badgeColor: '#f59e0b',
     time: '0:45',
   },
   {
@@ -35,7 +35,7 @@ const steps = [
     title: 'Live Tracking',
     desc: 'GPS location broadcasts every 2 seconds via WebSocket. Customer watches the agent move on a live map. ETA dynamically recalculates based on traffic data.',
     badge: 'Live',
-    badgeColor: '#00ffaa',
+    badgeColor: '#34d399',
     time: '1:20',
   },
   {
@@ -44,7 +44,7 @@ const steps = [
     title: 'Delivered',
     desc: 'Agent marks delivery complete with photo proof and digital signature. Rating prompt sent immediately. Admin analytics updated in real time. Order closed.',
     badge: 'Complete',
-    badgeColor: '#00ffaa',
+    badgeColor: '#34d399',
     time: '2:15',
   },
 ]

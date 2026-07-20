@@ -12,7 +12,7 @@ const problems = [
   {
     Icon: ClipboardList,
     cls: 'orange',
-    color: '#ff6b35',
+    color: '#f59e0b',
     title: 'Manual Tracking',
     desc: 'Pen-and-paper handoffs, WhatsApp updates, and fragile Excel sheets — falling apart at scale.',
   },
@@ -35,25 +35,25 @@ const problems = [
 const solutions = [
   {
     Icon: Radio,
-    color: '#00d4ff',
+    color: '#6366f1',
     title: 'Live GPS Streams',
     desc: 'Every delivery agent broadcasts real-time location via WebSocket — updated every 2 seconds.',
   },
   {
     Icon: Zap,
-    color: '#00d4ff',
+    color: '#6366f1',
     title: 'Automated Workflows',
     desc: 'Order lifecycle managed end-to-end: placed, assigned, picked, in-transit, delivered — zero manual input.',
   },
   {
     Icon: GitBranch,
-    color: '#00d4ff',
+    color: '#6366f1',
     title: 'Unified Command Layer',
     desc: 'One platform. Three roles. Customer, agent, and admin all in sync with the same live data.',
   },
   {
     Icon: CheckCircle2,
-    color: '#00d4ff',
+    color: '#6366f1',
     title: 'Instant Notifications',
     desc: 'Push, SMS, and email alerts fire in milliseconds when any status changes. No polling needed.',
   },
@@ -90,7 +90,7 @@ export default function ProblemSolution() {
             {solutions.map((s, i) => (
               <div className="pain-point" key={i}>
                 <div className="pain-icon" style={{
-                  background: 'rgba(0,212,255,0.12)',
+                  background: 'rgba(99,102,241,0.12)',
                   animationDelay: `${i * 0.3}s`
                 }}>
                   <s.Icon size={20} color={s.color} strokeWidth={2} />

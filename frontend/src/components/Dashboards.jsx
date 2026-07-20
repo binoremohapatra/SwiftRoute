@@ -157,7 +157,7 @@ export default function Dashboards() {
                   <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
                     <div style={{
                       width: '100%', height: `${h}%`, borderRadius: '4px 4px 0 0',
-                      background: i === 6 ? 'linear-gradient(to top, var(--accent-primary), var(--accent-tertiary))' : 'rgba(0,212,255,0.15)',
+                      background: i === 6 ? 'linear-gradient(to top, var(--accent-primary), var(--accent-tertiary))' : 'rgba(99,102,241,0.15)',
                     }} />
                     <span style={{ fontSize: '9px', color: 'var(--text-muted)' }}>
                       {['M', 'T', 'W', 'T', 'F', 'S', 'S'][i]}

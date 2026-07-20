@@ -24,7 +24,7 @@ export default function AgentPerformance() {
   }, [token, toast])
 
   const metrics = performance ? [
-    { label: 'Deliveries Today', value: performance.deliveriesToday || 0, icon: Package, color: '#00d4ff', suffix: '' },
+    { label: 'Deliveries Today', value: performance.deliveriesToday || 0, icon: Package, color: '#6366f1', suffix: '' },
     { label: 'Average Rating', value: performance.avgRating || 0, icon: Star, color: '#fbbf24', suffix: ' / 5' },
     { label: 'On-Time Rate', value: performance.onTimeRate || 0, icon: TrendingUp, color: '#34d399', suffix: '%' },
   ] : []
@@ -62,7 +62,7 @@ export default function AgentPerformance() {
                     <div style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'var(--font-display)', marginBottom: '0.25rem', lineHeight: 1, letterSpacing: '-0.03em' }}>
                       <AnimatedCounter value={m.value} duration={1500} suffix={m.suffix} />
                     </div>
-                    <div style={{ color: 'rgba(240,240,255,0.5)', fontSize: '0.9rem', fontWeight: 600 }}>{m.label}</div>
+                    <div style={{ color: 'rgba(245,245,247,0.5)', fontSize: '0.9rem', fontWeight: 600 }}>{m.label}</div>
                   </div>
                 )
               })}
@@ -83,14 +83,14 @@ export default function AgentPerformance() {
                   <div style={{ 
                     position: 'absolute', left: 0, top: 0, bottom: 0, 
                     width: `${onTimeRate}%`, 
-                    background: 'linear-gradient(90deg, #00d4ff, #34d399)', 
+                    background: 'linear-gradient(90deg, #6366f1, #34d399)', 
                     borderRadius: 999, 
                     transition: 'width 1.5s cubic-bezier(0.25,0.46,0.45,0.94) 0.5s',
                     boxShadow: '0 0 12px rgba(52,211,153,0.5)'
                   }} />
                 </div>
                 
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'rgba(240,240,255,0.4)', fontWeight: 600 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'rgba(245,245,247,0.4)', fontWeight: 600 }}>
                   <span>Needs Work</span>
                   <span style={{ color: onTimeRate >= 90 ? '#34d399' : '#fbbf24', fontWeight: 700, fontSize: '1.25rem' }}><AnimatedCounter value={onTimeRate} suffix="%" /></span>
                   <span>Excellent</span>
@@ -121,7 +121,7 @@ export default function AgentPerformance() {
                         />
                       ))}
                     </div>
-                    <div style={{ fontSize: '0.8rem', color: 'rgba(240,240,255,0.4)' }}>
+                    <div style={{ fontSize: '0.8rem', color: 'rgba(245,245,247,0.4)' }}>
                       Based on {Object.values(performance?.ratingBreakdown || {}).reduce((a, b) => a + b, 0)} ratings
                     </div>
                   </div>
@@ -134,11 +134,11 @@ export default function AgentPerformance() {
                       
                       return (
                       <div key={star} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                        <span style={{ fontSize: '0.75rem', color: 'rgba(240,240,255,0.5)', width: 45 }}>{star} Stars</span>
+                        <span style={{ fontSize: '0.75rem', color: 'rgba(245,245,247,0.5)', width: 45 }}>{star} Stars</span>
                         <div style={{ flex: 1, height: 6, background: 'rgba(255,255,255,0.06)', borderRadius: 3, overflow: 'hidden' }}>
                           <div style={{ width: `${pct}%`, height: '100%', background: '#fbbf24', borderRadius: 3, transition: 'width 1s ease 0.8s' }} />
                         </div>
-                        <span style={{ fontSize: '0.7rem', color: 'rgba(240,240,255,0.4)', width: 25, textAlign: 'right' }}>{pct}%</span>
+                        <span style={{ fontSize: '0.7rem', color: 'rgba(245,245,247,0.4)', width: 25, textAlign: 'right' }}>{pct}%</span>
                       </div>
                     )})}
                   </div>

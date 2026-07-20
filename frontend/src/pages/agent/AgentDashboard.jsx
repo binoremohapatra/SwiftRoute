@@ -21,7 +21,7 @@ const mapStyle = {
 
 const nextStatus = { 'Assigned': 'Picked-up', 'Picked-up': 'In-Transit', 'In-Transit': 'Delivered' }
 const actionLabel = { 'Picked-up': 'Confirm Pickup ✅', 'In-Transit': 'Start Transit 🚗', 'Delivered': 'Mark Delivered 🎉' }
-const actionColor = { 'Picked-up': '', 'In-Transit': 'linear-gradient(135deg,#a78bfa,#8b5cf6)', 'Delivered': 'linear-gradient(135deg,#34d399,#10b981)' }
+const actionColor = { 'Picked-up': '', 'In-Transit': 'linear-gradient(135deg,#818cf8,#6366f1)', 'Delivered': 'linear-gradient(135deg,#34d399,#10b981)' }
 
 export default function AgentDashboard() {
   const { token, user } = useAuth()
@@ -316,7 +316,7 @@ export default function AgentDashboard() {
               <button
                 onClick={handleInstallClick}
                 className="btn-primary"
-                style={{ padding: '0.6rem 1rem', borderRadius: 999, background: 'linear-gradient(135deg, #a78bfa, #8b5cf6)', color: '#fff', fontSize: '0.8rem', gap: 6 }}
+                style={{ padding: '0.6rem 1rem', borderRadius: 999, background: 'linear-gradient(135deg, #818cf8, #6366f1)', color: '#fff', fontSize: '0.8rem', gap: 6 }}
               >
                 <Download size={14} /> Install App
               </button>
@@ -328,7 +328,7 @@ export default function AgentDashboard() {
               style={{
                 borderColor: available ? 'rgba(52,211,153,0.35)' : 'rgba(255,255,255,0.1)',
                 background: available ? 'rgba(52,211,153,0.08)' : 'rgba(255,255,255,0.04)',
-                color: available ? '#34d399' : 'rgba(240,240,255,0.45)'
+                color: available ? '#34d399' : 'rgba(245,245,247,0.45)'
               }}
             >
               {available ? 'Available for Orders' : 'Currently Offline'}
@@ -341,8 +341,8 @@ export default function AgentDashboard() {
 
         {/* Stats */}
         <div className="dash-stats-grid stagger-list">
-          <StatCard label="Total Deliveries" value={performance?.totalDeliveries ?? 0} icon={Package} color="#00d4ff" loading={loading} />
-          <StatCard label="Active Orders"    value={active.length} icon={Clock} color="#a78bfa" loading={loading} />
+          <StatCard label="Total Deliveries" value={performance?.totalDeliveries ?? 0} icon={Package} color="#6366f1" loading={loading} />
+          <StatCard label="Active Orders"    value={active.length} icon={Clock} color="#818cf8" loading={loading} />
           <StatCard label="Success Rate"     value={performance?.successRate ?? 0} suffix="%" icon={TrendingUp} color="#34d399" loading={loading} />
           <StatCard label="Avg Time (mins)"  value={performance?.avgDeliveryTimeMinutes ?? 0} icon={Star} color="#fbbf24" loading={loading} />
         </div>
@@ -352,7 +352,7 @@ export default function AgentDashboard() {
             <button 
               onClick={handleOptimizeRoute}
               className="btn-primary btn-glow"
-              style={{ background: 'linear-gradient(135deg, #a78bfa, #8b5cf6)', padding: '0.6rem 1.25rem', borderRadius: 999, fontSize: '0.85rem' }}
+              style={{ background: 'linear-gradient(135deg, #818cf8, #6366f1)', padding: '0.6rem 1.25rem', borderRadius: 999, fontSize: '0.85rem' }}
             >
               <Zap size={14} /> Optimize My Route
             </button>
@@ -378,19 +378,19 @@ export default function AgentDashboard() {
                   style={{
                     borderRadius: 20,
                     overflow: 'hidden',
-                    borderTop: `3px solid ${order.status === 'In-Transit' ? '#00d4ff' : order.status === 'Picked-up' ? '#a78bfa' : '#f59e0b'}`,
+                    borderTop: `3px solid ${order.status === 'In-Transit' ? '#6366f1' : order.status === 'Picked-up' ? '#818cf8' : '#f59e0b'}`,
                   }}
                 >
                   {/* Card Header */}
                   <div
-                    style={{ padding: '1rem 1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', background: isLive ? 'rgba(0,212,255,0.04)' : 'transparent' }}
+                    style={{ padding: '1rem 1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', background: isLive ? 'rgba(99,102,241,0.04)' : 'transparent' }}
                     onClick={() => {
                       setLiveOrder(order)
                       setExpandedOrders(prev => ({ ...prev, [order.id]: !isExpanded }))
                     }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                      {isLive && <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#00d4ff', boxShadow: '0 0 8px #00d4ff', animation: 'livePulse 2s infinite' }} />}
+                      {isLive && <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#6366f1', boxShadow: '0 0 8px #6366f1', animation: 'livePulse 2s infinite' }} />}
                       <span style={{ fontFamily: 'monospace', fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)' }}>{order.orderNumber}</span>
                       <StatusBadge status={order.status} />
                     </div>
@@ -400,11 +400,11 @@ export default function AgentDashboard() {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={e => e.stopPropagation()}
-                        style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', background: 'rgba(0,212,255,0.12)', border: '1px solid rgba(0,212,255,0.3)', color: '#00d4ff', padding: '0.35rem 0.75rem', borderRadius: 8, fontSize: '0.75rem', fontWeight: 700, textDecoration: 'none' }}
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', background: 'rgba(99,102,241,0.12)', border: '1px solid rgba(99,102,241,0.3)', color: '#6366f1', padding: '0.35rem 0.75rem', borderRadius: 8, fontSize: '0.75rem', fontWeight: 700, textDecoration: 'none' }}
                       >
                         <Navigation size={12} /> Navigate to {navTarget.label}
                       </a>
-                      {isExpanded ? <ChevronUp size={16} color="rgba(240,240,255,0.4)" /> : <ChevronDown size={16} color="rgba(240,240,255,0.4)" />}
+                      {isExpanded ? <ChevronUp size={16} color="rgba(245,245,247,0.4)" /> : <ChevronDown size={16} color="rgba(245,245,247,0.4)" />}
                     </div>
                   </div>
 
@@ -431,7 +431,7 @@ export default function AgentDashboard() {
                             {isLive && activeRouteGeoJSON && (
                               <Source id="agent-route" type="geojson" data={activeRouteGeoJSON}>
                                 <Layer id="route-shadow" type="line" layout={{ 'line-join': 'round', 'line-cap': 'round' }} paint={{ 'line-color': '#000', 'line-width': 7, 'line-opacity': 0.2 }} />
-                                <Layer id="route-line" type="line" layout={{ 'line-join': 'round', 'line-cap': 'round' }} paint={{ 'line-color': '#00d4ff', 'line-width': 4 }} />
+                                <Layer id="route-line" type="line" layout={{ 'line-join': 'round', 'line-cap': 'round' }} paint={{ 'line-color': '#6366f1', 'line-width': 4 }} />
                               </Source>
                             )}
 
@@ -446,7 +446,7 @@ export default function AgentDashboard() {
 
                             {/* Pickup pin */}
                             <Marker longitude={order.pickupLng} latitude={order.pickupLat} anchor="bottom">
-                              <div style={{ background: '#a78bfa', color: '#fff', padding: '5px 10px', borderRadius: 8, fontSize: '0.72rem', fontWeight: 700, boxShadow: '0 4px 16px rgba(167,139,250,0.6)', border: '1.5px solid white', whiteSpace: 'nowrap' }}>
+                              <div style={{ background: '#818cf8', color: '#fff', padding: '5px 10px', borderRadius: 8, fontSize: '0.72rem', fontWeight: 700, boxShadow: '0 4px 16px rgba(129,140,248,0.6)', border: '1.5px solid white', whiteSpace: 'nowrap' }}>
                                 📦 Pickup
                               </div>
                             </Marker>
@@ -460,7 +460,7 @@ export default function AgentDashboard() {
                           </Map>
 
                           {/* Map hint */}
-                          <div style={{ position: 'absolute', top: 8, left: 8, background: 'rgba(10,10,18,0.75)', backdropFilter: 'blur(6px)', borderRadius: 8, padding: '4px 10px', fontSize: '0.68rem', color: 'rgba(240,240,255,0.7)', pointerEvents: 'none' }}>
+                          <div style={{ position: 'absolute', top: 8, left: 8, background: 'rgba(10,10,18,0.75)', backdropFilter: 'blur(6px)', borderRadius: 8, padding: '4px 10px', fontSize: '0.68rem', color: 'rgba(245,245,247,0.7)', pointerEvents: 'none' }}>
                             Click map to unlock scroll zoom
                           </div>
                         </div>
@@ -469,12 +469,12 @@ export default function AgentDashboard() {
                       {/* Address Details */}
                       <div style={{ padding: '1rem 1.25rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                         <div>
-                          <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#a78bfa', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.4rem', display: 'flex', alignItems: 'center', gap: 4 }}>
+                          <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#818cf8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.4rem', display: 'flex', alignItems: 'center', gap: 4 }}>
                             <MapPin size={10} /> Pickup Address
                           </div>
                           <div style={{ fontSize: '0.8rem', color: 'var(--text-primary)', lineHeight: 1.5 }}>{order.pickupAddress}</div>
                           <a href={`https://www.google.com/maps/dir/?api=1&destination=${order.pickupLat},${order.pickupLng}`} target="_blank" rel="noopener noreferrer"
-                            style={{ display: 'inline-flex', alignItems: 'center', gap: 4, marginTop: '0.4rem', fontSize: '0.7rem', color: '#a78bfa', textDecoration: 'none' }}>
+                            style={{ display: 'inline-flex', alignItems: 'center', gap: 4, marginTop: '0.4rem', fontSize: '0.7rem', color: '#818cf8', textDecoration: 'none' }}>
                             <Navigation size={10} /> Open in Maps
                           </a>
                         </div>
@@ -493,12 +493,12 @@ export default function AgentDashboard() {
                       {/* Customer + Action */}
                       <div style={{ padding: '0.875rem 1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                          <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(0,212,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: '0.9rem', color: '#00d4ff' }}>
+                          <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: '0.9rem', color: '#6366f1' }}>
                             {order.customer?.name?.[0]?.toUpperCase() || 'C'}
                           </div>
                           <div>
                             <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>{order.customer?.name}</div>
-                            <a href={`tel:${order.customer?.phone}`} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: '0.75rem', color: '#00d4ff', textDecoration: 'none', marginTop: 2 }}>
+                            <a href={`tel:${order.customer?.phone}`} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: '0.75rem', color: '#6366f1', textDecoration: 'none', marginTop: 2 }}>
                               <Phone size={10} /> {order.customer?.phone}
                             </a>
                           </div>
@@ -538,21 +538,21 @@ export default function AgentDashboard() {
       {/* New Order Request Modal */}
       {newRequest && (
         <div style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(10px)' }}>
-          <div style={{ background: '#12121a', border: '1px solid rgba(0,212,255,0.2)', padding: '2rem', borderRadius: 24, width: '90%', maxWidth: 400, textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-            <div style={{ position: 'absolute', top: 0, left: 0, height: 4, background: '#00d4ff', transition: 'width 1s linear', width: `${(newRequestTimer / 30) * 100}%` }} />
+          <div style={{ background: '#12121a', border: '1px solid rgba(99,102,241,0.2)', padding: '2rem', borderRadius: 24, width: '90%', maxWidth: 400, textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', top: 0, left: 0, height: 4, background: '#6366f1', transition: 'width 1s linear', width: `${(newRequestTimer / 30) * 100}%` }} />
             
-            <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(0,212,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
-              <Package size={32} color="#00d4ff" />
+            <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(99,102,241,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
+              <Package size={32} color="#6366f1" />
             </div>
             
             <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>New Delivery Request!</h3>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: '1.5rem' }}>
-              Pickup is <strong style={{ color: '#00d4ff' }}>{newRequest.etaMins} mins</strong> away ({newRequest.distance} km).
+              Pickup is <strong style={{ color: '#6366f1' }}>{newRequest.etaMins} mins</strong> away ({newRequest.distance} km).
             </p>
             
             <div style={{ background: 'rgba(255,255,255,0.03)', padding: '1rem', borderRadius: 12, marginBottom: '2rem', textAlign: 'left' }}>
               <div style={{ marginBottom: '0.75rem' }}>
-                <span style={{ fontSize: '0.75rem', color: '#a78bfa', textTransform: 'uppercase', fontWeight: 700 }}>Pickup</span>
+                <span style={{ fontSize: '0.75rem', color: '#818cf8', textTransform: 'uppercase', fontWeight: 700 }}>Pickup</span>
                 <div style={{ fontSize: '0.9rem', color: 'var(--text-primary)' }}>{newRequest.pickupAddress}</div>
               </div>
               <div>
@@ -569,7 +569,7 @@ export default function AgentDashboard() {
               </button>
               <button 
                 onClick={() => handleAcceptRequest(newRequest.orderId)}
-                style={{ padding: '0.875rem', borderRadius: 12, border: 'none', background: 'linear-gradient(135deg, #00d4ff, #0077ff)', color: '#fff', fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer' }}>
+                style={{ padding: '0.875rem', borderRadius: 12, border: 'none', background: 'linear-gradient(135deg, #6366f1, #4f46e5)', color: '#fff', fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer' }}>
                 Accept ({newRequestTimer}s)
               </button>
             </div>

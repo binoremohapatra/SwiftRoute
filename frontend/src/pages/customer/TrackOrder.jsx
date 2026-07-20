@@ -202,7 +202,7 @@ export default function TrackOrder() {
             toast.error('Payment Verification Error');
           }
         },
-        theme: { color: '#00d4ff' }
+        theme: { color: '#6366f1' }
       };
 
       const rzp = new window.Razorpay(options);
@@ -271,7 +271,7 @@ export default function TrackOrder() {
         <div className="glass-card" style={{ padding: '1.25rem', borderRadius: 20, marginBottom: '1.5rem', maxWidth: 500 }}>
           <form style={{ display: 'flex', gap: '0.75rem' }} onSubmit={(e) => { e.preventDefault(); setOrderId(inputId) }}>
             <div style={{ position: 'relative', flex: 1 }}>
-              <Search size={16} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'rgba(240,240,255,0.3)' }} />
+              <Search size={16} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'rgba(245,245,247,0.3)' }} />
               <input
                 className="dash-input"
                 style={{ paddingLeft: '2.75rem' }}
@@ -309,7 +309,7 @@ export default function TrackOrder() {
               >
                 {data.pickup && (
                   <Marker longitude={data.pickup.lng} latitude={data.pickup.lat} anchor="bottom">
-                    <div style={{ background: '#a78bfa', color: '#fff', padding: '4px 10px', borderRadius: 8, fontWeight: 700, fontSize: 12, border: '2px solid white', boxShadow: '0 4px 12px rgba(0,0,0,0.3)' }}>Pickup</div>
+                    <div style={{ background: '#818cf8', color: '#fff', padding: '4px 10px', borderRadius: 8, fontWeight: 700, fontSize: 12, border: '2px solid white', boxShadow: '0 4px 12px rgba(0,0,0,0.3)' }}>Pickup</div>
                   </Marker>
                 )}
                 {data.drop && (
@@ -343,9 +343,9 @@ export default function TrackOrder() {
                         'line-cap': 'round'
                       }}
                       paint={{
-                        'line-color': '#00d4ff',
+                        'line-color': '#2563eb',
                         'line-width': 5,
-                        'line-opacity': 0.8
+                        'line-opacity': 0.85
                       }}
                     />
                   </Source>
@@ -369,7 +369,7 @@ export default function TrackOrder() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
                     <InfoRow label="Order ID" value={data.orderNumber} accent />
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: '0.8rem', color: 'rgba(240,240,255,0.4)', fontWeight: 600 }}>Payment</span>
+                      <span style={{ fontSize: '0.8rem', color: 'rgba(245,245,247,0.4)', fontWeight: 600 }}>Payment</span>
                       <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                          <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#fff' }}>₹{data.amount}</span>
                          {data.paymentStatus === 'PAID' ? (
@@ -406,12 +406,12 @@ export default function TrackOrder() {
                   <div className="glass-card" style={{ padding: '1.75rem', borderRadius: 24 }}>
                     <h3 style={{ fontSize: '1rem', fontWeight: 800, marginBottom: '1.25rem', color: 'var(--text-primary)' }}>Delivery Agent</h3>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                      <div style={{ width: 52, height: 52, background: 'linear-gradient(135deg, #00d4ff, #0077ff)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem', fontWeight: 700, color: '#fff', boxShadow: '0 8px 24px rgba(0,212,255,0.3)' }}>
+                      <div style={{ width: 52, height: 52, background: 'linear-gradient(135deg, #6366f1, #4f46e5)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem', fontWeight: 700, color: '#fff', boxShadow: '0 8px 24px rgba(99,102,241,0.3)' }}>
                         {data.agent.name?.[0]?.toUpperCase()}
                       </div>
                       <div>
                         <div style={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--text-primary)', marginBottom: 2 }}>{data.agent.name}</div>
-                        <div style={{ fontSize: '0.8rem', color: 'rgba(240,240,255,0.5)' }}>{data.agent.vehicleType} • {data.agent.phone}</div>
+                        <div style={{ fontSize: '0.8rem', color: 'rgba(245,245,247,0.5)' }}>{data.agent.vehicleType} • {data.agent.phone}</div>
                       </div>
                     </div>
                   </div>
@@ -419,14 +419,14 @@ export default function TrackOrder() {
 
                 {/* Payment Card */}
                 {data.paymentStatus !== 'PAID' && (
-                  <div className="glass-card" style={{ padding: '1.75rem', borderRadius: 24, border: '1px solid rgba(0, 212, 255, 0.2)', background: 'linear-gradient(180deg, rgba(20,20,30,0.8) 0%, rgba(0, 212, 255, 0.05) 100%)' }}>
+                  <div className="glass-card" style={{ padding: '1.75rem', borderRadius: 24, border: '1px solid rgba(99,102,241, 0.2)', background: 'linear-gradient(180deg, rgba(20,20,30,0.8) 0%, rgba(99,102,241, 0.05) 100%)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
-                      <div style={{ padding: '8px', background: 'rgba(0, 212, 255, 0.1)', borderRadius: '50%' }}>
-                        <CreditCard size={20} color="#00d4ff" />
+                      <div style={{ padding: '8px', background: 'rgba(99,102,241, 0.1)', borderRadius: '50%' }}>
+                        <CreditCard size={20} color="#6366f1" />
                       </div>
                       <h3 style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary)' }}>Complete Payment</h3>
                     </div>
-                    <p style={{ fontSize: '0.85rem', color: 'rgba(240,240,255,0.6)', marginBottom: '1.5rem', lineHeight: 1.5 }}>
+                    <p style={{ fontSize: '0.85rem', color: 'rgba(245,245,247,0.6)', marginBottom: '1.5rem', lineHeight: 1.5 }}>
                       You can securely pay via UPI, Credit/Debit Cards, or Netbanking.
                     </p>
                     <button onClick={handleRetryPayment} className="btn-primary" style={{ width: '100%', padding: '1rem', borderRadius: 16, fontSize: '1rem', fontWeight: 700, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem' }}>
@@ -461,8 +461,8 @@ export default function TrackOrder() {
 function InfoRow({ label, value, accent }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}>
-      <span style={{ fontSize: '0.82rem', color: 'rgba(240,240,255,0.4)', whiteSpace: 'nowrap' }}>{label}</span>
-      <span style={{ fontSize: '0.875rem', fontWeight: accent ? 700 : 500, color: accent ? '#00d4ff' : 'var(--text-primary)', textAlign: 'right' }}>
+      <span style={{ fontSize: '0.82rem', color: 'rgba(245,245,247,0.4)', whiteSpace: 'nowrap' }}>{label}</span>
+      <span style={{ fontSize: '0.875rem', fontWeight: accent ? 700 : 500, color: accent ? '#6366f1' : 'var(--text-primary)', textAlign: 'right' }}>
         {value}
       </span>
     </div>

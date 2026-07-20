@@ -7,7 +7,7 @@ import { useAuth } from '../../context/AuthContext'
 import { useToast } from '../../components/ui/Toast'
 import AnimatedCounter from '../../components/ui/AnimatedCounter'
 
-const COLORS = ['#00d4ff', '#34d399', '#fbbf24', '#f87171', '#8b5cf6']
+const COLORS = ['#6366f1', '#34d399', '#fbbf24', '#f87171', '#6366f1']
 
 export default function AdminAnalytics() {
   const { token } = useAuth()
@@ -97,7 +97,7 @@ export default function AdminAnalytics() {
           <>
             {/* KPI Cards */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-              <KPICard title="Total Orders" value={data.totalOrders} icon={Package} color="#00d4ff" delay={0.1} trend={data.trends?.orders} />
+              <KPICard title="Total Orders" value={data.totalOrders} icon={Package} color="#6366f1" delay={0.1} trend={data.trends?.orders} />
               <KPICard title="Total Revenue" value={`₹${data.totalRevenue?.toLocaleString() || 0}`} icon={DollarSign} color="#34d399" delay={0.2} trend={data.trends?.revenue} />
               <KPICard title="Avg Delivery" value={`${data.avgDeliveryDurationMins}m`} icon={Clock} color="#fbbf24" delay={0.3} trend={data.trends?.avgDelivery} reverseTrendColor />
               <KPICard title="Failed / Cancelled" value={data.failedDeliveries} icon={TrendingUp} color="#f87171" delay={0.4} trend={data.trends?.failed} reverseTrendColor />
@@ -112,7 +112,7 @@ export default function AdminAnalytics() {
                     <XAxis dataKey="date" stroke="rgba(255,255,255,0.4)" fontSize={12} />
                     <YAxis stroke="rgba(255,255,255,0.4)" fontSize={12} />
                     <Tooltip contentStyle={{ background: 'rgba(20,20,30,0.9)', border: 'none', borderRadius: 8, color: '#fff' }} />
-                    <Line type="monotone" dataKey="orders" stroke="#00d4ff" strokeWidth={3} dot={{ r: 4, fill: '#00d4ff' }} />
+                    <Line type="monotone" dataKey="orders" stroke="#6366f1" strokeWidth={3} dot={{ r: 4, fill: '#6366f1' }} />
                   </LineChart>
                 </ResponsiveContainer>
               </ChartCard>
@@ -176,7 +176,7 @@ export default function AdminAnalytics() {
                     <XAxis type="number" stroke="rgba(255,255,255,0.4)" fontSize={12} />
                     <YAxis dataKey="name" type="category" stroke="rgba(255,255,255,0.8)" fontSize={12} width={100} />
                     <Tooltip cursor={{ fill: 'rgba(255,255,255,0.05)' }} contentStyle={{ background: 'rgba(20,20,30,0.9)', border: 'none', borderRadius: 8, color: '#fff' }} />
-                    <Bar dataKey="totalDeliveries" fill="#8b5cf6" radius={[0,4,4,0]} name="Completed Deliveries" />
+                    <Bar dataKey="totalDeliveries" fill="#6366f1" radius={[0,4,4,0]} name="Completed Deliveries" />
                   </BarChart>
                 </ResponsiveContainer>
               </ChartCard>
@@ -229,7 +229,7 @@ function KPICard({ title, value, icon: Icon, color, delay, trend, reverseTrendCo
         <div style={{ width: 32, height: 32, borderRadius: 8, background: `${color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Icon size={16} color={color} />
         </div>
-        <div style={{ fontSize: '0.85rem', color: 'rgba(240,240,255,0.5)', fontWeight: 600 }}>{title}</div>
+        <div style={{ fontSize: '0.85rem', color: 'rgba(245,245,247,0.5)', fontWeight: 600 }}>{title}</div>
       </div>
       <div style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'var(--font-display)' }}>
         {typeof value === 'number' ? <AnimatedCounter value={value} /> : value}

@@ -35,8 +35,8 @@ export default function CustomerDashboard() {
 
         {/* ── Hero greeting ── */}
         <div style={{
-          background: 'linear-gradient(135deg, rgba(0,212,255,0.08), rgba(0,119,255,0.05))',
-          border: '1px solid rgba(0,212,255,0.12)',
+          background: 'linear-gradient(135deg, rgba(99,102,241,0.08), rgba(79,70,229,0.05))',
+          border: '1px solid rgba(99,102,241,0.12)',
           borderRadius: 20,
           padding: '1.75rem 2rem',
           marginBottom: '1.5rem',
@@ -52,16 +52,16 @@ export default function CustomerDashboard() {
           <div style={{
             position: 'absolute', right: -30, top: -30,
             width: 200, height: 200, borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(0,212,255,0.08), transparent)',
+            background: 'radial-gradient(circle, rgba(99,102,241,0.08), transparent)',
             pointerEvents: 'none',
           }} />
 
           <div>
-            <p style={{ fontSize: '0.82rem', color: 'rgba(240,240,255,0.45)', fontWeight: 500, marginBottom: '0.25rem' }}>
+            <p style={{ fontSize: '0.82rem', color: 'rgba(245,245,247,0.45)', fontWeight: 500, marginBottom: '0.25rem' }}>
               {greeting} 👋
             </p>
             <h1 className="dash-page-title" style={{ marginBottom: '0.35rem' }}>
-              Welcome back, <span style={{ color: '#00d4ff' }}>{firstName}</span>
+              Welcome back, <span style={{ color: '#6366f1' }}>{firstName}</span>
             </h1>
             <p className="dash-page-sub">
               {loading ? 'Loading your orders...' : `You have ${active.length} active order${active.length !== 1 ? 's' : ''} right now`}
@@ -79,8 +79,8 @@ export default function CustomerDashboard() {
 
         {/* ── Stat cards ── */}
         <div className="dash-stats-grid stagger-list" style={{ marginBottom: '1.5rem' }}>
-          <StatCard label="Total Orders"   value={orders.length}    icon={Package}     color="#00d4ff"  loading={loading} />
-          <StatCard label="Active"         value={active.length}    icon={Clock}       color="#a78bfa"  loading={loading} />
+          <StatCard label="Total Orders"   value={orders.length}    icon={Package}     color="#6366f1"  loading={loading} />
+          <StatCard label="Active"         value={active.length}    icon={Clock}       color="#818cf8"  loading={loading} />
           <StatCard label="Delivered"      value={delivered.length} icon={CheckCircle} color="#34d399"  loading={loading} />
           <StatCard label="Cancelled"      value={cancelled.length} icon={XCircle}     color="#f87171"  loading={loading} />
         </div>
@@ -88,8 +88,8 @@ export default function CustomerDashboard() {
         {/* ── Live order card ── */}
         {liveOrder && (
           <div style={{
-            background: 'linear-gradient(135deg, rgba(0,212,255,0.1), rgba(0,119,255,0.07))',
-            border: '1px solid rgba(0,212,255,0.25)',
+            background: 'linear-gradient(135deg, rgba(99,102,241,0.1), rgba(79,70,229,0.07))',
+            border: '1px solid rgba(99,102,241,0.25)',
             borderRadius: 18,
             padding: '1.25rem 1.5rem',
             marginBottom: '1.5rem',
@@ -103,23 +103,23 @@ export default function CustomerDashboard() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
               <div style={{
                 width: 44, height: 44, borderRadius: 12,
-                background: 'rgba(0,212,255,0.15)',
+                background: 'rgba(99,102,241,0.15)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 animation: 'livePulse 2s infinite',
               }}>
-                <Zap size={20} color="#00d4ff" />
+                <Zap size={20} color="#6366f1" />
               </div>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: 4 }}>
-                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#00d4ff', animation: 'badgeDotPulse 1.5s infinite' }} />
-                  <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#00d4ff', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#6366f1', animation: 'badgeDotPulse 1.5s infinite' }} />
+                  <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6366f1', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                     Live Delivery
                   </span>
                 </div>
                 <div style={{ fontWeight: 700, color: 'var(--text-primary)' }}>
-                  Order <span style={{ fontFamily: 'monospace', color: '#00d4ff' }}>{liveOrder.orderNumber}</span> is on its way!
+                  Order <span style={{ fontFamily: 'monospace', color: '#6366f1' }}>{liveOrder.orderNumber}</span> is on its way!
                 </div>
-                <div style={{ fontSize: '0.8rem', color: 'rgba(240,240,255,0.45)', marginTop: 2 }}>
+                <div style={{ fontSize: '0.8rem', color: 'rgba(245,245,247,0.45)', marginTop: 2 }}>
                   Status: <StatusBadge status={liveOrder.status} />
                 </div>
               </div>
@@ -140,7 +140,7 @@ export default function CustomerDashboard() {
             <h3 style={{ fontSize: '1rem', fontWeight: 700, margin: 0 }}>Recent Orders</h3>
             <Link
               to="/dashboard/orders"
-              style={{ color: '#00d4ff', textDecoration: 'none', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.25rem', fontWeight: 600 }}
+              style={{ color: '#6366f1', textDecoration: 'none', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.25rem', fontWeight: 600 }}
             >
               View all <ArrowRight size={14} />
             </Link>
@@ -192,14 +192,14 @@ export default function CustomerDashboard() {
                       <td className="dash-address" title={o.dropAddress}>
                         {o.dropAddress || `${o.dropLat?.toFixed(3)}, ${o.dropLng?.toFixed(3)}`}
                       </td>
-                      <td style={{ color: 'rgba(240,240,255,0.4)', fontSize: '0.8rem' }}>
+                      <td style={{ color: 'rgba(245,245,247,0.4)', fontSize: '0.8rem' }}>
                         {new Date(o.createdAt).toLocaleDateString()}
                       </td>
                       <td>
                         <Link
                           to={`/dashboard/track?id=${o._id}`}
                           style={{
-                            color: '#00d4ff', textDecoration: 'none', fontSize: '0.8rem',
+                            color: '#6366f1', textDecoration: 'none', fontSize: '0.8rem',
                             display: 'inline-flex', alignItems: 'center', gap: '0.25rem',
                             fontWeight: 600, opacity: ['Delivered','Cancelled'].includes(o.status) ? 0.4 : 1,
                           }}

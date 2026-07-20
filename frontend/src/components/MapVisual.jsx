@@ -100,10 +100,10 @@ export default function MapVisual() {
   }, [])
 
   const cities = [
-    { x: 80, y: 280, color: '#ff6b35', label: 'Origin' },
-    { x: 200, y: 190, color: '#0077ff', label: 'Hub A' },
-    { x: 310, y: 160, color: '#0077ff', label: 'Hub B' },
-    { x: 420, y: 100, color: '#00ffaa', label: 'Destination' },
+    { x: 80, y: 280, color: '#f59e0b', label: 'Origin' },
+    { x: 200, y: 190, color: '#4f46e5', label: 'Hub A' },
+    { x: 310, y: 160, color: '#4f46e5', label: 'Hub B' },
+    { x: 420, y: 100, color: '#34d399', label: 'Destination' },
   ]
 
   return (
@@ -111,7 +111,7 @@ export default function MapVisual() {
       <svg className="map-svg" viewBox="0 0 500 420" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="mapGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="rgba(0,119,255,0.15)" />
+            <stop offset="0%" stopColor="rgba(79,70,229,0.15)" />
             <stop offset="100%" stopColor="transparent" />
           </radialGradient>
           <filter id="glow">
@@ -123,25 +123,25 @@ export default function MapVisual() {
             <feMerge><feMergeNode in="coloredBlur" /><feMergeNode in="SourceGraphic" /></feMerge>
           </filter>
           <linearGradient id="routeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#00d4ff" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#00ffaa" stopOpacity="0.8" />
+            <stop offset="0%" stopColor="#6366f1" stopOpacity="0.8" />
+            <stop offset="100%" stopColor="#34d399" stopOpacity="0.8" />
           </linearGradient>
         </defs>
 
         <ellipse cx="250" cy="210" rx="220" ry="180" fill="url(#mapGlow)" />
 
         {[60, 120, 180, 240, 300, 360].map(y => (
-          <line key={y} x1="20" y1={y} x2="480" y2={y} stroke="rgba(0,212,255,0.05)" strokeWidth="1" />
+          <line key={y} x1="20" y1={y} x2="480" y2={y} stroke="rgba(99,102,241,0.05)" strokeWidth="1" />
         ))}
         {[60, 120, 180, 240, 300, 360, 420].map(x => (
-          <line key={x} x1={x} y1="20" x2={x} y2="400" stroke="rgba(0,212,255,0.05)" strokeWidth="1" />
+          <line key={x} x1={x} y1="20" x2={x} y2="400" stroke="rgba(99,102,241,0.05)" strokeWidth="1" />
         ))}
 
         <path d="M 50 350 Q 180 300 250 220 Q 350 150 460 80" stroke="rgba(255,255,255,0.04)" strokeWidth="3" fill="none" strokeDasharray="8 4" />
 
         <polyline
           points={routePoints.map(p => `${p.x},${p.y}`).join(' ')}
-          stroke="rgba(0,212,255,0.15)"
+          stroke="rgba(99,102,241,0.15)"
           strokeWidth="2"
           strokeDasharray="6 4"
           fill="none"
@@ -151,19 +151,19 @@ export default function MapVisual() {
 
         {cities.map((city, i) => (
           <g key={i}>
-            <circle cx={city.x} cy={city.y} r="20" fill="rgba(0,119,255,0.05)" stroke="rgba(0,212,255,0.1)" strokeWidth="1" />
-            <circle cx={city.x} cy={city.y} r="6" fill={city.color} stroke="rgba(6,6,15,0.8)" strokeWidth="2" filter="url(#glow)" />
-            <text x={city.x} y={city.y + 24} textAnchor="middle" fill="rgba(240,240,255,0.4)" fontSize="9" fontFamily="Inter, sans-serif">
+            <circle cx={city.x} cy={city.y} r="20" fill="rgba(79,70,229,0.05)" stroke="rgba(99,102,241,0.1)" strokeWidth="1" />
+            <circle cx={city.x} cy={city.y} r="6" fill={city.color} stroke="rgba(10,10,15,0.8)" strokeWidth="2" filter="url(#glow)" />
+            <text x={city.x} y={city.y + 24} textAnchor="middle" fill="rgba(245,245,247,0.4)" fontSize="9" fontFamily="Inter, sans-serif">
               {city.label}
             </text>
           </g>
         ))}
 
-        <circle ref={markerRef} cx="80" cy="280" r="16" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.25)" strokeWidth="1">
+        <circle ref={markerRef} cx="80" cy="280" r="16" fill="rgba(99,102,241,0.08)" stroke="rgba(99,102,241,0.25)" strokeWidth="1">
           <animate attributeName="r" values="14;22;14" dur="2s" repeatCount="indefinite" />
           <animate attributeName="opacity" values="0.6;0;0.6" dur="2s" repeatCount="indefinite" />
         </circle>
-        <circle ref={dotRef} cx="80" cy="280" r="8" fill="#00d4ff" stroke="rgba(6,6,15,0.9)" strokeWidth="2.5" filter="url(#markerGlow)" />
+        <circle ref={dotRef} cx="80" cy="280" r="8" fill="#6366f1" stroke="rgba(10,10,15,0.9)" strokeWidth="2.5" filter="url(#markerGlow)" />
       </svg>
 
       {/* Floating cards — with SVG icons, no emojis */}
@@ -172,7 +172,7 @@ export default function MapVisual() {
           <LiveIcon /> Live Status
         </div>
         <div className="card-value live">In Transit</div>
-        <div style={{ fontSize: '11px', color: 'rgba(240,240,255,0.4)', marginTop: '4px' }}>
+        <div style={{ fontSize: '11px', color: 'rgba(245,245,247,0.4)', marginTop: '4px' }}>
           ORD-2847-KL · 2.3km away
         </div>
       </div>
@@ -182,7 +182,7 @@ export default function MapVisual() {
           <TruckIcon /> ETA
         </div>
         <div className="card-value">14 min</div>
-        <div style={{ fontSize: '11px', color: 'rgba(240,240,255,0.4)', marginTop: '4px' }}>
+        <div style={{ fontSize: '11px', color: 'rgba(245,245,247,0.4)', marginTop: '4px' }}>
           On schedule ✓
         </div>
       </div>
@@ -192,7 +192,7 @@ export default function MapVisual() {
           <UsersIcon /> Active Fleet
         </div>
         <div className="card-value warning">382 agents</div>
-        <div style={{ fontSize: '11px', color: 'rgba(240,240,255,0.4)', marginTop: '4px' }}>
+        <div style={{ fontSize: '11px', color: 'rgba(245,245,247,0.4)', marginTop: '4px' }}>
           +12% from yesterday
         </div>
       </div>
