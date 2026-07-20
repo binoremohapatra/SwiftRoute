@@ -1,0 +1,65 @@
+openapi: 3.0.0
+info:
+  title: SwiftRoute API
+  version: 1.0.0
+  description: API documentation for SwiftRoute Logistics Platform
+servers:
+  - url: http://localhost:5000/api/v1
+    description: Local development server
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user, agent, or admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                phone:
+                  type: string
+                password:
+                  type: string
+                role:
+                  type: string
+                  enum: [customer, agent, admin]
+                vehicleType:
+                  type: string
+      responses:
+        '201':
+          description: Created
+  /auth/login:
+    post:
+      summary: Login and get token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                role:
+                  type: string
+      responses:
+        '200':
+          description: Success
+  /orders:
+    get:
+      summary: Get list of orders based on role
+      responses:
+        '200':
+          description: List of orders
+    post:
+      summary: Create a new order (customer only)
+      responses:
+        '201':
+          description: Order created

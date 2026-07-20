@@ -1,0 +1,22 @@
+{
+  "short_name": "AgentApp",
+  "name": "Delhivery Agent Mobile App",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/vite.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/agent/dashboard",
+  "background_color": "#0a0a12",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#00d4ff",
+  "description": "Mobile application for delivery agents"
+}

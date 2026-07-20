@@ -1,0 +1,207 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id          String   @id @default(uuid())
+  name        String
+  email       String   @unique
+  password    String
+  permissions String[]
+  role        String   @default("admin")
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([email])
+  @@index([isActive])
+}
+
+model Agent {
+  id              String         @id @default(uuid())
+  name            String
+  email           String         @unique
+  phone           String
+  password        String
+  vehicleType     String
+  currentLat      Float?
+  currentLng      Float?
+  locationUpdated DateTime?
+  isAvailable     Boolean        @default(true)
+  availableStatus String         @default("Online") // Online | Offline | Busy | Break
+  rating          Float          @default(5.0)
+  totalDeliveries Int            @default(0)
+  role            String         @default("agent")
+  isActive        Boolean        @default(true)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  fcmToken        String?
+  deviceType      String?
+  lastActive      DateTime?
+
+  assignedOrders  Order[]        @relation("AgentOrders")
+  locationPings   LocationPing[]
+
+  @@index([email])
+  @@index([isAvailable])
+  @@index([availableStatus])
+  @@index([isActive])
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  phone     String
+  password  String
+  addresses Json?
+  role      String   @default("customer")
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  fcmToken  String?
+  deviceType String?
+  lastActive DateTime?
+
+  orders    Order[]  @relation("CustomerOrders")
+
+  @@index([email])
+  @@index([isActive])
+  @@index([name])
+}
+
+model Order {
+  id                    String    @id @default(uuid())
+  orderNumber           String    @unique
+  customerId            String
+  customer              User      @relation("CustomerOrders", fields: [customerId], references: [id], onDelete: Cascade)
+
+  pickupAddress         String
+  pickupLat             Float
+  pickupLng             Float
+
+  dropAddress           String
+  dropLat               Float
+  dropLng               Float
+
+  assignedAgentId       String?
+  assignedAgent         Agent?    @relation("AgentOrders", fields: [assignedAgentId], references: [id], onDelete: SetNull)
+
+  status                String    @default("Placed")
+  estimatedDeliveryTime DateTime?
+  actualDeliveryTime    DateTime?
+  
+  amount                Float     @default(0)
+  paymentMethod         String    @default("COD") // COD, ONLINE
+  paymentStatus         String    @default("PENDING") // PENDING, PAID, FAILED, REFUNDED
+  razorpayOrderId       String?
+  razorpayPaymentId     String?
+  paidAt                DateTime?
+
+  rating                Int?
+  review                String?
+
+  fulfillmentType       String    @default("IN_HOUSE") // IN_HOUSE, 3PL
+  thirdPartyCourier     String?   // e.g. Shiprocket, Delhivery
+  thirdPartyTrackingId  String?
+
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  locationPings         LocationPing[]
+  notifications         Notification[]
+  statusLogs            StatusLog[]
+  payments              Payment[]
+
+  @@index([customerId])
+  @@index([assignedAgentId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([orderNumber])
+}
+
+model LocationPing {
+  id        String   @id @default(uuid())
+  agentId   String
+  agent     Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  lat       Float
+  lng       Float
+  timestamp DateTime @default(now())
+
+  @@index([orderId])
+  @@index([agentId])
+  @@index([timestamp])
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  onModel   String
+  orderId   String?
+  order     Order?   @relation(fields: [orderId], references: [id], onDelete: SetNull)
+  message   String
+  type      String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([isRead])
+  @@index([createdAt])
+}
+
+model Payment {
+  id                String   @id @default(uuid())
+  orderId           String
+  order             Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  amount            Float
+  method            String   @default("ONLINE") // ONLINE
+  status            String   @default("PENDING") // PENDING, PAID, FAILED
+  gatewayResponse   Json?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([orderId])
+}
+
+model StatusLog {
+  id          String   @id @default(uuid())
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  status      String
+  updatedBy   String
+  onModel     String
+  lat         Float?
+  lng         Float?
+  notes       String   @default("")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([orderId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  userId      String
+  userModel   String
+  action      String
+  resource    String
+  resourceId  String?
+  metadata    Json?
+  ipAddress   String?
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
+  @@index([action])
+  @@index([resource])
+  @@index([createdAt])
+}
