@@ -92,7 +92,7 @@ function AppContent({ scrolled }) {
         <Route path="/dashboard/orders" element={<ProtectedRoute allowedRoles={['customer']}><MyOrders /></ProtectedRoute>} />
         <Route path="/dashboard/orders/new" element={<ProtectedRoute allowedRoles={['customer']}><PlaceOrder /></ProtectedRoute>} />
         <Route path="/dashboard/track" element={<ProtectedRoute allowedRoles={['customer']}><TrackOrder /></ProtectedRoute>} />
-        <Route path="/dashboard/notifications" element={<ProtectedRoute allowedRoles={['customer']}><Notifications /></ProtectedRoute>} />
+        <Route path="/dashboard/notifications" element={<ProtectedRoute allowedRoles={['customer', 'agent']}><Notifications /></ProtectedRoute>} />
 
         {/* Agent Routes */}
         <Route path="/agent" element={<ProtectedRoute allowedRoles={['agent']}><AgentDashboard /></ProtectedRoute>} />

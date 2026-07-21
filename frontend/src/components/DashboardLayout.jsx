@@ -12,54 +12,54 @@ import {
 /* ──────────── Nav Config ──────────── */
 const navConfig = {
   customer: [
-    { label: 'Dashboard',    href: '/dashboard',                icon: LayoutDashboard },
-    { label: 'My Orders',    href: '/dashboard/orders',         icon: Package },
-    { label: 'Track Order',  href: '/dashboard/track',          icon: MapPin },
-    { label: 'Notifications',href: '/dashboard/notifications',  icon: Bell },
+    { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+    { label: 'My Orders', href: '/dashboard/orders', icon: Package },
+    { label: 'Track Order', href: '/dashboard/track', icon: MapPin },
+    { label: 'Notifications', href: '/dashboard/notifications', icon: Bell },
   ],
   agent: [
-    { label: 'Dashboard',    href: '/agent',                    icon: LayoutDashboard },
-    { label: 'Deliveries',   href: '/agent/deliveries',         icon: Package },
-    { label: 'Performance',  href: '/agent/performance',        icon: TrendingUp },
+    { label: 'Dashboard', href: '/agent', icon: LayoutDashboard },
+    { label: 'Deliveries', href: '/agent/deliveries', icon: Package },
+    { label: 'Performance', href: '/agent/performance', icon: TrendingUp },
   ],
   admin: [
-    { label: 'Dashboard',    href: '/admin',                    icon: LayoutDashboard },
+    { label: 'Dashboard', href: '/admin', icon: LayoutDashboard },
     { section: 'OPERATIONS' },
-    { label: 'Orders',       href: '/admin/orders',             icon: Package },
-    { label: 'Live Tracking',href: '/admin/tracking',           icon: Map },
-    { label: 'Assign Orders',href: '/admin/assign',             icon: MapPin },
+    { label: 'Orders', href: '/admin/orders', icon: Package },
+    { label: 'Live Tracking', href: '/admin/tracking', icon: Map },
+    { label: 'Assign Orders', href: '/admin/assign', icon: MapPin },
     { section: 'INSIGHTS' },
-    { label: 'Analytics',    href: '/admin/analytics',          icon: TrendingUp },
-    { label: 'Users & Agents',href: '/admin/users',            icon: Users },
+    { label: 'Analytics', href: '/admin/analytics', icon: TrendingUp },
+    { label: 'Users & Agents', href: '/admin/users', icon: Users },
   ],
 }
 
 
-const roleIcons   = { customer: User, agent: Truck, admin: Shield }
-const roleLabel   = { customer: 'Customer', agent: 'Delivery Agent', admin: 'Administrator' }
-const roleAccent  = { customer: '#6366f1', agent: '#8b5cf6', admin: '#f59e0b' }
+const roleIcons = { customer: User, agent: Truck, admin: Shield }
+const roleLabel = { customer: 'Customer', agent: 'Delivery Agent', admin: 'Administrator' }
+const roleAccent = { customer: '#6366f1', agent: '#8b5cf6', admin: '#f59e0b' }
 
 /* ──────────── DashboardLayout ──────────── */
 export default function DashboardLayout({ children }) {
   const { user, logout } = useAuth()
-  const location         = useLocation()
-  const navigate         = useNavigate()
+  const location = useLocation()
+  const navigate = useNavigate()
 
-  const [sidebarOpen,    setSidebarOpen]    = useState(false)
-  const [collapsed,      setCollapsed]      = useState(false)
-  const [profileOpen,    setProfileOpen]    = useState(false)
-  const [theme,          setTheme]          = useState('dark')
-  const [notifCount]                        = useState(3)
-  
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [collapsed, setCollapsed] = useState(false)
+  const [profileOpen, setProfileOpen] = useState(false)
+  const [theme, setTheme] = useState('dark')
+  const [notifCount] = useState(3)
+
   // Mobile specific state
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false)
-  const [moreSheetOpen,    setMoreSheetOpen]    = useState(false)
-  const [sidebarExpanded,  setSidebarExpanded]  = useState(false) // for tablet hover/tap
+  const [moreSheetOpen, setMoreSheetOpen] = useState(false)
+  const [sidebarExpanded, setSidebarExpanded] = useState(false) // for tablet hover/tap
 
   const profileRef = useRef(null)
-  const navLinks   = navConfig[user?.role] || []
-  const RoleIcon   = roleIcons[user?.role] || User
-  const accent     = roleAccent[user?.role] || '#6366f1'
+  const navLinks = navConfig[user?.role] || []
+  const RoleIcon = roleIcons[user?.role] || User
+  const accent = roleAccent[user?.role] || '#6366f1'
 
   /* Theme toggle */
   useEffect(() => {
@@ -83,7 +83,7 @@ export default function DashboardLayout({ children }) {
   }, [location.pathname])
 
   const handleLogout = async () => {
-    try { await authAPI.logout() } catch {}
+    try { await authAPI.logout() } catch { }
     logout()
     navigate('/')
   }
@@ -102,7 +102,7 @@ export default function DashboardLayout({ children }) {
   return (
     <div className="dash-layout">
       {/* ═══ SIDEBAR ═══ */}
-      <aside 
+      <aside
         className={`dash-sidebar${collapsed ? ' collapsed' : ''}${sidebarExpanded ? ' expanded' : ''}`}
         onMouseEnter={() => setSidebarExpanded(true)}
         onMouseLeave={() => setSidebarExpanded(false)}
@@ -127,26 +127,9 @@ export default function DashboardLayout({ children }) {
           >
             {collapsed
               ? <ChevronRight size={16} />
-              : <ChevronLeft  size={16} />
+              : <ChevronLeft size={16} />
             }
           </button>
-        </div>
-
-        {/* User card */}
-        <div className="dash-user-card">
-          <div
-            className="dash-avatar"
-            style={{ background: 'var(--color-surface)' }}
-          >
-            {user?.name?.[0]?.toUpperCase() || 'U'}
-          </div>
-          <div className="dash-user-info">
-            <div className="dash-user-name">{user?.name}</div>
-            <div className="dash-user-role">
-              <RoleIcon size={11} />
-              {roleLabel[user?.role] || user?.role}
-            </div>
-          </div>
         </div>
 
         {/* Navigation */}
@@ -160,9 +143,9 @@ export default function DashboardLayout({ children }) {
                 </div>
               )
             }
-            const Icon     = link.icon
+            const Icon = link.icon
             const isActive = location.pathname === link.href ||
-                             (link.href !== '/' && location.pathname.startsWith(link.href + '/') && link.href.length > 4)
+              (link.href !== '/' && location.pathname.startsWith(link.href + '/') && link.href.length > 4)
             return (
               <Link
                 key={link.href}
@@ -199,8 +182,8 @@ export default function DashboardLayout({ children }) {
               <input placeholder="Search orders, agents..." />
             </div>
             {/* Mobile search toggle */}
-            <button 
-              className="dash-mobile-search-btn" 
+            <button
+              className="dash-mobile-search-btn"
               onClick={() => setMobileSearchOpen(true)}
               style={{ display: 'none', background: 'transparent', border: 'none', color: 'var(--text-secondary)' }}
             >
@@ -228,16 +211,10 @@ export default function DashboardLayout({ children }) {
               <span>Live</span>
             </div>
 
-            {/* Theme toggle */}
-            <button className="dash-theme-btn" onClick={toggleTheme} title="Toggle theme">
-              {theme === 'dark'
-                ? <Sun  size={16} />
-                : <Moon size={16} />
-              }
-            </button>
+
 
             {/* Notification bell */}
-            <Link to={user?.role === 'customer' ? '/dashboard/notifications' : '#'} className="dash-notif-btn">
+            <Link to="/dashboard/notifications" className="dash-notif-btn">
               <Bell size={16} />
               {notifCount > 0 && (
                 <span className="dash-notif-badge">{notifCount}</span>
@@ -258,6 +235,7 @@ export default function DashboardLayout({ children }) {
                 </div>
                 <span className="dash-profile-name">{user?.name?.split(' ')[0]}</span>
                 <ChevronRight
+                  className="dash-profile-chevron"
                   size={14}
                   color="rgba(240,240,255,0.4)"
                   style={{ transform: profileOpen ? 'rotate(90deg)' : 'rotate(0)', transition: '0.2s' }}
@@ -272,7 +250,7 @@ export default function DashboardLayout({ children }) {
                     </div>
                     <div style={{ fontSize: '0.75rem', color: 'rgba(240,240,255,0.35)' }}>{user?.email}</div>
                   </div>
-                  <button className="dash-dropdown-item" onClick={() => navigate('/profile')}>
+                  <button className="dash-dropdown-item" onClick={() => { setProfileOpen(false); navigate('/profile'); }}>
                     <User size={15} /> My Profile
                   </button>
                   <div className="dash-dropdown-divider" />
@@ -306,7 +284,7 @@ export default function DashboardLayout({ children }) {
               </Link>
             )
           })}
-          <button 
+          <button
             className={`mobile-nav-item${moreSheetOpen ? ' active' : ''}`}
             onClick={() => setMoreSheetOpen(true)}
           >
