@@ -86,8 +86,8 @@ export default function AgentDeliveries() {
         const targetLat = status === 'Picked-up' ? o.pickupLat : o.dropLat
         const targetLng = status === 'Picked-up' ? o.pickupLng : o.dropLng
         const distance  = getDistance(latitude, longitude, targetLat, targetLng)
-        if (distance > 500) {
-          toast.error('Location Error', `You are ${Math.round(distance)}m away. You must be at the location!`)
+        if (distance > 5) {
+          toast.error('Location Error', `You are ${Math.round(distance)}m away. You must be within 5m to mark as ${status}!`)
           setUpdating(null); return
         }
         executeStatusUpdate(o.id, status)

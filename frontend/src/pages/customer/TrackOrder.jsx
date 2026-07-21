@@ -165,7 +165,7 @@ export default function TrackOrder() {
 
   const handleRateSubmit = async (orderId, rating, review) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/v1/orders/${orderId}/rate`, {
+      const res = await fetch(`https://swiftroute-17uj.onrender.com/api/v1/orders/${orderId}/rate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ rating, review })

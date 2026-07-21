@@ -27,7 +27,7 @@ export default function AdminAnalytics() {
   const fetchAnalytics = async () => {
     setLoading(true)
     try {
-      let url = `http://localhost:5000/api/v1/admin/analytics?period=${period}`
+      let url = `https://swiftroute-17uj.onrender.com/api/v1/admin/analytics?period=${period}`
       if (period === 'custom' && customStart && customEnd) {
         url += `&customStart=${customStart}&customEnd=${customEnd}`
       }

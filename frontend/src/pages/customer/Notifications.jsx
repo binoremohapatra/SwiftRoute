@@ -99,7 +99,7 @@ export default function Notifications() {
 
   useEffect(() => {
     // Socket.io real-time
-    const socket = io('http://localhost:5000');
+    const socket = io('https://swiftroute-17uj.onrender.com');
     socket.emit('authenticate', token);
     
     socket.on('notification:new', (notif) => {

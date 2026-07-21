@@ -23,6 +23,16 @@ const nextStatus = { 'Assigned': 'Picked-up', 'Picked-up': 'In-Transit', 'In-Tra
 const actionLabel = { 'Picked-up': 'Confirm Pickup ✅', 'In-Transit': 'Start Transit 🚗', 'Delivered': 'Mark Delivered 🎉' }
 const actionColor = { 'Picked-up': '', 'In-Transit': 'linear-gradient(135deg,#8b5cf6,#8b5cf6)', 'Delivered': 'linear-gradient(135deg,#10b981,#10b981)' }
 
+function getDistance(lat1, lon1, lat2, lon2) {
+  if (!lat1 || !lon1 || !lat2 || !lon2) return 0
+  const R = 6371e3
+  const φ1 = lat1 * Math.PI/180
+  const φ2 = lat2 * Math.PI/180
+  const Δφ = (lat2-lat1) * Math.PI/180
+  const Δλ = (lon2-lon1) * Math.PI/180
+  const a = Math.sin(Δφ/2)**2 + Math.cos(φ1)*Math.cos(φ2)*Math.sin(Δλ/2)**2
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+}
 export default function AgentDashboard() {
   const { token, user } = useAuth()
   const toast = useToast()
@@ -208,6 +218,37 @@ export default function AgentDashboard() {
   }
 
   const handleStatusUpdate = async (order, status) => {
+    if (status === 'Picked-up' || status === 'Delivered') {
+      if (!navigator.geolocation) {
+        toast.error('Error', 'Geolocation is not supported by your browser')
+        return
+      }
+      setUpdating(order.id)
+      navigator.geolocation.getCurrentPosition(
+        async (pos) => {
+          const { latitude, longitude } = pos.coords
+          const targetLat = status === 'Picked-up' ? order.pickupLat : order.dropLat
+          const targetLng = status === 'Picked-up' ? order.pickupLng : order.dropLng
+          const distance  = getDistance(latitude, longitude, targetLat, targetLng)
+          if (distance > 5) {
+            toast.error('Location Error', `You are ${Math.round(distance)}m away. You must be within 5m to mark as ${status}!`)
+            setUpdating(null)
+            return
+          }
+          await executeStatusUpdate(order, status)
+        },
+        () => {
+          toast.error('Location Required', 'Allow location access to update status')
+          setUpdating(null)
+        },
+        { enableHighAccuracy: true }
+      )
+    } else {
+      await executeStatusUpdate(order, status)
+    }
+  }
+
+  const executeStatusUpdate = async (order, status) => {
     setUpdating(order.id)
     try {
       const res = await orderAPI.updateStatus(order.id, { status }, token)

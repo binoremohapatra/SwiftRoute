@@ -21,7 +21,7 @@ export default function useFCM() {
           if (currentToken) {
             setFcmToken(currentToken);
             // Send token to backend
-            await fetch('http://localhost:5000/api/v1/fcm/register', {
+            await fetch('https://swiftroute-17uj.onrender.com/api/v1/fcm/register', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
