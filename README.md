@@ -144,10 +144,8 @@ Whether you're dispatching in-house agents or utilizing 3PL fallback integration
 
 *(Replace these placeholders with actual screenshots from your app!)*
 
-<div align="center">
-  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80" alt="Admin Dashboard" width="48%">
-  <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&w=400&q=80" alt="Live Tracking Map" width="48%">
-</div>
+
+
 
 ---
 
