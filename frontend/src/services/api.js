@@ -106,6 +106,14 @@ export const adminAPI = {
 
   exportAgentsCSV: (token) =>
     fetch(`${API_BASE}/admin/export/agents`, { headers: getHeaders(token), credentials: 'include' }),
+
+  verifyAgentBankDetails: (agentId, isVerified, token) =>
+    fetch(`${API_BASE}/admin/agents/${agentId}/bank-details/verify`, {
+      method: 'PATCH',
+      headers: getHeaders(token),
+      credentials: 'include',
+      body: JSON.stringify({ isVerified })
+    }).then(handleResponse),
 };
 
 // Agents
@@ -128,13 +136,62 @@ export const agentAPI = {
     fetch(`${API_BASE}/agents/performance`, { headers: getHeaders(token), credentials: 'include' }).then(handleResponse),
 };
 
+// Profile
+export const profileAPI = {
+  getProfile: (token) =>
+    fetch(`${API_BASE}/profile`, { headers: getHeaders(token), credentials: 'include' }).then(handleResponse),
+
+  updateProfile: (data, token) =>
+    fetch(`${API_BASE}/profile`, { method: 'PATCH', headers: getHeaders(token), credentials: 'include', body: JSON.stringify(data) }).then(handleResponse),
+
+  uploadAvatar: (formData, token) =>
+    fetch(`${API_BASE}/profile/avatar`, { 
+      method: 'POST', 
+      headers: { ...(token ? { Authorization: `Bearer ${token}` } : {}) }, // No Content-Type so browser sets boundary
+      credentials: 'include', 
+      body: formData 
+    }).then(handleResponse),
+
+  deleteAvatar: (token) =>
+    fetch(`${API_BASE}/profile/avatar`, { method: 'DELETE', headers: getHeaders(token), credentials: 'include' }).then(handleResponse),
+
+  updatePassword: (data, token) =>
+    fetch(`${API_BASE}/profile/password`, { method: 'PATCH', headers: getHeaders(token), credentials: 'include', body: JSON.stringify(data) }).then(handleResponse),
+
+  getStats: (token) =>
+    fetch(`${API_BASE}/profile/stats`, { headers: getHeaders(token), credentials: 'include' }).then(handleResponse),
+
+  getBankDetails: (token) =>
+    fetch(`${API_BASE}/profile/bank-details`, { headers: getHeaders(token), credentials: 'include' }).then(handleResponse),
+
+  updateBankDetails: (data, token) =>
+    fetch(`${API_BASE}/profile/bank-details`, { method: 'PUT', headers: getHeaders(token), credentials: 'include', body: JSON.stringify(data) }).then(handleResponse),
+
+  deleteBankDetails: (data, token) =>
+    fetch(`${API_BASE}/profile/bank-details`, { method: 'DELETE', headers: getHeaders(token), credentials: 'include', body: JSON.stringify(data) }).then(handleResponse),
+};
+
 // Notifications
 export const notificationAPI = {
-  getAll: (token) =>
-    fetch(`${API_BASE}/notifications`, { headers: getHeaders(token), credentials: 'include' }).then(handleResponse),
+  getAll: (token, params = {}) => {
+    const qs = new URLSearchParams(params).toString();
+    return fetch(`${API_BASE}/notifications${qs ? `?${qs}` : ''}`, { headers: getHeaders(token), credentials: 'include' }).then(handleResponse);
+  },
 
   markRead: (id, token) =>
     fetch(`${API_BASE}/notifications/${id}/read`, { method: 'PATCH', headers: getHeaders(token), credentials: 'include' }).then(handleResponse),
+
+  markAllRead: (token) =>
+    fetch(`${API_BASE}/notifications/read-all`, { method: 'PATCH', headers: getHeaders(token), credentials: 'include' }).then(handleResponse),
+
+  deleteNotification: (id, token) =>
+    fetch(`${API_BASE}/notifications/${id}`, { method: 'DELETE', headers: getHeaders(token), credentials: 'include' }).then(handleResponse),
+
+  getPreferences: (token) =>
+    fetch(`${API_BASE}/notifications/preferences`, { headers: getHeaders(token), credentials: 'include' }).then(handleResponse),
+
+  updatePreferences: (data, token) =>
+    fetch(`${API_BASE}/notifications/preferences`, { method: 'PATCH', headers: getHeaders(token), credentials: 'include', body: JSON.stringify(data) }).then(handleResponse),
 };
 
 // FCM

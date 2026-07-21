@@ -502,6 +502,34 @@ const getAllAgents = asyncHandler(async (req, res) => {
   return res.status(200).json(new ApiResponse(200, agents, 'Agents fetched'));
 });
 
+const verifyAgentBankDetails = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { isVerified } = req.body;
+
+  const bankDetails = await prisma.bankDetails.findUnique({ where: { agentId: id } });
+  if (!bankDetails) {
+    throw new ApiError(404, 'Bank details not found for this agent');
+  }
+
+  const updatedBankDetails = await prisma.bankDetails.update({
+    where: { agentId: id },
+    data: { 
+      isVerified,
+      verifiedAt: isVerified ? new Date() : null
+    },
+    select: {
+      accountHolderName: true,
+      accountNumberLast4: true,
+      ifscCode: true,
+      bankName: true,
+      upiId: true,
+      isVerified: true
+    }
+  });
+
+  return res.status(200).json(new ApiResponse(200, updatedBankDetails, `Bank details ${isVerified ? 'verified' : 'unverified'} successfully`));
+});
+
 const assignOrderToAgent = asyncHandler(async (req, res) => {
   const { orderId, agentId } = req.body;
 

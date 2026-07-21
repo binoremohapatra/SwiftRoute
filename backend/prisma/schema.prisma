@@ -15,6 +15,10 @@ model Admin {
   permissions String[]
   role        String   @default("admin")
   isActive    Boolean  @default(true)
+  avatarUrl   String?
+  bio         String?
+  alternatePhone String?
+  dateOfBirth DateTime?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -43,9 +47,17 @@ model Agent {
   fcmToken        String?
   deviceType      String?
   lastActive      DateTime?
+  avatarUrl       String?
+  bio             String?
+  alternatePhone  String?
+  dateOfBirth     DateTime?
+  vehicleNumber   String?
+  documentsVerified Boolean @default(false)
+  joinedAt        DateTime @default(now())
 
   assignedOrders  Order[]        @relation("AgentOrders")
   locationPings   LocationPing[]
+  bankDetails     BankDetails?
 
   @@index([email])
   @@index([isAvailable])
@@ -67,6 +79,11 @@ model User {
   fcmToken  String?
   deviceType String?
   lastActive DateTime?
+  avatarUrl       String?
+  bio             String?
+  alternatePhone  String?
+  dateOfBirth     DateTime?
+  address         String?
 
   orders    Order[]  @relation("CustomerOrders")
 
@@ -204,4 +221,32 @@ model AuditLog {
   @@index([action])
   @@index([resource])
   @@index([createdAt])
+}
+
+model NotificationPreference {
+  id            String   @id @default(uuid())
+  userId        String   @unique
+  orderUpdates  Boolean  @default(true)
+  paymentAlerts Boolean  @default(true)
+  promotions    Boolean  @default(false)
+  pushEnabled   Boolean  @default(true)
+  emailEnabled  Boolean  @default(false)
+
+  @@index([userId])
+}
+
+model BankDetails {
+  id                     String    @id @default(uuid())
+  agentId                String    @unique
+  agent                  Agent     @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  accountHolderName      String
+  accountNumberEncrypted String
+  accountNumberLast4     String
+  ifscCode               String
+  bankName               String
+  upiId                  String?
+  isVerified             Boolean   @default(false)
+  verifiedAt             DateTime?
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
 }

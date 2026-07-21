@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { authAPI } from '../services/api'
+import { authAPI, notificationAPI } from '../services/api'
 import {
   LayoutDashboard, Package, MapPin, Bell, Users, LogOut,
   Menu, X, Zap, Shield, Truck, TrendingUp, ChevronLeft,
@@ -41,7 +41,7 @@ const roleAccent = { customer: '#6366f1', agent: '#8b5cf6', admin: '#f59e0b' }
 
 /* ──────────── DashboardLayout ──────────── */
 export default function DashboardLayout({ children }) {
-  const { user, logout } = useAuth()
+  const { user, logout, token } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -49,7 +49,7 @@ export default function DashboardLayout({ children }) {
   const [collapsed, setCollapsed] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
   const [theme, setTheme] = useState('dark')
-  const [notifCount] = useState(3)
+  const [notifCount, setNotifCount] = useState(0)
 
   // Mobile specific state
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false)
@@ -77,6 +77,15 @@ export default function DashboardLayout({ children }) {
     return () => document.removeEventListener('mousedown', handler)
   }, [])
 
+  /* Fetch unread notifications count */
+  useEffect(() => {
+    if (token) {
+      notificationAPI.getAll(token, { filter: 'unread', limit: 1 })
+        .then(res => setNotifCount(res.pagination?.total || 0))
+        .catch(console.error)
+    }
+  }, [token])
+
   /* Close mobile sidebar on route change */
   useEffect(() => {
     setSidebarOpen(false)
@@ -100,8 +109,9 @@ export default function DashboardLayout({ children }) {
   const moreNavLinks = hasMore ? flatLinks.slice(primaryNavCount) : []
 
   return (
-    <div className="dash-layout">
-      {/* ═══ SIDEBAR ═══ */}
+    <>
+      <div className="dash-layout">
+        {/* ═══ SIDEBAR ═══ */}
       <aside
         className={`dash-sidebar${collapsed ? ' collapsed' : ''}${sidebarExpanded ? ' expanded' : ''}`}
         onMouseEnter={() => setSidebarExpanded(true)}
@@ -267,9 +277,11 @@ export default function DashboardLayout({ children }) {
         <main className="dash-content">
           {children}
         </main>
+      </div>
+    </div>
 
-        {/* Mobile bottom navigation */}
-        <nav className="mobile-bottom-nav">
+    {/* Mobile bottom navigation (Moved outside dash-layout to fix fixed positioning) */}
+    <nav className="mobile-bottom-nav">
           {mobileNavLinks.map((link) => {
             const Icon = link.icon
             const isActive = location.pathname === link.href
@@ -319,7 +331,6 @@ export default function DashboardLayout({ children }) {
             </div>
           </>
         )}
-      </div>
-    </div>
+    </>
   )
 }

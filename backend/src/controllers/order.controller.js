@@ -67,37 +67,21 @@ const acceptOrder = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const agentId = req.user.id;
 
-  let order = await prisma.order.findUnique({ where: { id } });
-  if (!order || order.status !== 'Placed' || order.assignedAgentId) {
-    throw new ApiError(400, 'Order is no longer available');
-  }
-
-  const agent = await prisma.agent.update({
-    where: { id: agentId },
-    data: { isAvailable: false, availableStatus: 'Busy' }
-  });
-
-  let estimatedDeliveryTime = null;
-  try {
-    const url = `http://router.project-osrm.org/route/v1/driving/${order.pickupLng},${order.pickupLat};${order.dropLng},${order.dropLat}?overview=false`;
-    const response = await fetch(url);
-    const data = await response.json();
-    if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
-      const durationSecs = data.routes[0].duration;
-      // Add agent driving time to pickup, and pickup to drop. Since we don't know exact agent ETA here, just use pickup to drop + 10 mins buffer.
-      estimatedDeliveryTime = new Date(Date.now() + (durationSecs * 1000) + (10 * 60 * 1000));
-    }
-  } catch (err) {
-    console.warn('Failed to calculate ETA via OSRM', err);
-  }
-
-  order = await prisma.order.update({
-    where: { id },
+  const updateResult = await prisma.order.updateMany({
+    where: { id, status: 'Placed', assignedAgentId: null },
     data: { 
       assignedAgentId: agentId, 
       status: 'Assigned',
       ...(estimatedDeliveryTime ? { estimatedDeliveryTime } : {})
-    },
+    }
+  });
+
+  if (updateResult.count === 0) {
+    throw new ApiError(400, 'Order is no longer available or already handled');
+  }
+
+  order = await prisma.order.findUnique({
+    where: { id },
     include: {
       customer: { select: { name: true, email: true, phone: true } },
       assignedAgent: { select: { name: true, phone: true, vehicleType: true } },
@@ -116,12 +100,25 @@ const acceptOrder = asyncHandler(async (req, res) => {
 
   const io = req.app.get('io');
 
+  const agent = order.assignedAgent;
+  await prisma.agent.update({
+    where: { id: agentId },
+    data: { isAvailable: false, availableStatus: 'Busy' }
+  });
+
   await NotificationService.createNotification({
     userId: order.customerId,
     onModel: 'User',
     orderId: order.id,
     message: `Your order ${order.orderNumber} has been accepted by agent ${agent.name}.`,
     type: 'assignment',
+  }, io);
+
+  await NotificationService.notifyAgent(agentId, {
+    title: 'Order Accepted',
+    message: `You accepted order #${order.orderNumber}`,
+    type: 'ACCOUNT_ALERT',
+    orderId: order.id
   }, io);
 
   io.to(`order:${order.id}`).emit('order:statusChanged', { orderId: order.id, status: 'Assigned', timestamp: new Date() });
@@ -152,6 +149,13 @@ const rejectOrder = asyncHandler(async (req, res) => {
 
   const io = req.app.get('io');
   
+  await NotificationService.notifyAgent(agentId, {
+    title: 'Order Missed/Declined',
+    message: `Order #${order.orderNumber} was reassigned to another agent`,
+    type: 'ACCOUNT_ALERT',
+    orderId: order.id
+  }, io);
+
   // Find next nearest agent
   await AutoAssignService.assignNearestAgent(order, io);
 
@@ -326,6 +330,14 @@ const cancelOrder = asyncHandler(async (req, res) => {
       where: { id: order.assignedAgentId },
       data: { isAvailable: true, availableStatus: 'Online' },
     });
+    
+    const io = req.app.get('io');
+    await NotificationService.notifyAgent(order.assignedAgentId, {
+      title: 'Order Cancelled',
+      message: `Order #${order.orderNumber} was cancelled by admin`,
+      type: 'ORDER_CANCELLED_BY_ADMIN',
+      orderId: order.id
+    }, io);
   }
 
   await prisma.statusLog.create({

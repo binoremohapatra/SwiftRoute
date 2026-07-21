@@ -10,6 +10,10 @@ const notifTypeLabels = {
   delivery: 'Delivered',
   cancellation: 'Cancelled',
   near_destination: 'Near Destination',
+  NEW_DISPATCH: 'New Delivery Request',
+  ORDER_CANCELLED_BY_ADMIN: 'Order Cancelled',
+  ACCOUNT_ALERT: 'Account Alert',
+  PERFORMANCE_UPDATE: 'Performance Update'
 };
 
 class NotificationService {
@@ -65,6 +69,38 @@ class NotificationService {
     } catch (error) {
       logger.error('Error creating notification:', error);
       // Non-fatal
+    }
+  }
+  static async notifyAgent(agentId, { title, message, type, orderId }, io = null) {
+    try {
+      const notification = await prisma.notification.create({
+        data: { 
+          userId: agentId, 
+          onModel: 'Agent', 
+          orderId: orderId || null, 
+          message, 
+          type 
+        },
+      });
+
+      const label = title || notifTypeLabels[type] || type;
+
+      if (io) {
+        io.to(agentId.toString()).emit('notification:new', {
+          ...notification,
+          label,
+        });
+      }
+
+      this.sendPushNotification(agentId, label, message, {
+        orderId: orderId || '',
+        type,
+        notificationId: notification.id
+      }).catch(err => logger.error('Unhandled agent push notification error:', err));
+
+      return notification;
+    } catch (error) {
+      logger.error(`Error creating agent notification for ${agentId}:`, error);
     }
   }
 }

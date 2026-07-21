@@ -44,6 +44,21 @@ export default function AdminUsers() {
     }
   }
 
+  const handleVerifyBank = async (agentId, isVerified) => {
+    try {
+      await adminAPI.verifyAgentBankDetails(agentId, isVerified, token)
+      setData(prev => ({
+        ...prev,
+        agents: prev.agents.map(a => a.id === agentId ? {
+          ...a, bankDetails: { ...a.bankDetails, isVerified }
+        } : a)
+      }))
+      toast.success('Success', `Bank details ${isVerified ? 'verified' : 'unverified'} successfully`)
+    } catch (err) {
+      toast.error('Error', 'Failed to update bank verification status')
+    }
+  }
+
   const list = tab === 'customers' ? data.customers : data.agents
   const filteredList = list.filter(u => 
     u.name?.toLowerCase().includes(search.toLowerCase()) || 
@@ -170,6 +185,30 @@ export default function AdminUsers() {
                     <div style={{ height: 1, background: 'rgba(255,255,255,0.05)', margin: '0.25rem 0' }} />
                     <Row label="Joined" value={new Date(u.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })} />
                   </div>
+
+                  {isAgent && u.bankDetails && (
+                    <div style={{ marginTop: '1rem', padding: '1rem', background: 'rgba(99,102,241,0.05)', borderRadius: 16, border: '1px solid rgba(99,102,241,0.1)' }}>
+                      <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>Bank Details</div>
+                      <Row label="Account" value={u.bankDetails.accountNumberLast4} />
+                      <Row label="IFSC" value={u.bankDetails.ifscCode} />
+                      <Row label="Bank" value={u.bankDetails.bankName} />
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.75rem', paddingTop: '0.75rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                        <span style={{ fontSize: '0.8rem', color: u.bankDetails.isVerified ? '#10b981' : '#fbbf24', fontWeight: 600 }}>
+                          {u.bankDetails.isVerified ? '✓ Verified' : 'Pending Verification'}
+                        </span>
+                        <button 
+                          onClick={() => handleVerifyBank(u.id, !u.bankDetails.isVerified)}
+                          style={{ 
+                            background: u.bankDetails.isVerified ? 'rgba(239,68,68,0.1)' : 'var(--accent-indigo)', 
+                            color: u.bankDetails.isVerified ? '#ef4444' : '#fff',
+                            border: 'none', padding: '0.4rem 0.75rem', borderRadius: 8, fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer'
+                          }}
+                        >
+                          {u.bankDetails.isVerified ? 'Revoke' : 'Verify Now'}
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )
             })}

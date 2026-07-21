@@ -2432,7 +2432,7 @@ section {
   flex: 1;
   text-decoration: none;
   color: rgba(240, 240, 255, 0.4);
-  font-size: 0.65rem;
+  font-size: 0.55rem;
   font-weight: 600;
   transition: 0.2s;
 }
@@ -3235,5 +3235,11 @@ section {
   100% {
     transform: scaleY(1.4);
     opacity: 0;
+  }
+}
+
+@media (max-width: 639px) {
+  .hide-on-mobile {
+    display: none !important;
   }
 }

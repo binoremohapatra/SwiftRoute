@@ -1,5 +1,6 @@
 const { prisma } = require('../config/db');
 const logger = require('../utils/logger');
+const NotificationService = require('./notification.service');
 
 class AutoAssignService {
   static async assignNearestAgent(order, io) {
@@ -89,6 +90,13 @@ class AutoAssignService {
             distance: bestAgent.drivingDist.toFixed(2),
             etaMins: Math.ceil(bestAgent.etaMins)
           });
+          
+          NotificationService.notifyAgent(bestAgent.id, {
+            title: 'New Delivery Request',
+            message: `Order #${order.orderNumber} — pickup at ${order.pickupAddress}`,
+            type: 'NEW_DISPATCH',
+            orderId: order.id
+          }, io);
         }
 
         return bestAgent;
