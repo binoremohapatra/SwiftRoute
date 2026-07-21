@@ -230,8 +230,9 @@ export default function AgentDashboard() {
           const targetLat = status === 'Picked-up' ? order.pickupLat : order.dropLat
           const targetLng = status === 'Picked-up' ? order.pickupLng : order.dropLng
           const distance  = getDistance(latitude, longitude, targetLat, targetLng)
-          if (distance > 5) {
-            toast.error('Location Error', `You are ${Math.round(distance)}m away. You must be within 5m to mark as ${status}!`)
+          const maxDistance = status === 'Picked-up' ? 1000 : 5;
+          if (distance > maxDistance) {
+            toast.error('Location Error', `You are ${Math.round(distance)}m away. You must be within ${maxDistance}m to mark as ${status}!`)
             setUpdating(null)
             return
           }
