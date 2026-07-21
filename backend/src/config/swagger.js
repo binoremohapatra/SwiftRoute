@@ -4,12 +4,13 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Delhivery - Real-Time Delivery Tracking API',
+      title: 'SwiftRoute - Real-Time Delivery Tracking API',
       version: '1.0.0',
-      description: 'Complete API documentation for the Real-Time Delivery Tracking & Order Management System',
-      contact: { name: 'API Support', email: 'support@delhivery.dev' },
+      description: 'Complete API documentation for SwiftRoute Order Management System',
+      contact: { name: 'API Support', email: 'support@swiftroute.dev' },
     },
     servers: [
+      { url: 'https://swiftroute-17uj.onrender.com', description: 'Production Render Server' },
       { url: 'http://localhost:5000', description: 'Development server' },
     ],
     components: {

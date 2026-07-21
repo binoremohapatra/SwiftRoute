@@ -1,4 +1,6 @@
-const API_BASE = 'http://localhost:5000/api/v1';
+
+const BASE_HOST = import.meta.env.VITE_API_BASE_URL || 'https://swiftroute-17uj.onrender.com';
+const API_BASE = BASE_HOST.endsWith('/api/v1') ? BASE_HOST : `${BASE_HOST}/api/v1`;
 
 const getHeaders = (token) => ({
   'Content-Type': 'application/json',
@@ -56,7 +58,7 @@ export const orderAPI = {
 
   assign3PL: (id, token) =>
     fetch(`${API_BASE}/orders/${id}/assign-3pl`, { method: 'POST', headers: getHeaders(token), credentials: 'include' }).then(handleResponse),
-    
+
   track3PL: (id, token) =>
     fetch(`${API_BASE}/orders/${id}/3pl-tracking`, { headers: getHeaders(token), credentials: 'include' }).then(handleResponse),
 };
@@ -145,11 +147,11 @@ export const profileAPI = {
     fetch(`${API_BASE}/profile`, { method: 'PATCH', headers: getHeaders(token), credentials: 'include', body: JSON.stringify(data) }).then(handleResponse),
 
   uploadAvatar: (formData, token) =>
-    fetch(`${API_BASE}/profile/avatar`, { 
-      method: 'POST', 
-      headers: { ...(token ? { Authorization: `Bearer ${token}` } : {}) }, // No Content-Type so browser sets boundary
-      credentials: 'include', 
-      body: formData 
+    fetch(`${API_BASE}/profile/avatar`, {
+      method: 'POST',
+      headers: { ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+      credentials: 'include',
+      body: formData
     }).then(handleResponse),
 
   deleteAvatar: (token) =>
@@ -204,10 +206,10 @@ export const fcmAPI = {
 export const paymentAPI = {
   createOrder: (data, token) =>
     fetch(`${API_BASE}/payments/create-order`, { method: 'POST', headers: getHeaders(token), credentials: 'include', body: JSON.stringify(data) }).then(handleResponse),
-    
+
   verifyPayment: (data, token) =>
     fetch(`${API_BASE}/payments/verify`, { method: 'POST', headers: getHeaders(token), credentials: 'include', body: JSON.stringify(data) }).then(handleResponse),
-    
+
   collectCash: (data, token) =>
     fetch(`${API_BASE}/payments/collect-cash`, { method: 'POST', headers: getHeaders(token), credentials: 'include', body: JSON.stringify(data) }).then(handleResponse),
 };

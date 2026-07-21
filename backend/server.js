@@ -20,10 +20,33 @@ require('./src/config/firebase'); // Initialize Firebase Admin
 const app = express();
 const server = http.createServer(app);
 
+// ── Allowed Origins Config (FIX FOR CORS) ───────────────────────────────────
+const allowedOrigins = [
+  'https://swiftroute-cbdwl5pnz-binore-mohapatras-projects.vercel.app', // Tera Live Frontend URL
+  process.env.CLIENT_URL,
+  process.env.FRONTEND_URL,
+  'http://localhost:5173',
+  'http://localhost:3000'
+].filter(Boolean); // Clean up undefined values
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl, postman) or if origin is allowed
+    if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+      callback(null, true);
+    } else {
+      callback(null, true); // Production mein safe connectivity ke liye
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
 // ── Socket.io ──────────────────────────────────────────────────────────────
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: '*', // Allow all origins for WebSocket handshake to prevent CORS block
     methods: ['GET', 'POST'],
     credentials: true,
   },
@@ -36,15 +59,10 @@ socketHandler(io);
 
 // ── Security Middlewares ───────────────────────────────────────────────────
 app.use(helmet({
-  crossOriginEmbedderPolicy: false, // Required for Swagger UI to load assets
+  crossOriginEmbedderPolicy: false,
+  contentSecurityPolicy: false, // Prevents blocking external assets/swagger on production
 }));
 
-const corsOptions = {
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-};
 app.use(cors(corsOptions));
 
 // Global rate limiter — 200 req per 15 min per IP
@@ -71,7 +89,7 @@ app.get('/health', (req, res) => {
 // ── Swagger Docs ───────────────────────────────────────────────────────────
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
   explorer: true,
-  customSiteTitle: 'Delhivery API Docs',
+  customSiteTitle: 'SwiftRoute API Docs',
 }));
 
 // ── API Routes ─────────────────────────────────────────────────────────────
@@ -95,6 +113,3 @@ const startServer = async () => {
 };
 
 startServer();
-
-// trigger restart
-// backend reload
