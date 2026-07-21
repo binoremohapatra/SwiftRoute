@@ -54,7 +54,7 @@ class ShiprocketService {
       const payload = {
         order_id: orderData.orderNumber,
         order_date: new Date().toISOString().split('T')[0],
-        pickup_location: "Primary",
+        pickup_location: "warehouse",
         billing_customer_name: orderData.customer?.name || 'Customer',
         billing_last_name: "",
         billing_address: orderData.dropAddress,
@@ -65,6 +65,15 @@ class ShiprocketService {
         billing_email: orderData.customer?.email || 'test@example.com',
         billing_phone: orderData.customer?.phone || '9876543210',
         shipping_is_billing: true,
+        shipping_customer_name: orderData.customer?.name || 'Customer',
+        shipping_last_name: "",
+        shipping_address: orderData.dropAddress,
+        shipping_city: "Delhi",
+        shipping_pincode: "110001",
+        shipping_state: "Delhi",
+        shipping_country: "India",
+        shipping_email: orderData.customer?.email || 'test@example.com',
+        shipping_phone: orderData.customer?.phone || '9876543210',
         order_items: [
           {
             name: "Delivery Service",
@@ -84,7 +93,7 @@ class ShiprocketService {
         weight: 1
       };
 
-      const response = await fetch(`${this.baseUrl}/orders/create/ad-hoc`, {
+      const response = await fetch(`${this.baseUrl}/orders/create/adhoc`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -97,6 +106,7 @@ class ShiprocketService {
 
       if (!response.ok) {
         logger.error('[Shiprocket] Create Order Failed', data);
+        console.error('FULL SHIPROCKET ERROR:', JSON.stringify(data, null, 2));
         // Fallback to mock data if integration fails during testing
         return {
           success: true,
