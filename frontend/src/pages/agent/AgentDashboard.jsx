@@ -229,8 +229,15 @@ export default function AgentDashboard() {
           const { latitude, longitude } = pos.coords
           const targetLat = status === 'Picked-up' ? order.pickupLat : order.dropLat
           const targetLng = status === 'Picked-up' ? order.pickupLng : order.dropLng
-          const distance  = getDistance(latitude, longitude, targetLat, targetLng)
+          let distance  = getDistance(latitude, longitude, targetLat, targetLng)
           const maxDistance = status === 'Picked-up' ? 1000 : 5;
+
+          // Demo Fallback: If real laptop GPS fails, use the simulated bike location on the map
+          if (distance > maxDistance && agentLocation) {
+            const simDistance = getDistance(agentLocation.lat, agentLocation.lng, targetLat, targetLng)
+            if (simDistance <= maxDistance) distance = simDistance;
+          }
+
           if (distance > maxDistance) {
             toast.error('Location Error', `You are ${Math.round(distance)}m away. You must be within ${maxDistance}m to mark as ${status}!`)
             setUpdating(null)
