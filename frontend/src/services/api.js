@@ -1,6 +1,6 @@
 
-const BASE_HOST = import.meta.env.VITE_API_BASE_URL || 'https://swiftroute-17uj.onrender.com';
-const API_BASE = BASE_HOST.endsWith('/api/v1') ? BASE_HOST : `${BASE_HOST}/api/v1`;
+// Hardcoded Live Render Backend (Bulletproof Fix)
+const API_BASE = 'https://swiftroute-17uj.onrender.com/api/v1';
 
 const getHeaders = (token) => ({
   'Content-Type': 'application/json',
