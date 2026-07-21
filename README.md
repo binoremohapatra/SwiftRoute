@@ -175,9 +175,7 @@ In a true production environment where the Agent uses a mobile phone while drivi
 
 ---
 
-## 📸 Screenshots
 
-*(Replace these placeholders with actual screenshots from your app!)*
 
 
 
