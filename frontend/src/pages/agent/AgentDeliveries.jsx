@@ -86,7 +86,7 @@ export default function AgentDeliveries() {
         const targetLat = status === 'Picked-up' ? o.pickupLat : o.dropLat
         const targetLng = status === 'Picked-up' ? o.pickupLng : o.dropLng
         const distance  = getDistance(latitude, longitude, targetLat, targetLng)
-        const maxDistance = 5000; // 5km limit for easy desktop testing
+        const maxDistance = 1000; // 1km limit for both pickup and delivery
         if (distance > maxDistance) {
           toast.error('Location Error', `You are ${Math.round(distance)}m away. You must be within ${maxDistance}m to mark as ${status}!`)
           setUpdating(null); return
