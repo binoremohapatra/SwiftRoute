@@ -230,7 +230,7 @@ export default function AgentDashboard() {
           const targetLat = status === 'Picked-up' ? order.pickupLat : order.dropLat
           const targetLng = status === 'Picked-up' ? order.pickupLng : order.dropLng
           let distance  = getDistance(latitude, longitude, targetLat, targetLng)
-          const maxDistance = status === 'Picked-up' ? 1000 : 5;
+          const maxDistance = 1000; // 1km limit for both pickup and delivery
 
           // Demo Fallback: If real laptop GPS fails, use the simulated bike location on the map
           if (distance > maxDistance && agentLocation) {
