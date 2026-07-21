@@ -140,6 +140,41 @@ Whether you're dispatching in-house agents or utilizing 3PL fallback integration
 
 ---
 
+## 🧪 How to Use & Test the Application
+
+### 1. User Journey (Placing an Order)
+- Create a **User** account and log in.
+- Click on **New Delivery** from your dashboard.
+- Pick your pickup and drop-off locations on the map.
+- Confirm the order and pay via **Cash on Delivery** or **Online Payment (Razorpay)**.
+- Once placed, your order goes to the pending queue.
+
+### 2. Admin Journey (Dispatch & God-Mode)
+- Create an **Admin** account.
+- Go to the **Admin Dashboard** > **Radar**. You will see the entire city map with live orders and agents.
+- Go to the **Orders** tab. You can manually assign an order to an agent or click **Smart Assign** to auto-assign it to the nearest available agent.
+
+### 3. Agent Journey (Accepting & Delivering)
+- Create a **Delivery Agent** account.
+- Toggle your status to **Online** in the Agent Dashboard.
+- When the Admin assigns you an order, a real-time popup will appear for you to **Accept** or **Reject** the job.
+- After accepting, go to **Active Order**. Here you will see the pickup and drop-off route.
+
+### 🚗 How Driver Location Movement Works (Mock vs Real)
+
+**How it works right now (Testing/Mock Mode):**
+Since you are testing the app on a desktop browser, your device's GPS does not physically move. To demonstrate the real-time tracking feature, the application currently uses a **Mock Location Simulator**. 
+When an agent accepts an order, the frontend calculates the route from the pickup to the drop-off and mathematically generates waypoints. A timer fires every few seconds to emit a `socket.emit('agent:locationUpdate', ...)` event, simulating the driver moving along the route. This lets the Customer and Admin see the bike icon moving smoothly on the map for demonstration purposes.
+
+**How it will work in a Real-World Scenario:**
+In a true production environment where the Agent uses a mobile phone while driving:
+1. We will use the device's native `navigator.geolocation.watchPosition()` API or a background geolocation plugin.
+2. The agent's phone will continuously fetch their *actual* physical GPS coordinates.
+3. Every time their latitude/longitude changes, the phone will emit the exact same `agent:locationUpdate` Socket.IO event with real data.
+4. The mock calculation will be removed, and the bike icon on the Customer/Admin map will move based solely on the agent's real physical movement through the city streets.
+
+---
+
 ## 📸 Screenshots
 
 *(Replace these placeholders with actual screenshots from your app!)*
