@@ -67,6 +67,14 @@ const login = asyncHandler(async (req, res) => {
     throw new ApiError(401, 'Invalid credentials');
   }
 
+  // Automatically set agent to Online when they log in
+  if (role === 'agent') {
+    user = await prisma.agent.update({
+      where: { id: user.id },
+      data: { isAvailable: true, availableStatus: 'Online', lastActive: new Date() }
+    });
+  }
+
   const accessToken = generateToken(user.id, user.role);
 
   // Remove password before sending

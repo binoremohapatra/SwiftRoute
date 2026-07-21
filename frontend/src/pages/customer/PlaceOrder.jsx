@@ -35,6 +35,7 @@ export default function PlaceOrder() {
   const navigate = useNavigate()
   const toast = useToast()
   const mapRef = useRef(null)
+  const debounceRef = useRef({})
   
   const [form, setForm] = useState({
     pickupName: '', pickupPhone: '', pickupFlat: '', pickupAddress: '', pickupPincode: '', pickupLandmark: '', pickupLat: '', pickupLng: '',
@@ -132,11 +133,7 @@ export default function PlaceOrder() {
     }
   }
 
-  const geocodeAddress = async (type) => {
-    const address = form[`${type}Address`]
-    const pincode = form[`${type}Pincode`]
-    const landmark = form[`${type}Landmark`]
-    
+  const geocodeWithData = async (type, address, landmark, pincode) => {
     if (!address || address.trim().length < 3) return
     
     const query = [address, landmark, pincode].filter(Boolean).join(', ')
@@ -156,6 +153,26 @@ export default function PlaceOrder() {
     } catch (err) {
       console.warn("Geocode failed", err)
     }
+  }
+
+  const handleAddressChange = (type, field, value) => {
+    setForm(prev => {
+      const next = { ...prev, [field]: value }
+      
+      if (debounceRef.current[type]) {
+        clearTimeout(debounceRef.current[type])
+      }
+      
+      debounceRef.current[type] = setTimeout(() => {
+        geocodeWithData(type, next[`${type}Address`], next[`${type}Landmark`], next[`${type}Pincode`])
+      }, 1000)
+      
+      return next
+    })
+  }
+
+  const geocodeAddress = async (type) => {
+    geocodeWithData(type, form[`${type}Address`], form[`${type}Landmark`], form[`${type}Pincode`])
   }
 
   const handleSubmit = async (e) => {
@@ -367,7 +384,7 @@ export default function PlaceOrder() {
                 className="dash-input" 
                 placeholder="Tap map to set location or type here" 
                 value={address} 
-                onChange={(e) => setForm({ ...form, [`${type}Address`]: e.target.value })} 
+                onChange={(e) => handleAddressChange(type, `${type}Address`, e.target.value)} 
                 onBlur={() => geocodeAddress(type)}
                 required 
               />
@@ -376,11 +393,11 @@ export default function PlaceOrder() {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
               <div>
                 <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 600, color: 'rgba(240,240,255,0.4)', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Pincode</label>
-                <input className="dash-input" placeholder="e.g. 110001" type="number" maxLength={6} value={form[`${type}Pincode`]} onChange={(e) => setForm({ ...form, [`${type}Pincode`]: e.target.value })} onBlur={() => geocodeAddress(type)} required />
+                <input className="dash-input" placeholder="e.g. 110001" type="number" maxLength={6} value={form[`${type}Pincode`]} onChange={(e) => handleAddressChange(type, `${type}Pincode`, e.target.value)} onBlur={() => geocodeAddress(type)} required />
               </div>
               <div>
                 <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 600, color: 'rgba(240,240,255,0.4)', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Nearby Landmark</label>
-                <input className="dash-input" placeholder="e.g. Near Metro Station" value={form[`${type}Landmark`]} onChange={(e) => setForm({ ...form, [`${type}Landmark`]: e.target.value })} onBlur={() => geocodeAddress(type)} />
+                <input className="dash-input" placeholder="e.g. Near Metro Station" value={form[`${type}Landmark`]} onChange={(e) => handleAddressChange(type, `${type}Landmark`, e.target.value)} onBlur={() => geocodeAddress(type)} />
               </div>
             </div>
           </div>

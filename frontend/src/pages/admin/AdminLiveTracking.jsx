@@ -119,7 +119,7 @@ export default function AdminLiveTracking() {
     socket.on('agent:locationBroadcast', (update) => {
       setAgents(prev => ({
         ...prev,
-        [update.agentId]: { lat: update.lat, lng: update.lng, updatedAt: update.timestamp }
+        [update.agentId]: { ...(prev[update.agentId] || {}), lat: update.lat, lng: update.lng, updatedAt: update.timestamp }
       }))
     })
     socket.on('order:statusChanged', (data) => {
