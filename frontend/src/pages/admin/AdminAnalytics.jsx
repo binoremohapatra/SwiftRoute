@@ -83,7 +83,7 @@ export default function AdminAnalytics() {
                   className="dash-input" 
                   style={{ padding: '0.4rem' }} 
                 />
-                <button onClick={fetchAnalytics} className="btn-primary" style={{ padding: '0.4rem 1rem' }}>Apply</button>
+                <button onClick={fetchAnalytics} className="btn-primary" style={{ padding: '0.5rem 1.25rem', borderRadius: 12, flexShrink: 0, fontWeight: 600 }}>Apply</button>
               </div>
             )}
           </div>
