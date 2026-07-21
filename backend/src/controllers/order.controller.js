@@ -71,8 +71,7 @@ const acceptOrder = asyncHandler(async (req, res) => {
     where: { id, status: 'Placed', assignedAgentId: null },
     data: { 
       assignedAgentId: agentId, 
-      status: 'Assigned',
-      ...(estimatedDeliveryTime ? { estimatedDeliveryTime } : {})
+      status: 'Assigned'
     }
   });
 
@@ -80,7 +79,7 @@ const acceptOrder = asyncHandler(async (req, res) => {
     throw new ApiError(400, 'Order is no longer available or already handled');
   }
 
-  order = await prisma.order.findUnique({
+  const order = await prisma.order.findUnique({
     where: { id },
     include: {
       customer: { select: { name: true, email: true, phone: true } },
